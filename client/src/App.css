@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.car-list {
+  text-align: center;
+}
+
+.cars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+
+.car-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.car-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.fly-in-container {
+  overflow: hidden;
+}
+
+.fly-in-text {
+  animation: fly-in-from-left 1.5s ease-out forwards;
+  ;
+}
+
+@keyframes fly-in-from-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+/* -> Logo */
+.hover-logo {
+  transition: transform 0.3s ease;
+}
+
+.hover-logo:hover {
+  transform: scale(1.07);
+}
+/* Logo <- */
+
+
+.my-box {
+  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+/* -> Product */
+.hover-product {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-product:hover{
+    transform: scale(1.03);
+}
+
+/* Product <- */
+
+
