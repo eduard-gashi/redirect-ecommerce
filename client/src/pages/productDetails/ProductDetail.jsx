@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
+import apiClient from './apiClient';
 
 // The product schema can be found in "server/models/product.js"
-
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -11,11 +11,16 @@ function ProductDetail() {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data))
-      .catch((err) => console.error("Error while loading the products:", err));
-  }, [id]);
+      const fetchProduct = async () => {
+        try {
+          const { data } = await apiClient.get(`/products/${id}`);
+          setProduct(data);
+        } catch (err) {
+          console.error("Error while loading the product:", err);
+        }
+      };
+      fetchProduct();
+    }, [id]);
 
   if (!product) {
     return <p className="text-center mt-10">Produkt wird geladen...</p>;
