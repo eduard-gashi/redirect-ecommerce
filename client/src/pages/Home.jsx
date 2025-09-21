@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { VideoPlayerWithThumbnail } from "../components/VideoPlayerWithThumbnail";
 import "../App.css";
+import apiClient from '../apiClient';
 
 function Home() {
   const [products, setProducts] = useState([]);
