@@ -1,21 +1,20 @@
 import React, { createContext, useState, useEffect } from "react";
 
-// Context erstellen
+
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
-    // Warenkorb aus localStorage laden (falls vorhanden)
+    // Load cart from localStorage initially
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // Speichern im localStorage, wenn sich cartItems ändert
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Produkt hinzufügen
+  // Add Prodcuts to the Cart
   const addToCart = (product, quantity = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item._id === product._id);
@@ -30,17 +29,30 @@ export function CartProvider({ children }) {
     });
   };
 
-  // Produkt entfernen
+  // Remove products from the Cart
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item._id !== id));
   };
 
-  // Warenkorb leeren
+  // Clear the entire Cart
   const clearCart = () => setCartItems([]);
+
+  // Update quantity of a specific item
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) {
+      removeFromCart(id); // Remove item if quantity is less than 1
+    } else {
+      setCartItems((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, quantity: newQuantity } : item
+        )
+      );
+    }
+  };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{ cartItems, addToCart, removeFromCart, clearCart, updateQuantity }}
     >
       {children}
     </CartContext.Provider>
