@@ -6,7 +6,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { CartContext } from '../context/CartContext';
 
 // CORRECT: Use your Stripe PUBLISHABLE Key here
-const stripePromise = loadStripe('YOUR_PUBLISHABLE_KEY_HERE');
+const stripePromise = loadStripe('pk_test_51S9q9hLdadOC4urYTiGAsvhwFpLm2nPBzVuFN7PwvBh0coU5PIRRjmJszCIm5YlnSMWUs91atjoX2bv9PutoDIXG00hwqY4tBm');
 
 // --- Payment Form Component ---
 // This component contains the Stripe-specific logic.
