@@ -7,11 +7,18 @@ function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Fehler beim Laden:", err));
-  }, []);
+    const fetchProducts = async () => {
+      try {
+        const { data } = await apiClient.get('/products');
+        setProducts(data);
+        console.log("Fetched products:", data);
+      }
+      catch (err) {
+        console.error("Error while loading the products:", err);
+      }
+    };
+    fetchProducts();
+  }, []); // Runs once the component mounts
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-between">

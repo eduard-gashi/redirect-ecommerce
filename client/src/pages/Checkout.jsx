@@ -27,17 +27,15 @@ const PaymentForm = ({ shippingAddress }) => {
     setProcessing(true);
 
     // 1. Create a Payment Intent on your server
-    const res = await fetch('/api/payment/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: Math.round(total * 100) }), // Convert to cents
-    });
-    const data = await res.json();
-    if (data.error) {
-      setError(data.error);
+    try {
+      const {data} = await apiClient.post('/payment/create-payment-intent', { amount: Math.round(total * 100) }); // Convert to cents
+    }
+    catch (err) {
+      setError('Failed to create payment intent.');
       setProcessing(false);
       return;
     }
+    
     
     // 2. Confirm the payment on the client
     const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(data.clientSecret, {
