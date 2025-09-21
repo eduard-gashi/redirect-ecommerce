@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Kontakt from './pages/Kontakt';
@@ -8,6 +7,9 @@ import ProductDetail from './pages/productDetails/ProductDetail';
 import Cart from "./pages/Cart";
 import ScrollToTop from './components/ScrollToTop';
 import Products from './pages/Products';
+import { CartProvider } from './context/CartContext';
+import CheckoutScreen from './pages/Checkout';
+import OrderSuccessScreen from './pages/OrderSuccessScreen';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/products/:id" element={<ProductDetail />} /> {/* Every product is identified by an unique ID */}
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/checkout" element={<CheckoutScreen />} />
+            <Route path="/order/:id" element={<OrderSuccessScreen />} />
           </Routes>
         </main>
 
