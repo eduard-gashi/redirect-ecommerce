@@ -1,0 +1,13 @@
+# General logs and dependency folders
+node_modules/
+npm-debug.log
+.DS_Store
+
+# Server
+/server/node_modules
+.env
+
+# Client
+/client/node_modules
+/client/build
+.env.local
