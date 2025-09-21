@@ -1,20 +1,19 @@
 import express from "express";
-import Product from "../models/Product.js";
+import Product from "../models/product.js";
 
 const router = express.Router();
 
-// Produkt nach ID abrufen
-// 🔹 ALLE Produkte abrufen
+// Get all products
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find(); // ✅ Holt alle Produkte
+    const products = await Product.find();
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// 🔹 EIN Produkt nach ID abrufen
+// Call one product by ID
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -25,7 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Neues Produkt hinzufügen
+// Insert new product
 router.post("/", async (req, res) => {
   try {
     const newProduct = new Product(req.body);
