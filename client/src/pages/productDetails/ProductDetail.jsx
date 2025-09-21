@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
-import apiClient from './apiClient';
+import apiClient from '../../apiClient';
 
 // The product schema can be found in "server/models/product.js"
 function ProductDetail() {
