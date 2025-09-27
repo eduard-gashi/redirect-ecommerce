@@ -11,6 +11,12 @@ import { CartProvider } from './context/CartContext';
 import CheckoutScreen from './pages/Checkout';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 
+import LegalNotice from './pages/LegalNotice';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import RefundPolicy from './pages/RefundPolicy';
+
+
 function App() {
   return (
     <>
@@ -31,6 +37,11 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/checkout" element={<CheckoutScreen />} />
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
+
+            <Route path="/impressum" element={<LegalNotice />} />
+            <Route path="/datenschutz" element={<PrivacyPolicy />} />
+            <Route path="/agb" element={<TermsOfService />} />
+            <Route path="/widerruf" element={<RefundPolicy />} />
           </Routes>
         </main>
 
