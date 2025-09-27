@@ -1,10 +1,51 @@
+import LegalNotice from '../pages/LegalNotice';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
+import TermsOfService from '../pages/TermsOfService';
+import RefundPolicy from '../pages/RefundPolicy';
+import { Link } from 'react-router-dom';
+
+
 function Footer() {
+      const legalLinks = [
+        { name: 'Impressum', path: '/impressum' },
+        { name: 'Datenschutz', path: '/datenschutz' },
+        { name: 'AGB', path: '/agb' }, // Allgemeine Geschäftsbedingungen
+        { name: 'Widerruf', path: '/widerruf' }, // Widerrufsbelehrung / Refund Policy
+    ];
+
     return (
-        <footer style={{ backgroundColor: "white", borderTop: "1px solid #e5e7eb"}} className="text-black text-center py-6 mt-auto">
-          <p className="text-sm">© 2025 ReDirect - Handy Detox Box. Alle Rechte vorbehalten.</p>
-          <p className="text-sm mt-auto">
-            Kontakt: <a href="mailto:kaishi.company@gmail.com" className="text-blue-400 underline">kaishi.company@gmail.com</a>
-          </p>
+        <footer className="main-footer">
+            <div className="footer-content-container">
+                
+                {/* 1. Copyright and Contact */}
+                <div className="footer-section footer-contact">
+                    <h3 className="footer-heading">Kontakt & Informationen</h3>
+                    <p className="footer-text">
+                        © 2025 ReDirect - Handy Detox Box.
+                    </p>
+                    <p className="footer-text footer-email-spacing">
+                        E-Mail: <a href="mailto:kaishi.company@gmail.com" className="footer-link-email">kaishi.company@gmail.com</a>
+                    </p>
+                </div>
+
+                {/* 2. Rechtliche Links */}
+                <div className="footer-section footer-legal">
+                    <h3 className="footer-heading">Rechtliches</h3>
+                    <ul className="footer-link-list">
+                        {legalLinks.map((link) => (
+                            <li key={link.name}>
+                                <Link to={link.path} className="footer-link">
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
+            <div className="footer-disclaimer">
+                Alle Rechte vorbehalten.
+            </div>
         </footer>
     );
 }

@@ -6,7 +6,8 @@ This project is the official e-commerce platform for the GbR founded by my frien
 
 Our first product is the Smartphone Detox Box, a one-month guided program designed to help people, especially those in Generation Z, build a healthier relationship with their smartphones. The box provides daily challenges and a reflection journal to encourage discipline, mindfulness, and a conscious reduction in screen time. It's a tool for anyone who feels distracted by social media and addicted to their smart phone and wants to reclaim their focus and time for real-world experiences.
 
-Live Demo
+## Live Demo
+
 [Frontend (Vercel)](https://redirect-ecommerce.vercel.app/)
 
 [Backend (Render)](https://redirect-ecommerce-backend.onrender.com/)
