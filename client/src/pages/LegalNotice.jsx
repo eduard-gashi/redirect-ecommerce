@@ -16,7 +16,7 @@ function LegalNotice() {
         </h2>
 
         <div className="contact-box">
-          <h3 className="datenschutz-heading3">Betreiber und Verantwortlicher</h3>
+          <h3 className="datenschutz-heading3">Betreiber und Verantwortliche</h3>
 
           <p className="contact-info">
             {COMPANY_NAME}

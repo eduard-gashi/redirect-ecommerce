@@ -22,23 +22,10 @@ function Home() {
   }, []); // Runs once the component mounts
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
+    <div className="home-container content-padding-top">
 
-      <div style={{ display: "none" }} className="relative h-[500px] w-full overflow-hidden shadow-xl">
-        <img
-          src="/Smartphone-Sucht.jpeg"
-          alt="Handy Detox Box"
-          className="h-full w-full object-cover"
-          style={{ objectPosition: "50% 20%" }}
-        />
-        <div className="fly-in-container absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h1 className="fly-in-text text-white text-4xl md:text-5xl font-bold text-center px-4">
-            Weniger Bildschirmzeit. Mehr Kontrolle.
-          </h1>
-        </div>
-      </div>
-
-      <section style={{ backgroundImage: "url('focus.jpg')", padding: '40px 0' }}>
+      {/* Video Section */}
+      <section style={{ backgroundImage: "url('focus.jpg')", padding: '40px 0' }} className="content-padding-top">
         <div style={{ display: "flex", justifyContent: "center", margin: "40px", boxShadow: "15px" }}>
           <VideoPlayerWithThumbnail></VideoPlayerWithThumbnail>
         </div>

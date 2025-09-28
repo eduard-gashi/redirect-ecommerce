@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Kontakt from './pages/Kontakt';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CookieConsentBanner from './components/CookieConsentBanner';
+
 import ProductDetail from './pages/productDetails/ProductDetail';
 import Cart from "./pages/Cart";
 import ScrollToTop from './components/ScrollToTop';
@@ -19,7 +21,10 @@ import RefundPolicy from './pages/RefundPolicy';
 
 function App() {
   return (
-    <>
+    <CartProvider> 
+      {/* 2. Cookie Banner */}
+      <CookieConsentBanner />
+      
       <Router>
         {/* Scroll to top on route change */}
         <ScrollToTop />
@@ -28,16 +33,17 @@ function App() {
         <Header />
 
         {/* Main Content*/}
-        <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh"}}>
+        <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Kontakt" element={<Kontakt />} />
-            <Route path="/products/:id" element={<ProductDetail />} /> {/* Every product is identified by an unique ID */}
+            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products />} />
             <Route path="/checkout" element={<CheckoutScreen />} />
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
 
+            {/* Legal Routes */}
             <Route path="/impressum" element={<LegalNotice />} />
             <Route path="/datenschutz" element={<PrivacyPolicy />} />
             <Route path="/agb" element={<TermsOfService />} />
@@ -48,7 +54,7 @@ function App() {
         {/* Footer */}
         <Footer />
       </Router>
-    </>
+    </CartProvider>
   );
 }
 
