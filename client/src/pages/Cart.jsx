@@ -49,7 +49,7 @@ function Cart() {
               />
               <div>
                 <p className="font-semibold">{item.name}</p>
-                <p className="text-sm text-gray-600">€{item.price.toFixed(2)}</p>
+                <p className="text-sm text-gray-600">€{item.price?.toFixed(2) ?? '0.00'}</p>
               </div>
             </div>
 

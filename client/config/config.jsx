@@ -1,7 +1,7 @@
 const COMPANY_DETAILS = {
     COMPANY_NAME: "Kaishi GbR",
     STREET: "Am Affenberg 3",
-    ZIP_CITY: "708050",
+    ZIP_CITY: "78050",
 
     EMAIL: "kaishi.company@gmail.de",
     PHONE: "0 176 45889710",

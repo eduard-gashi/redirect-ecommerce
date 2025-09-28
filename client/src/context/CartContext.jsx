@@ -12,26 +12,12 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    console.log("Cart updated:", cartItems);
   }, [cartItems]);
-
-  // Add Prodcuts to the Cart
-  const addToCart = (product, quantity = 1) => {
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item._id === product._id);
-      if (existing) {
-        return prev.map((item) =>
-          item._id === product._id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      }
-      return [...prev, { ...product, quantity }];
-    });
-  };
 
   // Remove products from the Cart
   const removeFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item._id !== id));
+    setCartItems((prev) => prev.filter((item) => String(item._id) !== String(id)));
   };
 
   // Clear the entire Cart
@@ -44,10 +30,32 @@ export function CartProvider({ children }) {
     } else {
       setCartItems((prev) =>
         prev.map((item) =>
-          item._id === id ? { ...item, quantity: newQuantity } : item
+          String(item._id) === String(id) ? { ...item, quantity: newQuantity } : item
         )
       );
     }
+  };
+
+  // Add Prodcuts to the Cart
+  const addToCart = (product, quantity) => {
+    setCartItems((prev) => {
+      const productToAddId = String(product._id);
+      
+      const existing = prev.find((item) => {
+        const itemIdInCart = String(item._id);
+        return itemIdInCart === productToAddId;
+      });
+
+      if (existing) {
+        /* Product already in cart, update quantity */
+        return prev.map((item) =>
+          String(item._id) === productToAddId
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity }];
+    });
   };
 
   return (

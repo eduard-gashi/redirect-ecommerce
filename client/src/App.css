@@ -4,6 +4,121 @@
 
 
 
+/* Header */
+.main-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.header-container {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-image {
+    height: 56px; 
+    transition: transform 0.3s ease;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+    color: #2563eb; 
+}
+
+/* Warenkorb-Link (mit Badge-Positionierung) */
+.cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #ebe5e5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.cart-link:hover {
+    background-color: #d1d5db;
+}
+
+/* Count Items */
+.cart-count {
+    position: absolute;
+    top: 30px;
+    right: -10px;
+    background-color: var(--red-alert);
+    color: green;
+    font-size: 12px;
+    border-radius: 9999px;
+    padding: 1px 8px;
+    line-height: 1.2;
+}
+
+/* Buy Now Button */
+.buy-now-button {
+    background-color: #82CABC; 
+    color: black;
+    padding: 8px 16px; 
+    border-radius: 8px; 
+    transition: background-color 0.2s ease;
+    font-weight: 600;
+}
+
+.buy-now-button:hover {
+    background-color: #6aaca3; 
+}
+
+
+
+/* --- Produkte Seite Styles --- */
+.title {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 800; /* bold */
+}
+
+.header-subtitle {
+    color: #4b5563; /* text-gray-600 */
+    margin-top: 0.5rem;
+}
+
+
+
+/* Home */
+.home-container {
+    padding-top: var(--header-height); 
+    background-color: var(--gray-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 .logo-color {
   color: #6cd8c4;
 }
@@ -61,17 +176,15 @@
     transform: scale(1.02);
 }
 
-
-
-/* Products Page */
 .product-header-container {
-    padding-left: 200px;
-    padding-top: 20px;
     text-align: left;
+    padding-left: 150px;
+    padding-top: 50px;
 }
 
 .product-grid-wrapper {
-    padding: 32px 32px;
+    padding-left: 150px;
+    padding-top: 50px;
     max-width: 1280px;
 }
 
@@ -97,6 +210,86 @@
 .header-subtitle {
     color: black;
     margin-top: 0.5rem;
+}
+
+
+/* Product Detail */
+.quantity-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid black; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    width: fit-content;
+}
+
+.quantity-input {
+    width: 60px; 
+    padding: 8px 0;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity-button {
+    background-color: #f3f4f6;
+    color: #1f2937;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+    height: 100%;
+}
+
+.quantity-button:hover:not(:disabled) {
+    background-color: #e5e7eb; 
+}
+
+.quantity-button:disabled {
+    cursor: not-allowed;
+    color: #a0a0a0;
+}
+
+.add-to-cart-button {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 75%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.add-to-cart-button {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+    background-color: #2563eb;
+}
+
+.paypal-express-button {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10px;
 }
 
 
@@ -192,42 +385,6 @@
 
 
 
-/* Header ("Unsere Produkte") */
-.product-header-container {
-    padding-left: 200px;
-    padding-top: 20px;
-    text-align: left;
-}
-
-.header-subtitle {
-    color: black;
-    margin-top: 0.5rem;
-}
-
-/* 2. Styles für den Grid-Container */
-.product-grid-wrapper {
-    padding: 32px 16px; 
-    max-width: 1280px; 
-}
-
-.product-grid {
-    display: grid;
-    gap: 32px; 
-    
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-@media (min-width: 640px) {
-    .product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
 
 
 
@@ -322,6 +479,79 @@
 }
 
 
+
+
+/* Cookies */
+.cookie-banner-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cookie-banner-content {
+  background-color: #333;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cookie-banner-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.cookie-link {
+  color: #5AC4B1;
+  text-decoration: underline;
+}
+
+.cookie-banner-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.cookie-button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.cookie-button.accept {
+  background-color: #5AC4B1;
+  color: #333;
+}
+
+.cookie-button.accept:hover {
+  background-color: #4da594;
+}
+
+.cookie-button.decline {
+  background-color: #fff;
+  color: #333;
+}
+
+.cookie-button.decline:hover {
+  background-color: #f0f0f0;
+}
+
+
 /* Footer */
 .main-footer {
     background-color: #ffffff; 
@@ -362,8 +592,6 @@
     }
 }
 
-
-/* Footer */
 .footer-heading {
     font-size: 1.125rem;
     font-weight: 600;

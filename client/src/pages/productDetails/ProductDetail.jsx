@@ -1,29 +1,39 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import apiClient from '../../apiClient';
 
+
 function ProductDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-      const fetchProduct = async () => {
-        try {
-          const { data } = await apiClient.get(`/products/${id}`);
-          setProduct(data);
-        } catch (err) {
-          console.error("Error while loading the product:", err);
-        }
-      };
-      fetchProduct();
-    }, [id]);
+    const fetchProduct = async () => {
+      try {
+        const { data } = await apiClient.get(`/products/${id}`);
+        setProduct(data);
+      } catch (err) {
+        console.error("Error while loading the product:", err);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   if (!product) {
     return <p className="text-center mt-10">Produkt wird geladen...</p>;
   }
+
+  // Adds products and navigates to checkout page
+  const buyNowHandler = () => {
+    addToCart(product, quantity);
+    
+    navigate('/checkout'); 
+    
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
@@ -50,28 +60,57 @@ function ProductDetail() {
 
             <p className="text-xl font-semibold mb-4">€{product.price}</p>
 
-            <div className="flex items-center gap-3 mb-6">
-              <label className="font-medium">Menge</label>
+            <div className="quantity-input-wrapper">
+              {/* Minus Button */}
+              <button
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="quantity-button"
+                disabled={quantity <= 1}
+              >
+                –
+              </button>
+
+              {/* Input Field */}
               <input
                 type="number"
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="border w-20 p-2 rounded text-center"
+                className="quantity-input"
               />
+
+              {/* Plus Button */}
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="quantity-button"
+              >
+                +
+              </button>
             </div>
 
             <p className="font-bold mb-4">
               Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
             </p>
 
-            <button
-              onClick={() => addToCart(product, quantity)}
-              disabled={product.countInStock === 0}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-            >
-              🛒 In den Warenkorb
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* PayPal Express-Checkout */}
+                <button
+                    onClick={buyNowHandler}
+                    disabled={product.countInStock === 0}
+                    className="paypal-express-button"
+                >
+                    <img src="/paypal-button.png" 
+                         alt="PayPal Logo" />
+                </button>
+                {/* Add to card */}
+                <button
+                    onClick={() => addToCart(product, quantity)}
+                    disabled={product.countInStock === 0}
+                    className="add-to-cart-button"
+                >
+                    🛒 In den Warenkorb
+                </button>
+            </div>
           </div>
         </div>
       </div>
