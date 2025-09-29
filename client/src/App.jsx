@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
-import Kontakt from './pages/Kontakt';
+import Contact from './pages/Contact';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CookieConsentBanner from './components/CookieConsentBanner';
@@ -36,7 +36,7 @@ function App() {
         <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/kontakt" element={<Contact />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products />} />
