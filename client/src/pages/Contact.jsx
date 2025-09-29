@@ -2,7 +2,7 @@ import React from 'react';
 import COMPANY_DETAILS from '../../config/config';
 
 
-function Kontakt() {
+function Contact() {
   const { COMPANY_NAME, STREET, ZIP_CITY, EMAIL, PHONE, REGISTER_COURT, REGISTER_NUMBER, UST_ID, WIDERRUF_TAGE } = COMPANY_DETAILS;
 
   return (
@@ -15,4 +15,4 @@ function Kontakt() {
   );
 }
 
-export default Kontakt;
+export default Contact;
