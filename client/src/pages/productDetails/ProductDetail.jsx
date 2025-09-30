@@ -36,30 +36,29 @@ function ProductDetail() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-white hover-product border rounded-lg shadow-lg p-8 max-w-4xl mx-auto flex flex-row gap-10 transition-transform">
+    <div>
+      <div className="product-detail-container">
+        <div className="product-detail-card hover-product">
           {/* Image Box */}
-          <div className="flex-1 flex justify-center">
+          <div className="product-image-container">
             <img
               src={`/${product.image}`}
               alt={product.name}
-              className="rounded-lg max-h-[300px] object-cover"
+              className="product-image"
             />
           </div>
 
           {/* Description, Price & add to Cart */}
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <div className="flex-layout">
+            <h1 className="title-black">{product.name}</h1>
 
-            <div className="p-4 rounded mb-4">
-              <p className="text-gray-700 leading-relaxed">
-                {product.description}
-              </p>
-            </div>
-
-            <p className="text-xl font-semibold mb-4">€{product.price}</p>
-
+            <p className="text-paragraph">
+              {product.description}
+            </p>
+            <br />
+            <p className="text-bold">€{product.price}</p>
+            <br />
+            
             <div className="quantity-input-wrapper">
               {/* Minus Button */}
               <button
@@ -88,11 +87,13 @@ function ProductDetail() {
               </button>
             </div>
 
-            <p className="font-bold mb-4">
+            <br />
+
+            <p className="text-bold">
               Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="flex-layout-column">
                 {/* PayPal Express-Checkout */}
                 <button
                     onClick={buyNowHandler}
