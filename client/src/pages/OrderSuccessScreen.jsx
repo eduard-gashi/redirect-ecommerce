@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 function OrderSuccessScreen() {
-  const { id } = useParams(); // Holt die Bestell-ID aus der URL
+  const { id } = useParams();
 
   return (
     <div className="container mx-auto px-4 py-12 mt-20 text-center max-w-2xl">
@@ -25,7 +25,7 @@ function OrderSuccessScreen() {
             Weiter einkaufen
           </Link>
           <Link 
-            to="/profile" // Annahme: Du hast eine Profilseite für Bestellhistorie
+            to="/profile"
             className="bg-gray-300 px-6 py-2 rounded hover:bg-gray-400"
           >
             Meine Bestellungen

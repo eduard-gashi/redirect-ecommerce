@@ -22,77 +22,82 @@ function Home() {
   }, []); // Runs once the component mounts
 
   return (
-    <div className="home-container content-padding-top">
+    <div className="home-container">
 
       {/* Video Section */}
-      <section style={{ backgroundImage: "url('focus.jpg')", padding: '40px 0' }} className="content-padding-top">
-        <div style={{ display: "flex", justifyContent: "center", margin: "40px", boxShadow: "15px" }}>
+      <section className="video-section">
+        <div className="video-wrapper">
           <VideoPlayerWithThumbnail></VideoPlayerWithThumbnail>
         </div>
       </section>
 
       {/* Product Container */}
-      <main className="container mx-auto px-4 py-12 flex flex-col items-center">
+      <main className="product-list-container">
         {products.length > 0 ? (
           products.map((p) => (
             <Link
-              to={`/products/${p._id}`} // Route to the detail page of the specific product
+              to={`/products/${p._id}`}
               key={p._id}
-              className="hover-product bg-white rounded-lg shadow-lg p-8 max-w-xl w-full text-center mb-6 transition block"
+              className="hover-product product-card"
             >
               <img
                 src={p.image}
                 alt={p.name}
-                className="mx-auto mb-6 rounded h-64 object-cover"
+                className="product-card-image"
               />
-              <h2 className="text-3xl font-bold mb-4">{p.name}</h2>
-              <div style={{ display: "flex", gap: "20px", justifyContent: "center", alignItems: "center" }}>
-                <p style={{ color: "gray", textDecorationLine: "line-through", fontSize: "18px" }}>{p.upper_price_limit}€</p>
-                <p style={{ fontSize: "24px" }}>{p.price}€</p>
+              <h2 className="title-black">{p.name}</h2>
+
+              {/* Replaced inline styles */}
+              <div className="product-price-box">
+                <p className="product-old-price">{p.upper_price_limit}€</p>
+                <p className="product-current-price">{p.price}€</p>
               </div>
-              <div>
-                <button style={{ marginTop: "15px" }} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+
+              {/* Replaced inline styles */}
+              <div className="product-button-margin">
+                <button className="primary-button">
                   Jetzt Kaufen!
                 </button>
               </div>
             </Link>
           ))
         ) : (
-          <p className="text-gray-600 text-lg">Produkte werden geladen...</p>
+          <p className="loading-text">Produkte werden geladen...</p>
         )}
 
-
         {/* Information Container */}
-        <div className="flex bg-gray-50 w-3/4 gap-8 items-start my-10 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-transform duration-200">
-          <div className="w-1/2">
+        {/* Information Container 1 (Default: Image Left, Text Right) */}
+        <div className="info-card">
+          <div className="info-card-half">
             <img
               src="/distraction.jpg"
               alt="Beispiel"
-              className="w-full h-auto object-cover"
+              className="info-card-image"
             />
           </div>
-          <div className="w-1/2 pt-6 px-10">
-            <h2 className="text-3xl font-bold mb-4 font-sans">Ablenkungen...</h2>
-            <p className="text-gray-700 leading-relaxed">
+          <div className="info-card-half info-card-content">
+            <h2 className="title-black">Ablenkungen...</h2>
+            <p className="text-paragraph">
               Wir leben in einer Welt permanenter Reize und Ablenkungen. Ständig werden wir von unnötigen Dingen abgelenkt, die uns davon abhalten, unsere Träume zu verfolgen und unsere Ziele zu erreichen. Besonders heute – in Zeiten endlosen Entertainments und sozialer Medien – ist es einfacher denn je, den Fokus zu verlieren und stundenlang durch Feeds zu scrollen, ohne wirklich erfüllt zu sein.
             </p>
           </div>
         </div>
-        <div className="flex bg-gray-50 w-3/4 gap-8 flex-row-reverse items-start my-10 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-transform duration-200">
-          <div className="w-1/2">
-            <img src="focus.jpg" alt="Bild 1" />
+
+        {/* Information Container 2 (Reversed: Text Left, Image Right) */}
+        <div className="info-card info-card-reverse">
+          <div className="info-card-half">
+            <img src="focus.jpg" alt="Bild 1" className="info-card-image" />
           </div>
-          <div className="w-1/2 pt-6 px-10">
-            <h2 className="text-3xl font-bold mb-4 font-sans">Fokus und Klarheit</h2>
-            <p className="text-gray-700 leading-relaxed">
+          <div className="info-card-half info-card-content">
+            <h2 className="title-black">Fokus und Klarheit</h2>
+            <p className="text-paragraph">
               Die Handy-Detox-Box gibt dir 30 Tage, um deine Smartphone-Nutzung bewusst wahrzunehmen und Schritt für Schritt zu reduzieren.
               Mit 30 täglichen Challenges bekommst du jeden Tag einen kleinen Impuls, um deine Gewohnheiten zu hinterfragen und alternative, erfüllende Aktivitäten auszuprobieren.
               Unser Ziel: Dir helfen, Klarheit zu gewinnen, dich wieder auf das Wesentliche zu konzentrieren und gesunde Routinen zu entwickeln, die dein Leben langfristig bereichern.</p>
           </div>
         </div>
-
       </main>
-    </div>
+    </div >
 
   );
 }

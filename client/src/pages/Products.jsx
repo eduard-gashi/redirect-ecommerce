@@ -29,7 +29,7 @@ function Products() {
             {/* Header */}
             <div className="product-header-container">
                 <h1 className="title logo-color">Unsere Produkte</h1>
-                <p className="header-subtitle">Entdecken Sie unsere Kollektion.</p>
+                <p className="text-paragraph">Entdecken Sie unsere Kollektion.</p>
             </div>
 
             {/* Product Grid */}
