@@ -28,7 +28,7 @@ function Products() {
             
             {/* Header */}
             <div className="product-header-container">
-                <h1 className="title logo-color">Unsere Produkte</h1>
+                <h1 className="title-black logo-color">Unsere Produkte</h1>
                 <p className="text-paragraph">Entdecken Sie unsere Kollektion.</p>
             </div>
 
