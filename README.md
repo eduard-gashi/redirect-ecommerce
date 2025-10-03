@@ -20,7 +20,7 @@ Shopping Cart: Add and manage items in the cart.
 ## Tech Stack
 This project is built with the following technologies:
 
-Frontend: React (Vite), Tailwind CSS
+Frontend: React (Vite)
 
 Backend: Node.js, Express.js
 
