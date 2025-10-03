@@ -3,7 +3,7 @@ import COMPANY_DETAILS from '../../config/config';
 
 function LegalNotice() {
   const { COMPANY_NAME, STREET, ZIP_CITY, EMAIL, PHONE, REGISTER_COURT, REGISTER_NUMBER, UST_ID, WIDERRUF_TAGE } = COMPANY_DETAILS;
-  
+
   return (
     <div className="datenschutz-container">
       <div className="datenschutz-content">
@@ -26,19 +26,22 @@ function LegalNotice() {
             {ZIP_CITY}
           </p>
 
-          <h3 className="datenschutz-heading3" style={{ marginTop: '1.5rem' }}>Kontakt</h3>
-          <p className="contact-details">
-            <a href="mailto:kaishi.company@gmail.de" className="link-color">kaishi.company@gmail.de</a>
-            <br />
-            {PHONE}
-            < br />
-            < br />
-            Vertretungsberechtigte Gesellschafter: Philipp Kaiser und Eduard Gashi
+          <h2 className="datenschutz-heading2">Zentrale Kontaktstelle nach dem Digital Services Act (DSA)</h2>
+          <p className="datenschutz-text">
+            Unsere zentrale Kontaktstelle für Nutzer und Behörden nach Art. 11, 12 DSA erreichen Sie wie folgt:
           </p>
+          <p className="datenschutz-text">
+            E-Mail: kaishi.company@gmail.com
+            <br />
+            Telefon: 017645889710
+          </p>
+
+          <p>Vertretungsberechtigte Gesellschafter: Philipp Kaiser und Eduard Gashi</p>
+
         </div>
 
         <h2 className="datenschutz-heading2">
-          Weitere Angaben (optional oder pflichtig je nach Rechtsform)
+          Weitere Angaben
         </h2>
 
         <h3 className="datenschutz-heading3">Handelsregistereintrag</h3>
@@ -50,7 +53,7 @@ function LegalNotice() {
 
         <h3 className="datenschutz-heading3">Umsatzsteuer-Identifikationsnummer</h3>
         <p className="datenschutz-text">
-          Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: {COMPANY_DETAILS.UST_ID} <span className="highlight-text-red">// HIER EINFÜGEN (falls vorhanden)</span>
+          Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: {COMPANY_DETAILS.UST_ID}
         </p>
 
         <h3 className="datenschutz-heading3">Verbraucherschlichtung / OS-Plattform</h3>
