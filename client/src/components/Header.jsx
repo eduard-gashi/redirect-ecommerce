@@ -22,7 +22,7 @@ function Header() {
         {/* Navigation */}
         <nav className="main-nav">
           {/* Contact */}
-          <Link to="/kontakt" className="nav-link contact-link">
+          <Link to="/kontakt" className="nav-link">
             Kontakt
           </Link>
 

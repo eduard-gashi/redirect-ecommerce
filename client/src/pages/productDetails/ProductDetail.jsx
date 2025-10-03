@@ -49,7 +49,7 @@ function ProductDetail() {
           </div>
 
           {/* Description, Price & add to Cart */}
-          <div className="flex-layout">
+          <div style={{flex: "1 1 0%"}}>
             <h1 className="title-black">{product.name}</h1>
 
             <p className="text-paragraph">
@@ -93,7 +93,7 @@ function ProductDetail() {
               Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
             </p>
 
-            <div className="flex-layout-column">
+            <div style={{ display: "flex", flexDirection: "column" }}>
                 {/* PayPal Express-Checkout */}
                 <button
                     onClick={buyNowHandler}
