@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { CartContext } from "../components/../context/CartContext";
 import apiClient from '../apiClient';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
-const PAYPAL_CLIENT_ID = "YOUR_PAYPAL_CLIENT_ID_HERE"; 
+const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_LIVE_CLIENT_ID;
 
-function ProductDetail() {
+function CheckoutScreen() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation(); 
+
+  const defaultQuantity = location.state?.checkoutQuantity || 1;
+
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(defaultQuantity); 
   const { addToCart, clearCart } = useContext(CartContext); 
 
   useEffect(() => {
@@ -22,7 +26,12 @@ function ProductDetail() {
         console.error("Error while loading the product:", err);
       }
     };
-    fetchProduct();
+    if (id) { 
+      console.log("Fetching product with ID:", id);
+       fetchProduct();
+      } else {
+        console.warn("Product ID is missing in URL parameters.");
+      }
   }, [id]);
 
   if (!product) {
@@ -153,4 +162,4 @@ function ProductDetail() {
   );
 }
 
-export default ProductDetail;
+export default CheckoutScreen;

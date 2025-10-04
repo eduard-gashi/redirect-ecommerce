@@ -30,10 +30,13 @@ function ProductDetail() {
   // Adds products and navigates to checkout page
   const buyNowHandler = () => {
     addToCart(product, quantity);
-    
-    navigate('/checkout'); 
-    
+    navigate(`/checkout/${product._id}`, { 
+    state: { 
+      checkoutQuantity: quantity 
+    } 
+  });
   };
+
 
   return (
     <div>
