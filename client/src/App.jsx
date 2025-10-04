@@ -40,7 +40,7 @@ function App() {
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/checkout" element={<CheckoutScreen />} />
+            <Route path="/checkout/:id" element={<CheckoutScreen />} />.
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
 
             {/* Legal Routes */}
