@@ -1,26 +1,23 @@
 import express from 'express';
 import Order from '../models/order.js';
+import Product from '../models/product.js' // Ensure Product Model is imported
 
 const router = express.Router();
 
-
 // Assuming this endpoint is mounted at `/api/orders`
 router.post('/', async (req, res) => {
-    // 1. Destructure the required order data sent from the frontend (ProductDetail.jsx)
+    console.log("Received order data:", req);
+    console.log("Received order data:", res);
+    // 1. Destructure the required order data sent from the frontend
     const { 
         orderItems, 
         shippingAddress, 
         paymentMethod, 
-        totalPrice, 
-        itemsPrice, 
-        taxPrice = 0, // Default to 0 if not sent
-        shippingPrice = 0, // Default to 0 if not sent
+        taxPrice = 0, 
+        shippingPrice = 0, 
         paymentResult 
     } = req.body;
 
-    // 💡 Security Best Practice: Get the user ID from the request object (assuming authentication middleware)
-    // const userId = req.user._id; 
-    // For demonstration, we'll use a placeholder or assume it's passed in the body (less secure):
     const userId = req.body.user; 
     
     // 2. Simple Validation
@@ -28,42 +25,79 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'No order items found' });
     }
     if (!userId) {
-        return res.status(401).json({ message: 'User not authenticated or ID missing' });
+        // You should check for authentication here, not just body parameter
+        return res.status(401).json({ message: 'User ID missing in order data.' });
     }
 
     try {
-        // 3. Prepare the new Order document based on your Mongoose Schema
-        const order = new Order({
-            // Required User & Item Data
-            user: userId, 
-            // ⚠️ FIX: Map 'quantity' back to 'qty' for Mongoose schema
-            orderItems: orderItems.map(item => ({
+        // --- 💡 SECURITY STEP: VALIDATE PRICES ON THE BACKEND ---
+
+        // Get all unique product IDs from the order items
+        const productIds = orderItems.map(item => item.product);
+
+        // Fetch products and their current prices from the database
+        const productsFromDb = await Product.find({ _id: { $in: productIds } }).select('_id price countInStock');
+
+        // Create a map for quick lookup: { productId: { price, countInStock } }
+        const productMap = productsFromDb.reduce((acc, prod) => {
+            acc[prod._id.toString()] = {
+                price: prod.price,
+                countInStock: prod.countInStock
+            };
+            return acc;
+        }, {});
+
+        let validatedItemsPrice = 0;
+        const validatedOrderItems = [];
+
+        // Re-calculate the itemsPrice and check stock
+        for (const item of orderItems) {
+            const productInfo = productMap[item.product];
+
+            if (!productInfo) {
+                return res.status(404).json({ message: `Product with ID ${item.product} not found.` });
+            }
+            if (productInfo.countInStock < item.qty) {
+                 return res.status(400).json({ message: `Not enough stock for ${item.name}. Available: ${productInfo.countInStock}` });
+            }
+
+            // Calculate the subtotal for this item using the secure DB price
+            validatedItemsPrice += productInfo.price * item.qty;
+
+            // Add the item to the validated list, ensuring the correct DB price is used
+            validatedOrderItems.push({
                 ...item,
-                qty: item.quantity || item.qty, 
-                // Ensure product ID is properly set
-                product: item.product, 
-            })),
+                price: productInfo.price, // Overwrite price with secure DB price
+                qty: item.qty,             // Use the quantity sent
+                product: item.product,     // Link to the Product ID
+            });
+        }
+        
+        // Final Price Calculation
+        const finalItemsPrice = Number(validatedItemsPrice.toFixed(2));
+        const finalTaxPrice = Number(taxPrice.toFixed(2));
+        const finalShippingPrice = Number(shippingPrice.toFixed(2));
+        const finalTotalPrice = Number((finalItemsPrice + finalTaxPrice + finalShippingPrice).toFixed(2));
+
+        // 3. Prepare the new Order document
+        const order = new Order({
+            user: userId, 
+            orderItems: validatedOrderItems, // Use the validated items
             
-            // Required Pricing Data (Trusting the frontend for Express Checkout, 
-            // but for safety, you should re-calculate itemsPrice on the backend!)
-            itemsPrice: itemsPrice,
-            taxPrice: taxPrice,
-            shippingPrice: shippingPrice,
-            totalPrice: totalPrice, 
+            // Required Pricing Data (Using validated prices)
+            itemsPrice: finalItemsPrice,
+            taxPrice: finalTaxPrice,
+            shippingPrice: finalShippingPrice,
+            totalPrice: finalTotalPrice, 
 
             // Payment and Shipping Details
             shippingAddress: shippingAddress,
-            paymentMethod: paymentMethod, // Should be 'PayPal Express'
+            paymentMethod: paymentMethod, 
             
-            // Payment Status (Set immediately to PAID since this route only runs AFTER capture)
+            // Payment Status
             isPaid: true,
             paidAt: Date.now(),
-            paymentResult: {
-                id: paymentResult.id,
-                status: paymentResult.status,
-                update_time: paymentResult.update_time || new Date().toISOString(),
-                email_address: paymentResult.email_address || '', 
-            },
+            paymentResult: paymentResult, // Use the paymentResult sent from onApprove
         });
 
         // 4. Save the order to MongoDB

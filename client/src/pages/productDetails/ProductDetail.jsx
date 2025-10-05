@@ -4,7 +4,7 @@ import { CartContext } from "../../context/CartContext";
 import apiClient from '../../apiClient';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
-const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_LIVE_CLIENT_ID;
+const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_SANDBOX_CLIENT_ID;
 
 
 function ProductDetail() {
@@ -35,14 +35,13 @@ function ProductDetail() {
     const purchasePrice = product.price * quantity;
     const totalValue = purchasePrice.toFixed(2);
 
-    console.log("Creating PayPal Express Order for:");
+    console.log("Creating PayPal Express Order for:", data, actions);
 
     return actions.order.create({
       purchase_units: [{
         amount: {
           currency_code: "EUR",
-          value: totalValue, // Use the fixed total value
-          // 🆕 ADD THE BREAKDOWN SECTION
+          value: totalValue,
           breakdown: {
             item_total: {
               currency_code: "EUR",
@@ -52,7 +51,6 @@ function ProductDetail() {
         },
         items: [{
           name: product.name,
-          // Ensure product.price is converted to a string with 2 decimals here too
           unit_amount: { currency_code: "EUR", value: product.price.toFixed(2) },
           quantity: quantity,
         }]
@@ -65,10 +63,13 @@ function ProductDetail() {
 
   const onApprove = async (data, actions) => {
     // 2. Payment approved by user, get details (address etc.)
+    console.log("ON APPROVE", data, actions);
     const details = await actions.order.capture();  // All relevant information are saved in details
 
+    console.log("PayPal Express Payment Details:", details);
+
     // TODO: Replace with actual user ID from auth context or state
-    const USER_ID = 'your_authenticated_user_id';
+    const USER_ID = '60f9a7b9c3f9a7b9c3f9a7b9';
 
     // Extract country code from PayPal details
     const countryCode = details.purchase_units[0].shipping.address.country_code || "DE";
@@ -123,6 +124,7 @@ function ProductDetail() {
       };
 
       try {
+        console.log("TRYING TO SAVE EXPRESS ORDER:", orderData);
         const orderRes = await apiClient.post('/orders', orderData);
         console.log("Express-Bestellung gespeichert:", orderRes.data);
         if (orderRes.status === 201) {
@@ -131,6 +133,9 @@ function ProductDetail() {
         }
       } catch (err) {
         console.error("Fehler beim Speichern der Express-Bestellung:", err);
+        if (err.response) {
+          console.error("Server-Antwort (Fehler-Details):", err.response.data);
+        }
       }
     }
   };
