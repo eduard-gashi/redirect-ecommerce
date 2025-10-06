@@ -52,11 +52,12 @@ function RefundPolicy() {
         <div className="datenschutz-content" style={{ marginTop: '2.5rem', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
           <h3 className="datenschutz-heading3">Muster-Widerrufsformular</h3>
           <p className="datenschutz-text" style={{ fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-            *(Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und senden Sie es zurück.)*
+            Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und senden Sie es zurück.
+            <br></br>
+            An Philipp Kaiser, Am Affenberg 3, 78050 Villingen-Schwenningen, Germany, kaishi.company@gmail.com
           </p>
           
           <ul className="datenschutz-text" style={{ listStyleType: 'none', paddingLeft: '0' }}>
-            <li>– An Philipp Kaiser, Am Affenberg 3, 78050 Villingen-Schwenningen, Germany, kaishi.company@gmail.com</li>
             <li>– Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*)/die Erbringung der folgenden Dienstleistung (*)</li>
             <li>– Bestellt am (*)/erhalten am (*)</li>
             <li>– Name des/der Verbraucher(s)</li>
@@ -66,7 +67,7 @@ function RefundPolicy() {
           </ul>
           
           <p className="datenschutz-text" style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
-            *(*) Unzutreffendes streichen.*
+            (*) Unzutreffendes streichen.
           </p>
         </div>
       </div>
