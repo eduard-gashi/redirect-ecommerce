@@ -4,8 +4,8 @@ import { CartContext } from "../context/CartContext";
 import "../App.css";
 
 function Header() {
-  const { cartItems } = useContext(CartContext); 
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0); 
+  const { cartItems } = useContext(CartContext);
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <header className="main-header">
@@ -29,6 +29,11 @@ function Header() {
           {/* Prodcuts */}
           <Link to="/products" className="nav-link">
             Produkte
+          </Link>
+
+          {/* User Login */}
+          <Link to="/login" className="nav-link">
+            Login
           </Link>
 
           {/* Cart */}

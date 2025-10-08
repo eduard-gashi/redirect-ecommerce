@@ -18,6 +18,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy';
 
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/checkout/:id" element={<CheckoutScreen />} />.
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
+            <Route path="/login" element={<Login />} />
 
             {/* Legal Routes */}
             <Route path="/impressum" element={<LegalNotice />} />
