@@ -17,32 +17,41 @@ function Login(): React.JSX.Element {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [needsRegistration, setNeedsRegistration] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // TypeScript-Typ für das Formular-Submit-Event
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      const { data } = await apiClient.post<UserInfo>('/api/users/login', { email, password });
-
-      localStorage.setItem('userInfo', JSON.stringify(data));
-
-      // Navigate to profile page after successful login
-      navigate('/profile');
+      if (needsRegistration) {
+        // Registration flow: Send verification email
+        await apiClient.post('/api/users/send-registration-email', { email });  // Tell backend to send email
+        setError('Registrierungslink an Ihre E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
+        setNeedsRegistration(false);
+      } else {
+        // Regular login flow: Get user data from MongoDB
+        const { data } = await apiClient.post<UserInfo>('/api/users/login', { email, password });
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        navigate('/profile');
+      }
 
     } catch (err: any) {
       setError(
         err.response && err.response.data.message
           ? err.response.data.message
-          : 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie E-Mail und Passwort.'
+          : 'Anmeldung/Registrierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.'
       );
     } finally {
       setLoading(false);
     }
   };
+
+  const handleRegisterClick = () => {
+    setNeedsRegistration(true);
+  }
 
   return (
     <div className="login-container">
@@ -87,12 +96,37 @@ function Login(): React.JSX.Element {
             />
           </div>
 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: '15px' // Etwas Abstand hinzufügen
+            }}
+          >
+            <span 
+              onClick={() => setNeedsRegistration(!needsRegistration)} // Reset state
+              style={{ 
+                cursor: 'pointer', 
+                color: '#007bff', 
+                textDecoration: 'underline' 
+              }}
+            >
+              {needsRegistration
+                ? 'Zurück zum Login' 
+                : 'Noch kein Konto? Hier registrieren'
+              }
+            </span>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
             className='primary-button'
           >
-            {loading ? 'Wird geladen...' : 'Einloggen'}
+            {loading 
+              ? 'Wird geladen...' 
+              : needsRegistration ? 'Registrierungs-E-Mail senden' : 'Einloggen'
+            }
           </button>
         </form>
       </div>
