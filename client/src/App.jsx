@@ -12,6 +12,7 @@ import Products from './pages/Products';
 import { CartProvider } from './context/CartContext';
 import CheckoutScreen from './pages/Checkout';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
+import AccountConfirmation from './components/AccountConfirmation';
 
 import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -44,6 +45,7 @@ function App() {
             <Route path="/checkout/:id" element={<CheckoutScreen />} />.
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/confirm-registration" element={<AccountConfirmation />} />
 
             {/* Legal Routes */}
             <Route path="/impressum" element={<LegalNotice />} />

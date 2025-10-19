@@ -9,8 +9,10 @@
     --color-primary-blue-hover: #1d4ed8;
     
     /* You can also use variables for background/text colors */
-    --text-color-light: #4b5563; /* e.g., text-gray-600 */
-    --color-error: #dc2626; /* e.g., text-red-600 */
+    --text-color-light: #4b5563;
+    --color-error: #dc2626;
+
+    --color-background: #f9fafbM;
 }
 
 
@@ -173,7 +175,7 @@
 /* Product Section */
 .products-view {
     padding: 3rem 1rem;
-    background-color: #f9fafb; 
+    background-color: var(--color-background); 
     flex: 1; 
     min-height: 100vh;
     min-width: 100%;
@@ -344,6 +346,7 @@
     padding: 3rem;
     min-height: 100vh;
     text-align: center;
+    background-color: var(--color-background);
 }
 
 
