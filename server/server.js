@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import productRoutes from "./routes/product.js";
 import paymentRoutes from "./routes/order.js";
 import orderRoutes from "./routes/order.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/users", userRoutes);
 
 
 const PORT = process.env.PORT || 5000;
@@ -22,6 +24,6 @@ const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => console.log(`🚀 Server läuft auf Port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
   })
   .catch((err) => console.error(err));

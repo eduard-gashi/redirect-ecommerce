@@ -7,7 +7,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); // Neu: Passwort-Bestätigung
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState(null); // Neu: Erfolgsmeldung
+  const [successMessage, setSuccessMessage] = useState(''); // Neu: Erfolgsmeldung
   const [loading, setLoading] = useState(false);
 
   /**

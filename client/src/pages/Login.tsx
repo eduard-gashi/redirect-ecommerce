@@ -28,12 +28,13 @@ function Login(): React.JSX.Element {
     try {
       if (needsRegistration) {
         // Registration flow: Send verification email
-        await apiClient.post('/api/users/send-registration-email', { email });  // Tell backend to send email
+        await apiClient.post('/users/send-registration-email', { email });  // Tell backend to send email
+        console.log('Registrierungs-E-Mail gesendet an:', email);
         setError('Registrierungslink an Ihre E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
         setNeedsRegistration(false);
       } else {
         // Regular login flow: Get user data from MongoDB
-        const { data } = await apiClient.post<UserInfo>('/api/users/login', { email, password });
+        const { data } = await apiClient.post<UserInfo>('/users/login', { email, password });
         localStorage.setItem('userInfo', JSON.stringify(data));
         navigate('/profile');
       }
@@ -103,16 +104,16 @@ function Login(): React.JSX.Element {
               marginTop: '15px' // Etwas Abstand hinzufügen
             }}
           >
-            <span 
+            <span
               onClick={() => setNeedsRegistration(!needsRegistration)} // Reset state
-              style={{ 
-                cursor: 'pointer', 
-                color: '#007bff', 
-                textDecoration: 'underline' 
+              style={{
+                cursor: 'pointer',
+                color: '#007bff',
+                textDecoration: 'underline'
               }}
             >
               {needsRegistration
-                ? 'Zurück zum Login' 
+                ? 'Zurück zum Login'
                 : 'Noch kein Konto? Hier registrieren'
               }
             </span>
@@ -123,8 +124,8 @@ function Login(): React.JSX.Element {
             disabled={loading}
             className='primary-button'
           >
-            {loading 
-              ? 'Wird geladen...' 
+            {loading
+              ? 'Wird geladen...'
               : needsRegistration ? 'Registrierungs-E-Mail senden' : 'Einloggen'
             }
           </button>
