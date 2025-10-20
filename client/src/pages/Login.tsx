@@ -6,7 +6,6 @@ import '../App.css';
 // Typdefinition for user data returned from the API
 interface UserInfo {
   _id: string;
-  name: string;
   email: string;
   isAdmin: boolean;
   token: string; // JWT-Token
@@ -15,31 +14,41 @@ interface UserInfo {
 function Login(): React.JSX.Element {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [needsRegistration, setNeedsRegistration] = useState<boolean>(false);
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    setHasAttemptedSubmit(true);
+
+    if (passwordError) {
+      setLoading(false);
+      return;
+    }
 
     try {
       if (needsRegistration) {
         // Registration flow: Send verification email
-        await apiClient.post('/users/send-registration-email', { email });  // Tell backend to send email
+        await apiClient.post('/users/send-registration-email', { email, password });  // Tell backend to send email
         console.log('Registrierungs-E-Mail gesendet an:', email);
         setError('Registrierungslink an Ihre E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
         setNeedsRegistration(false);
       } else {
         // Regular login flow: Get user data from MongoDB
         const { data } = await apiClient.post<UserInfo>('/users/login', { email, password });
+        console.log('error', data);
         localStorage.setItem('userInfo', JSON.stringify(data));
         navigate('/profile');
       }
-
+      setHasAttemptedSubmit(false);
     } catch (err: any) {
+      console.error('Fehler bei der Anmeldung/Registrierung:', err);
       setError(
         err.response && err.response.data.message
           ? err.response.data.message
@@ -50,9 +59,38 @@ function Login(): React.JSX.Element {
     }
   };
 
-  const handleRegisterClick = () => {
-    setNeedsRegistration(true);
-  }
+  const validatePassword = (value: string): string => {
+    if (value === '') return '';
+
+    const errors: string[] = [];
+
+    if (value.length < 8) {
+      errors.push('mindestens 8 Zeichen');
+    }
+    if (!/[A-Z]/.test(value)) {
+      errors.push('mindestens 1 Großbuchstabe');
+    }
+    if (!/[a-z]/.test(value)) {
+      errors.push('mindestens 1 Kleinbuchstabe');
+    }
+    if (!/[0-9]/.test(value)) {
+      errors.push('mindestens 1 Zahl');
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      errors.push('mindestens 1 Sonderzeichen (!@#$...)');
+    }
+
+    if (errors.length > 0) {
+      return `Passwort ist unsicher. Muss enthalten: ${errors.join(', ')}.`;
+    }
+    return '';
+  };
+
+  const handleSetPasswort = (value: string) => {
+    setPassword(value);
+    const validationMessage = validatePassword(value);
+    setPasswordError(validationMessage);
+  };
 
   return (
     <div className="login-container">
@@ -93,19 +131,29 @@ function Login(): React.JSX.Element {
               required
               className="form-input"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleSetPasswort(e.target.value)}
             />
+            {passwordError && hasAttemptedSubmit && (
+              <p className="mt-2 text-xs text-red-600 font-medium p-2 bg-red-50 rounded-lg border border-red-200 shadow-sm">
+                {passwordError}
+              </p>
+            )}
           </div>
 
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: '15px' // Etwas Abstand hinzufügen
+              marginTop: '15px'
             }}
           >
             <span
-              onClick={() => setNeedsRegistration(!needsRegistration)} // Reset state
+              onClick={() => {
+                setNeedsRegistration(!needsRegistration);
+                setError('');
+                setPasswordError('');
+                setHasAttemptedSubmit(false);
+              }}
               style={{
                 cursor: 'pointer',
                 color: '#007bff',
