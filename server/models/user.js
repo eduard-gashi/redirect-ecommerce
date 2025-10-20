@@ -3,8 +3,7 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
   },
@@ -18,19 +17,17 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
+  this.password = this.password.trim();
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   console.log("Vergleiche eingegebenes Passwort mit gespeichertem Hash.");
-  console.log("Eingegebenes Klartext-Passwort:", enteredPassword); // Das, was der Nutzer eingibt
-  console.log("Gespeicherter Hash:", this.password); // Das, was aus der DB kommt (sollte mit $2b beginnen)
-
-  // bcrypt.compare führt den Vergleich sicher durch
-  const isMatch = await bcrypt.compare(enteredPassword, this.password);
+  const trimmedEnteredPassword = enteredPassword.trim();
+  const isMatch = await bcrypt.compare(trimmedEnteredPassword, this.password);
   console.log("Vergleichsergebnis:", isMatch);
-  
   return isMatch;
 };
-export default mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

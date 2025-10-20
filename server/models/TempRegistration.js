@@ -6,15 +6,15 @@ const tempRegistrationSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  passwordHash: { type: String, required: true },
   registrationToken: {
     type: String,
     required: true,
   },
-  // Der Index sorgt dafür, dass die Daten nach 1 Stunde gelöscht werden
   createdAt: { 
     type: Date, 
     default: Date.now, 
-    expires: 3600 // Dokument wird nach 3600 Sekunden (1 Stunde) gelöscht
+    expires: 3600,
   },
 });
 
