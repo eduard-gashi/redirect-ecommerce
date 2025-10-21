@@ -5,8 +5,10 @@ import generateToken from '../utils/generateToken.js';
 import { v4 as uuidv4 } from 'uuid';
 import TempRegistration from '../models/TempRegistration.js';
 import sendEmail from '../utils/sendEmail.js';
+import bcrypt from "bcryptjs";
 
 const router = express.Router();
+
 
 // Login Endpoint
 router.post(
@@ -19,20 +21,31 @@ router.post(
 
     console.log("Eingegebenes passwort:", password);
     console.log("Gefundener Benutzer:", user);
+    let error_message = '';
 
-    if (user && (await user.matchPassword(password))) {
-      console.log("Login erfolgreich für E-Mail:", email);
-      res.json({
-        _id: user._id,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-      });
+    if (user) {
+      if (await user.matchPassword(password)) {
+        console.log("Login erfolgreich für E-Mail:", email);
+        res.json({
+          _id: user._id,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user._id),
+        });
+      }
+      else {
+        console.log("Ungültiges Passwort für E-Mail:", email);
+        error_message = 'Ungültiges Passwort. Bitte versuchen Sie es erneut.';
+        res.status(401);
+        res.json({ message: error_message });
+        throw new Error(error_message);
+      }
     } else {
       console.log("Ungültige Login-Versuche für E-Mail:", email);
-      console.log(user);
       res.status(401);
-      throw new Error('Ungültige E-Mail oder ungültiges Passwort.');
+      error_message = 'Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.';
+      res.json({ message: error_message });
+      throw new Error(error_message);
     }
   })
 );
@@ -68,6 +81,7 @@ router.post(
     const registrationToken = uuidv4();
 
     // Create a temporary registration entry
+    console.log('Erstelle temporären Registrierungseintrag für:', email);
     await TempRegistration.create({
       email,
       passwordHash,
@@ -76,7 +90,6 @@ router.post(
 
 
     let baseURL;
-
     if (process.env.NODE_ENV === 'development') {
       baseURL = 'http://localhost:5173';
     } else {
@@ -111,14 +124,20 @@ router.get(
   asyncHandler(async (req, res) => {
     const { token } = req.query;
 
+    console.log('Token vom Request:', token);
     if (!token) {
       res.status(400);
       throw new Error('Fehlender Registrierungstoken.');
     }
 
+    const allTempRegs = await TempRegistration.find({});
+    console.log('Alle vorhandenen temporären Registrierungen:', allTempRegs.map(tr => ({ email: tr.email, token: tr.registrationToken, created: tr.createdAt })));
+
     const tempReg = await TempRegistration.findOne({
       registrationToken: token
     });
+
+    console.log('Temporärer Registrierungseintrag gefunden:', tempReg);
 
     if (!tempReg) {
       res.status(404);
@@ -126,6 +145,7 @@ router.get(
     }
 
     const { email, passwordHash } = tempReg;
+    console.log('E-Mail und Passwort-Hash aus temporärer Registrierung:', { email, passwordHash });
 
     const user = await User.create({
       email: email,
