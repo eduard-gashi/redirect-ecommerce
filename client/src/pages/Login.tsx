@@ -37,7 +37,7 @@ function Login(): React.JSX.Element {
         // Registration flow: Send verification email
         await apiClient.post('/users/send-registration-email', { email, password });  // Tell backend to send email
         console.log('Registrierungs-E-Mail gesendet an:', email);
-        setError('Registrierungslink an Ihre E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
+        setError('Wir haben eine Registrierungs-Email gesendet. Bitte überprüfen Sie Ihr Postfach.');
         setNeedsRegistration(false);
       } else {
         // Regular login flow: Get user data from MongoDB
