@@ -13,6 +13,7 @@ import { CartProvider } from './context/CartContext';
 import CheckoutScreen from './pages/Checkout';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import AccountConfirmation from './components/AccountConfirmation';
+import Profile from './pages/Profile';
 
 import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -46,6 +47,7 @@ function App() {
             <Route path="/order/:id" element={<OrderSuccessScreen />} />
             <Route path="/login" element={<Login />} />
             <Route path="/confirm-registration" element={<AccountConfirmation />} />
+            <Route path="/profile" element={<Profile />} />
 
             {/* Legal Routes */}
             <Route path="/impressum" element={<LegalNotice />} />
