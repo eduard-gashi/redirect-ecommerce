@@ -43,10 +43,12 @@ function Profile() {
         <div className="profile-container">
             <h1 className="title-black">Mein Profil</h1>
             <div className="profile-details">
-                <p className="text-paragraph">**ID:** {userInfo._id}</p>
-                <p className="text-paragraph">**E-Mail:** {userInfo.email}</p>
-                <p className="text-paragraph">**Admin-Status:** {userInfo.isAdmin ? 'Ja' : 'Nein'}</p>
-                <p className="text-paragraph">Sie sind erfolgreich angemeldet.</p>
+                <p className="text-paragraph">
+                    <strong>E-Mail: </strong>{userInfo.email}
+                </p>
+                <p className="text-paragraph">
+                    <strong>Verkaufshistorie: </strong> (Noch nicht implementiert)
+                </p>
             </div>
         </div>
     );

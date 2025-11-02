@@ -1,7 +1,8 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../apiClient';
 import '../App.css';
+import { AuthContext } from '../context/AuthContext';
 
 // Typdefinition for user data returned from the API
 interface UserInfo {
@@ -21,6 +22,16 @@ function Login(): React.JSX.Element {
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const { state, dispatch } = useContext(AuthContext);
+  const { userInfo } = state;
+
+  // Check if user is already logged in and redirect to profile
+  useEffect(() => {
+        if (userInfo) {
+            navigate('/profile');
+        }
+    }, [userInfo, navigate]);
+
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
@@ -37,13 +48,12 @@ function Login(): React.JSX.Element {
         // Registration flow: Send verification email
         await apiClient.post('/users/send-registration-email', { email, password });  // Tell backend to send email
         console.log('Registrierungs-E-Mail gesendet an:', email);
-        setError('Wir haben eine Registrierungs-Email gesendet. Bitte überprüfen Sie Ihr Postfach.');
+        setError('Wir haben eine Verifizierungs-Email gesendet. Bitte überprüfen Sie Ihr Postfach.');
         setNeedsRegistration(false);
       } else {
         // Regular login flow: Get user data from MongoDB
         const { data } = await apiClient.post<UserInfo>('/users/login', { email, password });
-        console.log('error', data);
-        localStorage.setItem('userInfo', JSON.stringify(data));
+        dispatch({ type: 'USER_SIGNIN', payload: data });
         navigate('/profile');
       }
       setHasAttemptedSubmit(false);

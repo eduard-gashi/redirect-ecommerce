@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import ScrollToTop from './components/ScrollToTop';
 import Products from './pages/Products';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import CheckoutScreen from './pages/Checkout';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import AccountConfirmation from './components/AccountConfirmation';
@@ -24,42 +25,44 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <CartProvider> 
-      {/* 2. Cookie Banner */}
-      <CookieConsentBanner />
-      
-      <Router>
-        {/* Scroll to top on route change */}
-        <ScrollToTop />
+    <CartProvider>
+      <AuthProvider>
+        {/* 2. Cookie Banner */}
+        <CookieConsentBanner />
 
-        {/* Header */}
-        <Header />
+        <Router>
+          {/* Scroll to top on route change */}
+          <ScrollToTop />
 
-        {/* Main Content*/}
-        <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/kontakt" element={<Contact />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/checkout/:id" element={<CheckoutScreen />} />.
-            <Route path="/order/:id" element={<OrderSuccessScreen />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/confirm-registration" element={<AccountConfirmation />} />
-            <Route path="/profile" element={<Profile />} />
+          {/* Header */}
+          <Header />
 
-            {/* Legal Routes */}
-            <Route path="/impressum" element={<LegalNotice />} />
-            <Route path="/datenschutz" element={<PrivacyPolicy />} />
-            <Route path="/agb" element={<TermsOfService />} />
-            <Route path="/widerruf" element={<RefundPolicy />} />
-          </Routes>
-        </main>
+          {/* Main Content*/}
+          <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/kontakt" element={<Contact />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/checkout/:id" element={<CheckoutScreen />} />.
+              <Route path="/order/:id" element={<OrderSuccessScreen />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/confirm-registration" element={<AccountConfirmation />} />
+              <Route path="/profile" element={<Profile />} />
 
-        {/* Footer */}
-        <Footer />
-      </Router>
+              {/* Legal Routes */}
+              <Route path="/impressum" element={<LegalNotice />} />
+              <Route path="/datenschutz" element={<PrivacyPolicy />} />
+              <Route path="/agb" element={<TermsOfService />} />
+              <Route path="/widerruf" element={<RefundPolicy />} />
+            </Routes>
+          </main>
+
+          {/* Footer */}
+          <Footer />
+        </Router>
+      </AuthProvider>
     </CartProvider>
   );
 }
