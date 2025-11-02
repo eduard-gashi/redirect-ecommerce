@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 function Profile() {
-    // State für Benutzerinformationen
-    const [userInfo, setUserInfo] = useState(null);
+    const { state, dispatch } = useContext(AuthContext);
+    const { userInfo } = state;
     const navigate = useNavigate();
 
-    console.log("Profile component rendered");
-
     useEffect(() => {
-        // 1. Daten aus dem localStorage laden
-        const storedUserInfo = localStorage.getItem('userInfo');
-
-        if (storedUserInfo) {
-            try {
-                const parsedInfo = JSON.parse(storedUserInfo);
-                setUserInfo(parsedInfo);
-                console.log("Benutzerinformationen geladen:", parsedInfo);
-            } catch (error) {
-                console.error("Fehler beim Parsen der Benutzerinformationen:", error);
-                // Bei Fehler auf Login umleiten
-                localStorage.removeItem('userInfo');
-                navigate('/login');
-            }
-        } else {
-            // Wenn keine UserInfo vorhanden ist, auf Login umleiten
-            console.log("Keine UserInfo gefunden, Umleitung zu Login.");
+        if (!userInfo) {
+            console.log("Keine UserInfo im Context gefunden, Umleitung zu Login.");
             navigate('/login');
         }
-    }, [navigate]);
+    }, [userInfo, navigate]);
+
+    const handleLogOut = () => {
+        dispatch({ type: 'USER_SIGNOUT' }); 
+    }
 
     if (!userInfo) {
-        // Zeigt "Wird geladen..." an, bis die Daten verarbeitet sind
         return (
             <div style={{ padding: '50px', textAlign: 'center', height: '100vh', background: '#f8f8f8' }}>
                 <h1 style={{ color: '#333' }}>Profil wird geladen...</h1>
@@ -39,6 +26,7 @@ function Profile() {
         );
     }
 
+    // 💡 4. Rendering des Profils
     return (
         <div className="profile-container">
             <h1 className="title-black">Mein Profil</h1>
@@ -50,7 +38,11 @@ function Profile() {
                     <strong>Verkaufshistorie: </strong> (Noch nicht implementiert)
                 </p>
             </div>
+            <button className="btn-primary" onClick={handleLogOut}>
+                Ausloggen
+            </button>
         </div>
     );
 }
+
 export default Profile;
