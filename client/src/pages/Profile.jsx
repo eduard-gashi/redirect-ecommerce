@@ -15,7 +15,7 @@ function Profile() {
     }, [userInfo, navigate]);
 
     const handleLogOut = () => {
-        dispatch({ type: 'USER_SIGNOUT' }); 
+        dispatch({ type: 'USER_SIGNOUT' });
     }
 
     if (!userInfo) {
@@ -26,7 +26,6 @@ function Profile() {
         );
     }
 
-    // 💡 4. Rendering des Profils
     return (
         <div className="profile-container">
             <h1 className="title-black">Mein Profil</h1>
@@ -37,10 +36,10 @@ function Profile() {
                 <p className="text-paragraph">
                     <strong>Verkaufshistorie: </strong> (Noch nicht implementiert)
                 </p>
+                <button className="primary-button" onClick={handleLogOut}>
+                    Ausloggen
+                </button>
             </div>
-            <button className="btn-primary" onClick={handleLogOut}>
-                Ausloggen
-            </button>
         </div>
     );
 }
