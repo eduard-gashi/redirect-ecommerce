@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import "../App.css";
-
+import { FaUserCircle } from 'react-icons/fa';
 function Header() {
   const { cartItems } = useContext(CartContext);
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -31,9 +31,9 @@ function Header() {
             Produkte
           </Link>
 
-          {/* User Login */}
-          <Link to="/login" className="nav-link">
-            Login
+          {/* User Logind and profile page */}
+          <Link to="/profile" className="nav-link profile-link">
+            <FaUserCircle size={24} style={{ marginRight: '5px' }} />
           </Link>
 
           {/* Cart */}
