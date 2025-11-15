@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import apiClient from '../../apiClient';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { AuthContext } from '../../context/AuthContext';
 
 const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_SANDBOX_CLIENT_ID;
 
@@ -13,6 +14,9 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart, clearCart } = useContext(CartContext);
+  const { state, dispatch } = useContext(AuthContext);
+  const userInfo = state.userInfo;
+
 
   const createOrder = (data, actions) => {
     // 1. Create order based on price and quantity
@@ -52,8 +56,11 @@ function ProductDetail() {
 
     console.log("PayPal Express Payment Details:", details);
 
-    // TODO: Replace with actual user ID from auth context or state
-    const USER_ID = '60f9a7b9c3f9a7b9c3f9a7b9';
+    let user_id = null;
+    if (userInfo){
+      user_id = userInfo._id;
+      console.log("HAHA", userInfo);
+    }
 
     // Extract country code from PayPal details
     const countryCode = details.purchase_units[0].shipping.address.country_code || "DE";
@@ -72,7 +79,7 @@ function ProductDetail() {
       const itemPrice = product.price * quantity; // Calculate item price
 
       const orderData = {
-        user: USER_ID,
+        user: user_id,
 
         orderItems: [{
           name: product.name,
