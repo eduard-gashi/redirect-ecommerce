@@ -5,9 +5,9 @@ npm-debug.log
 
 # Server
 /server/node_modules
-.env
+/server/.env
 
 # Client
 /client/node_modules
 /client/build
-.env.local
+/client/.env
