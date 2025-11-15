@@ -15,12 +15,10 @@ import CheckoutScreen from './pages/Checkout';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import AccountConfirmation from './components/AccountConfirmation';
 import Profile from './pages/Profile';
-
 import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy';
-
 import Login from './pages/Login';
 
 function App() {
