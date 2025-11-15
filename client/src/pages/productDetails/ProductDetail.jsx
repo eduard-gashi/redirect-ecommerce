@@ -14,22 +14,6 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const { addToCart, clearCart } = useContext(CartContext);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const { data } = await apiClient.get(`/products/${id}`);
-        setProduct(data);
-      } catch (err) {
-        console.error("Error while loading the product:", err);
-      }
-    };
-    fetchProduct();
-  }, [id]);
-
-  if (!product) {
-    return <p className="text-center mt-10">Produkt wird geladen...</p>;
-  }
-
   const createOrder = (data, actions) => {
     // 1. Create order based on price and quantity
     const purchasePrice = product.price * quantity;
@@ -88,26 +72,22 @@ function ProductDetail() {
       const itemPrice = product.price * quantity; // Calculate item price
 
       const orderData = {
-        // 🆕 REQUIRED FIELD: Must send the user ID
         user: USER_ID,
 
         orderItems: [{
           name: product.name,
-          // 🆕 FIX KEY NAME: Use 'qty' as required by schema
           qty: quantity,
           image: product.image,
           price: product.price,
-          // 🆕 REQUIRED FIELD: Link to the Product Mongoose ID
           product: product._id,
         }],
 
         shippingAddress: shippingAddress,
         paymentMethod: 'PayPal Express',
 
-        // 🆕 REQUIRED FIELDS: Calculate and include pricing details
         itemsPrice: itemPrice,
-        taxPrice: 0.00, // Assuming 0 for now, calculate based on your logic
-        shippingPrice: 0.00, // Assuming 0 for now
+        taxPrice: 0.00,
+        shippingPrice: 0.00,
         totalPrice: itemPrice,
 
         // Set payment status
@@ -124,25 +104,37 @@ function ProductDetail() {
       };
 
       try {
-        console.log("TRYING TO SAVE EXPRESS ORDER:", orderData);
+        console.log("Trying to save Express order:", orderData);
         const orderRes = await apiClient.post('/orders', orderData);
-        console.log("Express-Bestellung gespeichert:", orderRes.data);
         if (orderRes.status === 201) {
           clearCart();
           navigate(`/order/${orderRes.data._id}`);
         }
       } catch (err) {
-        console.error("Fehler beim Speichern der Express-Bestellung:", err);
-        if (err.response) {
-          console.error("Server-Antwort (Fehler-Details):", err.response.data);
-        }
+        console.error("Error while saving the express order:", err);
       }
     }
   };
 
   const onCancel = () => {
-    console.log("PayPal Express Zahlung abgebrochen.");
+    console.log("PayPal Express order cancelled.");
   };
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const { data } = await apiClient.get(`/products/${id}`);
+        setProduct(data);
+      } catch (err) {
+        console.error("Error while loading the product:", err);
+      }
+    };
+    fetchProduct();
+  }, [id]);
+
+  if (!product) {
+    return <p className="text-center mt-10">Produkt wird geladen...</p>;
+  }
 
 
   return (
