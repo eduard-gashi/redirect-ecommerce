@@ -74,6 +74,8 @@ function Header() {
             <FaTimes size={24} />
           </button>
           <nav className="mobile-nav">
+            <Link to="/" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
+            <br></br>
             <Link to="/kontakt" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
             <br></br>
             <Link to="/products" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
