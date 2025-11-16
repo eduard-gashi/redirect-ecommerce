@@ -19,8 +19,6 @@ router.post(
 
     const user = await User.findOne({ email });
 
-    console.log("Eingegebenes passwort:", password);
-    console.log("Gefundener Benutzer:", user);
     let error_message = '';
 
     if (user) {
@@ -162,5 +160,26 @@ router.get(
     });
   })
 );
+
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    console.log("Fetched users:", users.length);
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    console.log("Requested user with ID:", req.params.id);
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ error: "Could not find user" });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 export default router;
