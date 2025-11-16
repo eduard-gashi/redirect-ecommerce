@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import OrderHistory from '../components/OrderHistory'
 
 function Profile() {
     const { state, dispatch } = useContext(AuthContext);
@@ -34,7 +35,8 @@ function Profile() {
                     <strong>E-Mail: </strong>{userInfo.email}
                 </p>
                 <p className="text-paragraph">
-                    <strong>Verkaufshistorie: </strong> (Noch nicht implementiert)
+                    <strong>Verkaufshistorie: </strong> 
+                    <OrderHistory></OrderHistory>
                 </p>
                 <button className="primary-button" onClick={handleLogOut}>
                     Ausloggen
