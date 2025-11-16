@@ -124,6 +124,22 @@
     transform: scale(1.05);
 }
 
+.cart-link {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 14px;
+}
+
+
 .main-nav {
     display: flex;
     align-items: center;
@@ -141,6 +157,76 @@
 .nav-link:hover {
     color: #2563eb;
 }
+
+.mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .main-nav,
+    .profile-link {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: flex;
+    }
+
+    .header-container {
+        justify-content: space-between;
+        padding: 0 12px;
+    }
+
+    .header-logo-link {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin-right: 28px;
+    }
+
+    .cart-link {
+        margin-left: 10px;
+        display: flex;
+    }
+
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .close-menu-button {
+        background: none;
+        border: none;
+        color: white;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .mobile-nav .nav-link {
+        color: white;
+        font-size: 2rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        text-decoration: none;
+    }
+}
+
 
 
 
@@ -272,19 +358,29 @@
 
 @media (max-width: 600px) {
     .products-view {
-        align-items: flex-start;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .product-header-container {
-        margin-top: -30px;
-        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
     }
 
     .product-grid-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
         padding: 20px;
     }
-
 }
+
 
 
 /* Information Section */
