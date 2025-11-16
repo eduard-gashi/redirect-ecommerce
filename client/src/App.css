@@ -4,7 +4,7 @@
 /* CSS-Variables */
 :root {
     /* Primary colors */
-    --color-logo: #5AC4B1;
+    --color-logo: #5cd1c7;
     --color-primary-blue: #2563eb;
     --color-primary-blue-hover: #1d4ed8;
 
@@ -167,11 +167,10 @@
 }
 
 @media (max-width: 600px) {
-    .main-nav,
-    .profile-link {
+    .nav-link {
         display: none;
     }
-
+    
     .mobile-menu-button {
         display: flex;
     }
@@ -185,11 +184,10 @@
         flex: 1;
         display: flex;
         justify-content: center;
-        margin-right: 28px;
+        margin-left: 37px;
     }
 
     .cart-link {
-        margin-left: 10px;
         display: flex;
     }
 
@@ -218,7 +216,7 @@
         cursor: pointer;
     }
 
-    .mobile-nav .nav-link {
+    .mobile-nav {
         color: white;
         font-size: 2rem;
         margin: 1.5rem 0;
@@ -259,28 +257,43 @@
 }
 
 /* Product Section */
+.product-title {
+  font-size: 2.0rem;
+  display: inline-block;      
+  font-weight: 700;
+  letter-spacing: px;
+  margin: 0 0 0.5rem 0;
+  position: relative;
+}
+.product-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 15px;
+  background: var(--color-logo);
+  margin: 16px auto 0 auto;
+  clip-path: polygon(
+    0 75%, 10% 50%, 20% 75%, 30% 50%, 40% 75%, 
+    50% 50%, 60% 75%, 70% 50%, 80% 75%, 90% 50%, 100% 75%, 100% 100%, 0 100%
+  );
+}
+
 .products-view {
     width: 100%;
     padding: 3rem 1rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.product-list-container {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 3rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .product-header-container {
     width: 100%;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 0.5rem;
 }
 
@@ -912,6 +925,9 @@
 .profile-header-container {
     width: 100%;
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 0.5rem;
 }
 

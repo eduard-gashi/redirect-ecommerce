@@ -7,7 +7,7 @@ function Contact() {
 
   return (
     <div className="contact-container">
-      <h2 className="title-black">Kontakt</h2>
+      <h2 className="product-title">Kontakt</h2>
       <p className="text-paragraph">📞 Telefon: {PHONE}</p>
       <p className="text-paragraph">📧 E-Mail: {EMAIL}</p>
       <p className="text-paragraph">📍 Adresse: {STREET}, {ZIP_CITY}</p>
