@@ -49,14 +49,6 @@ function Header() {
               </span>
             )}
           </Link>
-
-          {/* Buy Now Button */}
-          <a
-            href="#produkt"
-            className="nav-link buy-now-button"
-          >
-            Jetzt kaufen
-          </a>
         </nav>
       </div>
     </header>
