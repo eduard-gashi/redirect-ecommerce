@@ -160,7 +160,7 @@
 
 /* Video Section */
 .video-section {
-    background-image: url('focus.jpg');
+    background-image: url('/focus.jpg');
     padding: 40px 0;
     background-size: cover;
     background-position: center;
