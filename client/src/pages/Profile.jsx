@@ -29,9 +29,9 @@ function Profile() {
 
     return (
         <div className="profile-view">
-            
+
             {/* Header */}
-            <div className="product-header-container">
+            <div className="profile-header-container">
                 <h1 className="title-black logo-color">Bestellungen</h1>
             </div>
 
