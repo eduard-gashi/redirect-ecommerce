@@ -5,7 +5,7 @@ import '../App.css';
 
 function Products() {
     const [products, setProducts] = useState(null);
-    console.log("HELLO");
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
