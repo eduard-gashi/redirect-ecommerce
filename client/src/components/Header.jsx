@@ -14,7 +14,7 @@ function Header() {
     <header className="main-header">
       <div className="header-container">
 
-        {/* Hamburger */}
+        {/* Hamburger mobile */}
         <button
           className="mobile-menu-button"
           onClick={() => setMobileMenuOpen(true)}
@@ -31,7 +31,7 @@ function Header() {
           />
         </Link>
 
-        {/* Navigation */}
+        {/* Navigation desktop*/}
         <nav className="main-nav">
           {/* Contact */}
           <Link to="/kontakt" className="nav-link">
@@ -44,14 +44,14 @@ function Header() {
           </Link>
 
           {/* User Logind and profile page */}
-          <Link to="/profile" className="nav-link profile-link">
+          <Link to="/profile" className="profile-link">
             <FaUserCircle size={24} style={{ marginRight: '5px' }} />
           </Link>
 
           {/* Cart */}
           <Link
             to="/cart"
-            className="nav-link cart-link"
+            className="cart-link"
           >
             🛒
             {/* Count Items */}
@@ -74,11 +74,11 @@ function Header() {
             <FaTimes size={24} />
           </button>
           <nav className="mobile-nav">
-            <Link to="/" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
             <br></br>
-            <Link to="/kontakt" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
+            <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
             <br></br>
-            <Link to="/products" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
+            <Link to="/products" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
           </nav>
         </div>
       )}

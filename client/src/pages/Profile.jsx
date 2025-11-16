@@ -32,7 +32,7 @@ function Profile() {
 
             {/* Header */}
             <div className="profile-header-container">
-                <h1 className="title-black logo-color">Bestellungen</h1>
+                <h1 className="product-title">Bestellungen</h1>
             </div>
 
             {/* Order History */}
