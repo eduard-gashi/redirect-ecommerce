@@ -28,14 +28,19 @@ function Profile() {
     }
 
     return (
-        <div className="profile-container">
-            <h1 className="title-black">Mein Profil</h1>
+        <div className="profile-view">
+            
+            {/* Header */}
+            <div className="product-header-container">
+                <h1 className="title-black logo-color">Bestellungen</h1>
+            </div>
+
+            {/* Order History */}
             <div className="profile-details">
                 <p className="text-paragraph">
-                    <strong>E-Mail: </strong>{userInfo.email}
+                    <strong>Eingeloggt als: <br></br></strong>{userInfo.email}
                 </p>
                 <p className="text-paragraph">
-                    <strong>Verkaufshistorie: </strong> 
                     <OrderHistory></OrderHistory>
                 </p>
                 <button className="primary-button" onClick={handleLogOut}>
