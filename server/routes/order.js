@@ -7,7 +7,6 @@ const router = express.Router();
 // Assuming this endpoint is mounted at `/api/orders`
 router.post('/', async (req, res) => {
     console.log("Received order data:", req);
-    console.log("Received order data:", res);
     // 1. Destructure the required order data sent from the frontend
     const { 
         orderItems, 
@@ -114,5 +113,19 @@ router.post('/', async (req, res) => {
         });
     }
 });
+
+router.get("/", async (req, res) => {
+  try {
+    console.log("TRYING TO fetch orders", req.query);
+    const userId = req.query.user;
+    const orders = userId 
+      ? await Order.find({ user: userId }) 
+      : await Order.find();
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 export default router;
