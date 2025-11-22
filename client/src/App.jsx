@@ -1,25 +1,27 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import CookieConsentBanner from './components/CookieConsentBanner';
-
-import ProductDetail from './pages/productDetails/ProductDetail';
-import Cart from "./pages/Cart";
-import ScrollToTop from './components/ScrollToTop';
-import Products from './pages/Products';
-import { CartProvider } from './context/CartContext';
-import { AuthProvider } from './context/AuthContext';
-import CheckoutScreen from './pages/Checkout';
-import OrderSuccessScreen from './pages/OrderSuccessScreen';
-import AccountConfirmation from './components/AccountConfirmation';
 import Profile from './pages/Profile';
 import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy';
 import Login from './pages/Login';
+import ProductDetail from './pages/ProductDetail';
+import Cart from "./pages/Cart";
+import ScrollToTop from './components/ScrollToTop';
+import Products from './pages/Products';
+
+import OrderSuccessScreen from './components/Checkout/OrderSuccessScreen';
+import AccountConfirmation from './components/AccountConfirmation';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CookieConsentBanner from './components/CookieConsentBanner';
+
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   return (
@@ -40,10 +42,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/kontakt" element={<Contact />} />
-              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/produkte/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/checkout/:id" element={<CheckoutScreen />} />.
               <Route path="/order/:id" element={<OrderSuccessScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="/confirm-registration" element={<AccountConfirmation />} />
