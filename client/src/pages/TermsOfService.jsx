@@ -41,7 +41,6 @@ function TermsOfService() {
             <div className="spinner" />
           </div>
         )}
-        {/* Drittnutzer-Widget-Text */}
         <div
           ref={legaltextRef}
           className="itrk-legaltext"
