@@ -10,6 +10,7 @@ function LegalNotice() {
     script.src = "https://www.it-recht-kanzlei.de/js/itrk-legaltext.js";
     script.async = true;
     document.body.appendChild(script);
+    
     return () => {
       document.body.removeChild(script);
     };

@@ -1,22 +1,19 @@
-import LegalNotice from '../pages/LegalNotice';
-import PrivacyPolicy from '../pages/PrivacyPolicy';
-import TermsOfService from '../pages/TermsOfService';
-import RefundPolicy from '../pages/RefundPolicy';
 import { Link } from 'react-router-dom';
 
 
 function Footer() {
-      const legalLinks = [
+    const legalLinks = [
         { name: 'Impressum', path: '/impressum' },
         { name: 'Datenschutz', path: '/datenschutz' },
-        { name: 'AGB', path: '/agb' }, // Allgemeine Geschäftsbedingungen
-        { name: 'Widerruf', path: '/widerruf' }, // Widerrufsbelehrung / Refund Policy
+        { name: 'AGB', path: '/agb' },
+        { name: 'Widerruf', path: '/widerruf' },
+        { name: 'Zahlungsinformationen', path: '/Zahlungsinformationen' },
     ];
 
     return (
         <footer className="main-footer">
             <div className="footer-content-container">
-                
+
                 {/* 1. Copyright and Contact */}
                 <div className="footer-section footer-contact">
                     <h3 className="footer-heading">Kontakt & Informationen</h3>
