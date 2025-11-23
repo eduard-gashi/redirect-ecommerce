@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import COMPANY_DETAILS from '../../config/config';
 
 function TermsOfService() {
   const [loading, setLoading] = useState(true);

@@ -1,18 +1,33 @@
-import { useEffect } from "react";
-import COMPANY_DETAILS from '../../config/config';
+import { useEffect, useRef, useState } from 'react';
 
 
 function LegalNotice() {
-  const { COMPANY_NAME, STREET, ZIP_CITY, EMAIL, PHONE, REGISTER_COURT, REGISTER_NUMBER, UST_ID, WIDERRUF_TAGE } = COMPANY_DETAILS;
+  const [loading, setLoading] = useState(true);
+  const legaltextRef = useRef(null);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.it-recht-kanzlei.de/js/itrk-legaltext.js";
+    const script = document.createElement('script');
+    script.src = 'https://www.it-recht-kanzlei.de/js/itrk-legaltext.js';
     script.async = true;
     document.body.appendChild(script);
-    
+
+    // Set Styling
+    const observer = new MutationObserver(() => {
+      if (legaltextRef.current && legaltextRef.current.innerHTML.trim() !== '') {
+        legaltextRef.current.querySelectorAll('h2').forEach(el => el.classList.add('datenschutz-heading2'));
+        legaltextRef.current.querySelectorAll('p').forEach(el => el.classList.add('datenschutz-text'));
+        setLoading(false);
+        observer.disconnect();
+      }
+    });
+
+    if (legaltextRef.current) {
+      observer.observe(legaltextRef.current, { childList: true, subtree: true });
+    }
+
     return () => {
       document.body.removeChild(script);
+      observer.disconnect();
     };
   }, []);
 
@@ -26,10 +41,18 @@ function LegalNotice() {
         <h2 className="datenschutz-heading2">
           Angaben gemäß § 5 TMG (Telemediengesetz)
         </h2>
-        <div>
-          <div data-itrk-legaltext-url="https://itrk.legal/1tey.0.12eh-iframe.html"></div>
-          <script src="https://www.it-recht-kanzlei.de/js/itrk-legaltext.js"></script>
-        </div>
+        {loading && (
+          <div className="loading-indicator" style={{ textAlign: "center", margin: "2rem" }}>
+            <span>Informationen zum Impressum werden geladen...</span>
+            <div className="spinner" />
+          </div>
+        )}
+        <div
+          ref={legaltextRef}
+          className="itrk-legaltext"
+          data-itrk-legaltext-url="https://itrk.legal/1tey.0.12eh-iframe.html"
+          style={{ display: loading ? 'none' : 'block' }}
+        />
       </div>
     </div>
   );
