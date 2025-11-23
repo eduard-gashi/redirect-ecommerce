@@ -34,10 +34,8 @@ function ProductDetail() {
 
   useEffect(() => {
     if (product) {
-      console.log("HIHI");
       const fetchClientSecret = async () => {
         try {
-          console.log("Test");
           const { data } = await apiClient.post('/stripe/create-payment-intent', {
             product,
             quantity,
