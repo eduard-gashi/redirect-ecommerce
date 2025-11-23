@@ -39,7 +39,7 @@ function Header() {
           </Link>
 
           {/* Prodcuts */}
-          <Link to="/products" className="nav-link">
+          <Link to="/produkte" className="nav-link">
             Produkte
           </Link>
 
@@ -78,7 +78,7 @@ function Header() {
             <br></br>
             <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
             <br></br>
-            <Link to="/products" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
+            <Link to="/produkte" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
           </nav>
         </div>
       )}

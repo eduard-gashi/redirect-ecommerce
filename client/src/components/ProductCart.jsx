@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function ProductCard({ product }) {
   return (
     <div className="bg-white hover-product border rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
-      <Link to={`/products/${product._id}`}>
+      <Link to={`/produkte/${product._id}`}>
         <img
           src={`/${product.image}`}
           alt={product.name}
@@ -14,7 +14,7 @@ function ProductCard({ product }) {
       <h2 className="text-xl font-bold mb-2">{product.name}</h2>
       <p className="text-lg font-semibold text-gray-800 mb-2">€{product.price}</p>
       <p className="text-sm text-gray-600 mb-4 truncate w-full">{product.description}</p>
-      <Link to={`/products/${product._id}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full mt-auto">
+      <Link to={`/produkte/${product._id}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full mt-auto">
         Details ansehen
       </Link>
     </div>

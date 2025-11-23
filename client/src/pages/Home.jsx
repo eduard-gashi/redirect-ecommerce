@@ -36,7 +36,7 @@ function Home() {
         {products.length > 0 ? (
           products.map((p) => (
             <Link
-              to={`/products/${p._id}`}
+              to={`/produkte/${p._id}`}
               key={p._id}
               className="hover-product product-card"
             >
