@@ -12,6 +12,7 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from "./pages/Cart";
 import ScrollToTop from './components/ScrollToTop';
 import Products from './pages/Products';
+import PaymentInformation from './pages/PaymentInformation';
 
 import OrderSuccessScreen from './components/Checkout/OrderSuccessScreen';
 import AccountConfirmation from './components/AccountConfirmation';
@@ -55,6 +56,7 @@ function App() {
               <Route path="/datenschutz" element={<PrivacyPolicy />} />
               <Route path="/agb" element={<TermsOfService />} />
               <Route path="/widerruf" element={<RefundPolicy />} />
+              <Route path="/Zahlungsinformationen" element={<PaymentInformation/>}/>
             </Routes>
           </main>
 
