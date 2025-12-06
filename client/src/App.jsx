@@ -10,11 +10,11 @@ import RefundPolicy from './pages/RefundPolicy';
 import Login from './pages/Login';
 import ProductDetail from './pages/ProductDetail';
 import Cart from "./pages/Cart";
-import ScrollToTop from './components/ScrollToTop';
+import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import Products from './pages/Products';
 import PaymentInformation from './pages/PaymentInformation';
 
-import OrderSuccessScreen from './components/Checkout/OrderSuccessScreen';
+import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
