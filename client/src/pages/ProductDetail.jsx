@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
-import EmbeddedCheckout from '../components/Checkout/EmbeddedCheckout';
+import EmbeddedCheckout from '../components/EmbeddedCheckout';
 
 function ProductDetail() {
   const { id } = useParams();
