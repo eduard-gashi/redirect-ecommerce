@@ -13,10 +13,6 @@ function OrderSuccessScreen() {
           Wir haben Ihre Bestellung erhalten und werden sie so schnell wie möglich bearbeiten.
           Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.
         </p>
-        <div className="bg-gray-100 p-4 rounded mb-6">
-          <p className="text-lg font-semibold">Ihre Bestellnummer lautet:</p>
-          <p className="text-md text-gray-800 font-mono">{id}</p>
-        </div>
         <div className="flex justify-center gap-4">
           <Link 
             to="/" 

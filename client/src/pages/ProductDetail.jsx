@@ -3,20 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
-import StripeCheckoutForm from "../components/Checkout/StripeCheckoutForm"
-import StripeCheckoutWrapper from "../components/Checkout/StripeCheckoutWrapper"
-
-
+import EmbeddedCheckout from '../components/Checkout/EmbeddedCheckout';
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { addToCart, clearCart } = useContext(CartContext);
   const { state, dispatch } = useContext(AuthContext);
-  const userInfo = state.userInfo;
   const [clientSecret, setClientSecret] = useState(null);
+  const [showCheckout, setShowCheckout] = useState(false);
 
 
   useEffect(() => {
@@ -33,21 +29,23 @@ function ProductDetail() {
 
 
   useEffect(() => {
-    if (product) {
-      const fetchClientSecret = async () => {
-        try {
-          const { data } = await apiClient.post('/stripe/create-payment-intent', {
-            product,
-            quantity,
-          });
-          setClientSecret(data.clientSecret);
-        } catch (err) {
-          console.error('Error fetching Stripe clientSecret:', err);
-        }
-      };
-      fetchClientSecret();
-    }
+    console.log("Fetching checkout session for product:", product, "quantity:", quantity);
+    if (!product) return;
+    const fetchClientSecret = async () => {
+      try {
+        const { data } = await apiClient.post(
+          "/stripe/create-checkout-session",
+          { product, quantity }
+        );
+        setClientSecret(data.clientSecret);
+      } catch (err) {
+        console.error("Error fetching checkout session:", err);
+      }
+    };
+
+    fetchClientSecret();
   }, [product, quantity]);
+
 
   if (!product) {
     return <p className="text-center mt-10">Produkt wird geladen...</p>;
@@ -108,20 +106,27 @@ function ProductDetail() {
 
             <br />
 
-            <p className="text-bold">
-              Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
-            </p>
-
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              {clientSecret && (
-                <StripeCheckoutWrapper clientSecret={clientSecret}>
-                  <StripeCheckoutForm product={product} quantity={quantity} />
-                </StripeCheckoutWrapper>
-              )}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <p className="text-bold">
+                Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
+              </p>
+              <button onClick={() => setShowCheckout(true)} className="primary-button">
+                Jetzt bezahlen
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Stripe Checkout */}
+      {showCheckout && clientSecret && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
+          <div className="bg-white rounded-lg p-4 max-w-lg w-full">
+            <button onClick={() => setShowCheckout(false)}>X</button>
+            <EmbeddedCheckout clientSecret={clientSecret} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
