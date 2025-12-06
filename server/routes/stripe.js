@@ -7,22 +7,33 @@ dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-router.post('/create-payment-intent', async (req, res) => {
+router.post('/create-checkout-session', async (req, res) => {
   try {
+    console.log("Create Checkout Session Request Body:", req.body);
     const { product, quantity } = req.body;
-    const amount = Math.round(product.price * quantity * 100); // Stripe erwartet Cent!
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
-      currency: 'eur',
-      automatic_payment_methods: { enabled: true },
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: 'embedded',
+      mode: 'payment',
+      line_items: [
+        {
+          price_data: {
+            currency: 'eur',
+            product_data: { name: product.name },
+            unit_amount: Math.round(product.price * 100),
+          },
+          quantity,
+        },
+      ],
+      return_url: `${req.headers.origin}/order/success?session_id={CHECKOUT_SESSION_ID}`,
     });
 
-    res.send({ clientSecret: paymentIntent.client_secret });
+    res.send({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error('Stripe Payment Error:', err);
+    console.error('Stripe Checkout Error:', err);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 export default router;
