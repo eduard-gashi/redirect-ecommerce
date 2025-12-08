@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import type { Order } from "../types/order";
 import apiClient from '../apiClient';
-import OrderSummary from "./OrderSumamry";
+import OrderSummary from "./OrderSummary";
 
 function OrderHistory() {
     const { state, dispatch } = useContext(AuthContext);

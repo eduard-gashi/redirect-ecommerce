@@ -29,7 +29,6 @@ function OrderSummary({ order }) {
             <div className="order-products">
                 {order.orderItems.map(item => (
                     <div className="order-product-item" key={item.product}>
-                        <img src={item.image} alt={item.name} className="order-product-img" />
                         <div>
                             <strong>{item.name}</strong>
                             <div>Menge: {item.qty} × {item.price.toFixed(2)} €</div>
