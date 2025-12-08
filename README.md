@@ -55,10 +55,15 @@ Backend base URL (prod): https://redirect-ecommerce-backend.onrender.com/api
 ## Getting Started (local)
 ### Backend
 cd server
+
 npm install
+
 npm run dev # expects MongoDB + STRIPE_SECRET_KEY in .env
+
 
 ### Frontend
 cd client
+
 npm install
+
 npm run dev # expects VITE_API_BASE_URL and VITE_STRIPE_PUBLISHABLE_KEY in .env
