@@ -120,9 +120,11 @@ function ProductDetail() {
 
       {/* Stripe Checkout */}
       {showCheckout && clientSecret && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
-          <div className="bg-white rounded-lg p-4 max-w-lg w-full">
-            <button onClick={() => setShowCheckout(false)}>X</button>
+        <div className="checkout-overlay">
+          <div className="checkout-modal">
+            <button className="checkout-close" onClick={() => setShowCheckout(false)}>
+              ×
+            </button>
             <EmbeddedCheckout clientSecret={clientSecret} />
           </div>
         </div>
