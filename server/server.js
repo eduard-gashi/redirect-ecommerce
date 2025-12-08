@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import productRoutes from "./routes/product.js";
-import paymentRoutes from "./routes/order.js";
 import orderRoutes from "./routes/order.js";
 import userRoutes from "./routes/user.js";
 import stripeRoutes from "./routes/stripe.js"
@@ -15,7 +14,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
-app.use("/api/payment", paymentRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/stripe", stripeRoutes);

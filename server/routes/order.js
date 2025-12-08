@@ -6,7 +6,6 @@ const router = express.Router();
 
 // Assuming this endpoint is mounted at `/api/orders`
 router.post('/', async (req, res) => {
-    console.log("Received order data:", req);
     // 1. Destructure the required order data sent from the frontend
     const { 
         orderItems, 
@@ -24,13 +23,10 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'No order items found' });
     }
     if (!userId) {
-        // You should check for authentication here, not just body parameter
         return res.status(401).json({ message: 'User ID missing in order data.' });
     }
 
     try {
-        // --- 💡 SECURITY STEP: VALIDATE PRICES ON THE BACKEND ---
-
         // Get all unique product IDs from the order items
         const productIds = orderItems.map(item => item.product);
 

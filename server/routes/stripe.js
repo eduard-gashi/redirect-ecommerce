@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const router = express.Router();
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY_LIVE);
 
 router.post('/create-checkout-session', async (req, res) => {
   try {
@@ -25,12 +25,33 @@ router.post('/create-checkout-session', async (req, res) => {
           quantity,
         },
       ],
+      metadata: {
+        productId: product._id.toString(),
+        userId: req.user?._id?.toString() || "",
+      },
+      shipping_address_collection: {
+        allowed_countries: ["DE"],
+      },
       return_url: `${req.headers.origin}/order/success?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.send({ clientSecret: session.client_secret });
   } catch (err) {
     console.error('Stripe Checkout Error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+router.get("/session/:id", async (req, res) => {
+  try {
+    console.log("Retrieve Session ID:", req.params.id);
+    const session = await stripe.checkout.sessions.retrieve(req.params.id, {
+      expand: ["line_items", "line_items.data.price"],
+    });
+    res.json(session);
+  } catch (err) {
+    console.error("Error retrieving session:", err);
     res.status(500).json({ error: err.message });
   }
 });
