@@ -2,42 +2,63 @@
 A full-stack e-commerce application built with the MERN stack (MongoDB, Express, React, Node.js).
 
 ## About The Project
-This project is the official e-commerce platform for the GbR founded by my friend Philipp Kaiser and me, Eduard Gashi. Our mission is to create tangible products that address modern digital challenges.
+This project is the official e-commerce platform for the GbR founded by my Philipp Kaiser and Eduard Gashi. 
 
-Our first product is the Smartphone Detox Box, a one-month guided program designed to help people, especially those in Generation Z, build a healthier relationship with their smartphones. The box provides daily challenges and a reflection journal to encourage discipline, mindfulness, and a conscious reduction in screen time. It's a tool for anyone who feels distracted by social media and addicted to their smart phone and wants to reclaim their focus and time for real-world experiences.
+Our mission: build tangible products that address modern digital challenges.
 
-## Live Demo
+The first product is the Smartphone Detox Box - a 30‑day guided program to help people (especially Gen Z) build a healthier relationship with their phone through daily challenges and a reflection journal.
 
-[Frontend (Vercel)](https://redirect-ecommerce.vercel.app/)
+## Production
 
-[Backend (Render)](https://redirect-ecommerce-backend.onrender.com/)
+- https://www.redirectstore.de/
 
-## Features
-Product Catalog: Browse and view product details.
-
-Shopping Cart: Add and manage items in the cart.
 
 ## Tech Stack
-This project is built with the following technologies:
+- Frontend: React (Vite), React Router
 
-Frontend: React (Vite)
+- Backend: Node.js, Express.js
 
-Backend: Node.js, Express.js
+- Database: MongoDB + Mongoose
 
-Database: MongoDB with Mongoose
+- Payments: Stripe Embedded Checkout (test & live)
 
-Payments: Stripe, PayPal
+- Deployment: Vercel (frontend), Render (backend)
 
-Deployment: Vercel (Frontend), Render (Backend)
+- CI/CD: GitHub Actions (manually triggered deploys to Vercel & Render)
 
-## Project Status
-This project is currently in active development. Key areas still in progress include:
 
-User Authentication: Secure sign-up and login functionality.
+## API Overview
+Backend base URL (prod): https://redirect-ecommerce-backend.onrender.com/api
+- GET /api/products – list products
 
-Checkout Process: A multi-step process for order placement.
+- GET /api/products/:id – access one specific product
 
-Secure Payments: (In Progress) Integration with Stripe and PayPal.
+- POST /api/orders – create order (MongoDB)
 
-Responsive Design: Fully functional on both desktop and mobile devices.
+- GET /api/orders?user=:userId – list orders for a user
 
+- POST /api/users/login – user login (JWT)
+
+- POST /api/users/register – user registration
+
+- POST /api/stripe/create-checkout-session – create Stripe Embedded Checkout session
+
+- GET /api/stripe/session/:id – retrieve Checkout Session for order finalization
+
+
+## Architecture Details
+- MongoDB is the single source of truth for products (price, stock, metadata).
+- Stripe is used purely as a payment layer; prices are validated against MongoDB, not client input.
+- Orders are created in MongoDB only after verifying the Stripe Checkout Session status.
+
+
+## Getting Started (local)
+### Backend
+cd server
+npm install
+npm run dev # expects MongoDB + STRIPE_SECRET_KEY in .env
+
+### Frontend
+cd client
+npm install
+npm run dev # expects VITE_API_BASE_URL and VITE_STRIPE_PUBLISHABLE_KEY in .env
