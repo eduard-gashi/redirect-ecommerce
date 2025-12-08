@@ -16,7 +16,7 @@ jobs:
 
       - name: Install backend dependencies
         run: |
-          cd backend
+          cd server
           npm install
 
       - name: Trigger Render deploy
