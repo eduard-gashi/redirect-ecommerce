@@ -44,13 +44,13 @@ function Header() {
           </Link>
 
           {/* User Logind and profile page */}
-          <Link to="/profile" className="profile-link">
+          <Link to="/profil" className="profile-link">
             <FaUserCircle size={24} style={{ marginRight: '5px' }} />
           </Link>
 
           {/* Cart */}
           <Link
-            to="/cart"
+            to="/warenkorb"
             className="cart-link"
           >
             🛒

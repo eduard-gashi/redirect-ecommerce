@@ -28,7 +28,7 @@ function Login(): React.JSX.Element {
   // Check if user is already logged in and redirect to profile
   useEffect(() => {
         if (userInfo) {
-            navigate('/profile');
+            navigate('/profil');
         }
     }, [userInfo, navigate]);
 
@@ -54,7 +54,7 @@ function Login(): React.JSX.Element {
         // Regular login flow: Get user data from MongoDB
         const { data } = await apiClient.post<UserInfo>('/users/login', { email, password });
         dispatch({ type: 'USER_SIGNIN', payload: data });
-        navigate('/profile');
+        navigate('/profil');
       }
       setHasAttemptedSubmit(false);
     } catch (err: any) {

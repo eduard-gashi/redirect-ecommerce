@@ -101,7 +101,7 @@ function OrderSuccessScreen() {
             Weiter einkaufen
           </Link>
           <Link
-            to="/profile"
+            to="/profil"
             className="primary-button"
             style={{ backgroundColor: "grey" }}
           >
