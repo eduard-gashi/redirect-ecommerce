@@ -5,6 +5,7 @@ import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
 import EmbeddedCheckout from '../components/EmbeddedCheckout';
 
+
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function ProductDetail() {
   const { state, dispatch } = useContext(AuthContext);
   const [clientSecret, setClientSecret] = useState(null);
   const [showCheckout, setShowCheckout] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
 
   useEffect(() => {
@@ -50,6 +52,13 @@ function ProductDetail() {
   if (!product) {
     return <p className="text-center mt-10">Produkt wird geladen...</p>;
   }
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product, quantity);
+      alert("Produkt wurde zum Warenkorb hinzugefügt!");
+    }
+  };
 
 
   return (
@@ -110,9 +119,23 @@ function ProductDetail() {
               <p className="text-bold">
                 Status: {product.countInStock > 0 ? "Auf Lager" : "Nicht verfügbar"}
               </p>
-              <button onClick={() => setShowCheckout(true)} className="primary-button">
-                Jetzt bezahlen
-              </button>
+              <div style={{ display: "flex", flexDirection: "row", width: "100%", gap: "10px" }}>
+                <button
+                  onClick={handleAddToCart}
+                  className="primary-button"
+                  style={{ flex: 1 }}
+                >
+                  In den Warenkorb
+                </button>
+
+                <button
+                  onClick={() => setShowCheckout(true)}
+                  className="primary-button"
+                  style={{ flex: 1 }}
+                >
+                  Sofort kaufen
+                </button>
+              </div>
               <p style={{ marginTop: "8px", fontSize: "14px", color: "#4b5563" }}>
                 Unterstützte Zahlungsarten: Kreditkarte, PayPal, Klarna, SEPA-Lastschrift, EPS, Bancontact
               </p>

@@ -33,7 +33,7 @@ function Cart() {
 
   return (
     <div className="cart-container">
-      <h1 className="cart-title">Dein Warenkorb</h1>
+      <h1 className="product-title">Dein Warenkorb</h1>
       <div className="cart-content-wrapper">
         {cartItems.map((item) => (
           <div
@@ -81,7 +81,7 @@ function Cart() {
         ))}
 
         {/* Total and Actions */}
-        <div className="cart-summary-total">
+        <div className="text-paragraph">
           <p>Gesamt:</p>
           <p>€{total.toFixed(2)}</p>
         </div>
@@ -89,13 +89,13 @@ function Cart() {
         <div className="cart-actions-group">
           <button
             onClick={clearCart}
-            className="cart-clear-button"
+            className="primary-button"
           >
             Warenkorb leeren
           </button>
           <button 
             onClick={handleCheckout}
-            className="cart-checkout-button"
+            className="primary-button"
           >
             Zur Kasse gehen
           </button>
