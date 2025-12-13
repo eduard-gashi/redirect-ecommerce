@@ -42,21 +42,20 @@ function App() {
           <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/kontakt" element={<Contact />} />
-              <Route path="/produkte/:id" element={<ProductDetail />} />
-              <Route path="/cart" element={<Cart />} />
               <Route path="/produkte" element={<Products />} />
-              <Route path="/order/:id" element={<OrderSuccessScreen />} />
+              <Route path="/produkte/:id" element={<ProductDetail />} />
+              <Route path="/kontakt" element={<Contact />} />
+              <Route path="/warenkorb" element={<Cart />} />
+              <Route path="/bestellungen/:id" element={<OrderSuccessScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="/confirm-registration" element={<AccountConfirmation />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profil" element={<Profile />} />
 
               {/* Legal Routes */}
               <Route path="/impressum" element={<LegalNotice />} />
               <Route path="/datenschutz" element={<PrivacyPolicy />} />
               <Route path="/agb" element={<TermsOfService />} />
               <Route path="/widerruf" element={<RefundPolicy />} />
-              <Route path="/Zahlungsinformationen" element={<PaymentInformation/>}/>
             </Routes>
           </main>
 
