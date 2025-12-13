@@ -113,6 +113,9 @@ function ProductDetail() {
               <button onClick={() => setShowCheckout(true)} className="primary-button">
                 Jetzt bezahlen
               </button>
+              <p style={{ marginTop: "8px", fontSize: "14px", color: "#4b5563" }}>
+                Unterstützte Zahlungsarten: Kreditkarte, PayPal, Klarna, SEPA-Lastschrift, EPS, Bancontact
+              </p>
             </div>
           </div>
         </div>
