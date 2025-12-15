@@ -41,7 +41,7 @@ function Home() {
               className="hover-product product-card"
             >
               <img
-                src={p.image}
+                src={`/images/products/${p.image_paths?.[0]}`}
                 alt={p.name}
                 className="product-card-image"
               />
