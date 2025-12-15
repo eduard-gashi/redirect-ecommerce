@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     price: { type: Number, required: true, default: 0 },
-    image: { type: String, required: true },
+    image_paths: { type: [String], required: true },
     countInStock: { type: Number, required: true, default: 0 }, // For inventory management
     reviews: [reviewSchema], // An array of review objects
     numReviews: { type: Number, required: true, default: 0 }, // Total number of reviews
