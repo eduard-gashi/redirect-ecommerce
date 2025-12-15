@@ -5,7 +5,7 @@ import "../VideoPlayer.css"
 const AdvertisementVideo = () => {
     return (
         <iframe
-            src="advertisement_video.mp4"
+            src="videos/advertisement_video.mp4"
             title="Advertisement Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

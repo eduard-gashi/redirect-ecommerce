@@ -6,7 +6,7 @@ function ProductCard({ product }) {
     <div className="bg-white hover-product border rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
       <Link to={`/produkte/${product._id}`}>
         <img
-          src={`/${product.image}`}
+          src={`/images/products/${product.image_paths?.[0]}`}
           alt={product.name}
           className="rounded-lg mb-4 w-full h-48 object-cover"
         />

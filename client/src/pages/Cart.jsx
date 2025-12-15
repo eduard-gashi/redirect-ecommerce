@@ -16,8 +16,8 @@ function Cart() {
       <div className="cart-empty-state">
         <p className="cart-empty-icon">🛒</p>
         <p className="cart-empty-text">Dein Warenkorb ist leer</p>
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="cart-empty-button"
         >
           Weiter einkaufen
@@ -43,7 +43,7 @@ function Cart() {
             {/* Product Info */}
             <div className="cart-item-info">
               <img
-                src={`/${item.image}`} 
+                src={`/images/products/${item.image_paths?.[0]}`}
                 alt={item.name}
                 className="cart-item-image"
               />
@@ -56,14 +56,14 @@ function Cart() {
             {/* Quantity and Remove Button */}
             <div className="cart-item-actions">
               <div className="cart-quantity-controls">
-                <button 
+                <button
                   onClick={() => updateQuantity(item._id, item.quantity - 1)}
                   className="cart-quantity-button"
                 >
                   -
                 </button>
                 <span className="cart-quantity-display">{item.quantity}</span>
-                <button 
+                <button
                   onClick={() => updateQuantity(item._id, item.quantity + 1)}
                   className="cart-quantity-button"
                 >
@@ -93,7 +93,7 @@ function Cart() {
           >
             Warenkorb leeren
           </button>
-          <button 
+          <button
             onClick={handleCheckout}
             className="primary-button"
           >

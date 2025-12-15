@@ -12,7 +12,6 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from "./pages/Cart";
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import Products from './pages/Products';
-import PaymentInformation from './pages/PaymentInformation';
 
 import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';
