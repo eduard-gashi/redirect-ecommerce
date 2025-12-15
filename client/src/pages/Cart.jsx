@@ -15,7 +15,7 @@ function Cart() {
     return (
       <div className="cart-empty-state">
         <p className="cart-empty-icon">🛒</p>
-        <p className="cart-empty-text logo-color">Dein Warenkorb ist leer</p>
+        <p className="cart-empty-text">Dein Warenkorb ist leer</p>
         <Link 
           to="/" 
           className="cart-empty-button"

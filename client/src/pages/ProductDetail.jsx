@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartContext";
 import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
 import EmbeddedCheckout from '../components/EmbeddedCheckout';
+import ProductImages from '../components/ProductImages';
 
 
 function ProductDetail() {
@@ -60,6 +61,10 @@ function ProductDetail() {
     }
   };
 
+  const basePath = "public/images/products/";
+  const productImages = product.image_paths
+    ? product.image_paths.map(filename => basePath + filename)
+    : [];
 
   return (
     <div>
@@ -67,11 +72,7 @@ function ProductDetail() {
         <div className="product-detail-card hover-product">
           {/* Image Box */}
           <div className="product-image-container">
-            <img
-              src={`/${product.image}`}
-              alt={product.name}
-              className="product-image"
-            />
+            <ProductImages images_paths={productImages} />
           </div>
 
           {/* Description, Price & add to Cart */}
