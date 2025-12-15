@@ -10,6 +10,8 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY_LIVE);
 router.post('/create-checkout-session', async (req, res) => {
   try {
     console.log("Create Checkout Session Request Body:", req.body);
+    const { cartItems } = req.body;  // List of products
+
     const { product, quantity } = req.body;
 
     const session = await stripe.checkout.sessions.create({
