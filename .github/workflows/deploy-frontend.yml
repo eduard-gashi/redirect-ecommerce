@@ -22,6 +22,8 @@ jobs:
       - name: Trigger Vercel deploy
         run: |
           cd client
-          npx vercel --prod --yes --token=$VERCEL_TOKEN
+          DEPLOY_URL=$(npx vercel --prod --yes --token=$VERCEL_TOKEN)
+          npx vercel alias set "$DEPLOY_URL" www.redirectstore.de --token=$VERCEL_TOKEN
+
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

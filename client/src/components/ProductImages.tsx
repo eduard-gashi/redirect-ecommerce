@@ -23,7 +23,6 @@ export default function ProductImages({ images_paths }: ProductImagesProp) {
         return <div className="no-image">Kein Bild verfügbar</div>;
     }
 
-
     return (
         <div className="product-images-slider">
             <Swiper
@@ -45,8 +44,6 @@ export default function ProductImages({ images_paths }: ProductImagesProp) {
                             minScale={1}
                             maxScale={2}
                             initialScale={1}
-                            centerOnIt={true}
-                            alignmentIterationLimit={5}
                         >
                             {({ zoomIn, resetTransform, }: TransformState) => {
                                 const [isZoomedIn, setIsZoomedIn] = useState<boolean>(false);
