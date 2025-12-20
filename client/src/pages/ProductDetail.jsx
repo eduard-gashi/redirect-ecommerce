@@ -61,7 +61,7 @@ function ProductDetail() {
     }
   };
 
-  const basePath = "public/images/products/";
+  const basePath = "images/products/";
   const productImages = product.image_paths
     ? product.image_paths.map(filename => basePath + filename)
     : [];
