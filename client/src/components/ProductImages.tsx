@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,10 +12,17 @@ interface ProductImagesProp {
     images_paths: Array<string>;
 }
 
+interface TransformState {
+    zoomIn: (scale: number, animationTime?: number) => void;
+    resetTransform: () => void;
+}
+
+
 export default function ProductImages({ images_paths }: ProductImagesProp) {
     if (!images_paths || images_paths.length === 0) {
         return <div className="no-image">Kein Bild verfügbar</div>;
     }
+
 
     return (
         <div className="product-images-slider">
@@ -25,17 +33,36 @@ export default function ProductImages({ images_paths }: ProductImagesProp) {
                 navigation
                 pagination={{ clickable: true }}
                 loop={images_paths.length > 1}
-                className="mySwiper"
+                allowTouchMove={true}
             >
                 {images_paths.map((path, index) => (
-                    <SwiperSlide key={index}>
-                        <div className="image-wrapper">
-                            <img 
-                                src={`/${path}`} 
-                                alt={`Produktbild ${index + 1}`} 
-                                className="product-image-slide"
-                            />
-                        </div>
+                    <SwiperSlide key={index}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}>
+                        <TransformWrapper
+                            minScale={1}
+                            maxScale={2}
+                            initialScale={1}
+                            centerOnIt={true}
+                            alignmentIterationLimit={5}
+                        >
+                            {({ zoomIn, resetTransform, }: TransformState) => {
+                                const [isZoomedIn, setIsZoomedIn] = useState<boolean>(false);
+                                const handleClick = () => {
+                                    isZoomedIn ? resetTransform() : zoomIn(2);
+                                    setIsZoomedIn(prev => !prev);
+                                };
+                                return (
+                                    <div className="image-wrapper" onClick={handleClick} style={{ cursor: isZoomedIn ? 'zoom-out' : 'zoom-in' }}>
+                                        <TransformComponent>
+                                            <img src={`/${path}`} className="product-image-slide" />
+                                        </TransformComponent>
+                                    </div>
+                                );
+                            }}
+                        </TransformWrapper>
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -76,44 +76,50 @@ function ProductDetail() {
           </div>
 
           {/* Description, Price & add to Cart */}
-          <div style={{ flex: "1 1 0%" }}>
-            <h1 className="title-black">{product.name}</h1>
+          <div style={{
+            flex: "1 1 0%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between"
+          }}>
+            <div>
+              <h1 className="title-black">{product.name}</h1>
 
-            <p className="text-paragraph">
-              {product.description}
-            </p>
-            <br />
-            <p className="text-bold">€{product.price}</p>
-            <br />
+              <p className="text-paragraph">
+                {product.description}
+              </p>
+              <br />
+              <p className="text-bold">€{product.price}</p>
+              <br />
 
-            <div className="quantity-input-wrapper">
-              {/* Minus Button */}
-              <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="quantity-button"
-                disabled={quantity <= 1}
-              >
-                –
-              </button>
+              <div className="quantity-input-wrapper">
+                {/* Minus Button */}
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="quantity-button"
+                  disabled={quantity <= 1}
+                >
+                  –
+                </button>
 
-              {/* Input Field */}
-              <input
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="quantity-input"
-              />
+                {/* Input Field */}
+                <input
+                  type="number"
+                  min="1"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="quantity-input"
+                />
 
-              {/* Plus Button */}
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="quantity-button"
-              >
-                +
-              </button>
+                {/* Plus Button */}
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="quantity-button"
+                >
+                  +
+                </button>
+              </div>
             </div>
-
             <br />
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
