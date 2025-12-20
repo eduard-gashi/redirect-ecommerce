@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import "../VideoPlayer.css"
 
 
 const AdvertisementVideo = () => {
@@ -23,7 +22,7 @@ export const VideoPlayerWithThumbnail = () => {
     // If the video should be visible, render the video player
     if (isVideoVisible) {
         return (
-            <div style={{ width: '800px', height: '450px', maxWidth: '100%'  }}>
+            <div style={{ width: '800px', height: '450px', maxWidth: '100%' }}>
                 <AdvertisementVideo />
             </div>
         );
@@ -41,8 +40,15 @@ export const VideoPlayerWithThumbnail = () => {
                 alt="Video Thumbnail"
                 className="video-thumbnail-image"
             />
+            <div className="hero-overlay-top">
+                <h1>Mehr Fokus, weniger Bildschirmzeit</h1>
+            </div>
             <div className="play-button-overlay">
-                <div className="play-icon"></div>
+                <div className="play-icon" />
+            </div>
+
+            <div className="hero-overlay-bottom">
+                <p>Durchbreche deine negativen Smartphone Gewohnheiten in nur 30 Tagen.</p>
             </div>
         </div>
     );
