@@ -8,10 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run vercel-deploy && npm run vercel-alias"
+    "deploy": "vercel --prod"
   },
-  "vercel-deploy": "vercel --prod",
-  "vercel-alias": "vercel alias set $(vercel ls --limit=1 | grep 'https://' | awk '{print $2}') www.redirectstore.de",
   "dependencies": {
     "@paypal/react-paypal-js": "^8.9.1",
     "@stripe/react-stripe-js": "^4.0.2",
