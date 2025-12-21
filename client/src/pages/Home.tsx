@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { VideoPlayerWithThumbnail } from "../components/VideoPlayerWithThumbnail";
+import BenefitsSection from "../components/BenefitsSection";
+import TutorialVideo from "../components/TutorialVideo";
 import "../App.css";
 import apiClient from '../apiClient';
+import { Product } from "../types/data-types";
+
 
 function Home() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Array<Product>>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -65,37 +69,12 @@ function Home() {
           <p className="loading-text">Produkte werden geladen...</p>
         )}
 
-        {/* Information Container */}
-        {/* Information Container 1 (Default: Image Left, Text Right) */}
-        <div className="info-card">
-          <div className="info-card-half">
-            <img
-              src="/distraction.jpg"
-              alt="Beispiel"
-              className="info-card-image"
-            />
-          </div>
-          <div className="info-card-half info-card-content">
-            <h2 className="title-black">Ablenkungen...</h2>
-            <p className="text-paragraph">
-              Wir leben in einer Welt permanenter Reize und Ablenkungen. Ständig werden wir von unnötigen Dingen abgelenkt, die uns davon abhalten, unsere Träume zu verfolgen und unsere Ziele zu erreichen. Besonders heute – in Zeiten endlosen Entertainments und sozialer Medien – ist es einfacher denn je, den Fokus zu verlieren und stundenlang durch Feeds zu scrollen, ohne wirklich erfüllt zu sein.
-            </p>
-          </div>
-        </div>
+        {/* Benefits Section */}
+        <BenefitsSection />
 
-        {/* Information Container 2 (Reversed: Text Left, Image Right) */}
-        <div className="info-card info-card-reverse">
-          <div className="info-card-half">
-            <img src="focus.jpg" alt="Bild 1" className="info-card-image" />
-          </div>
-          <div className="info-card-half info-card-content">
-            <h2 className="title-black">Fokus und Klarheit</h2>
-            <p className="text-paragraph">
-              Die Handy-Detox-Box gibt dir 30 Tage, um deine Smartphone-Nutzung bewusst wahrzunehmen und Schritt für Schritt zu reduzieren.
-              Mit 30 täglichen Challenges bekommst du jeden Tag einen kleinen Impuls, um deine Gewohnheiten zu hinterfragen und alternative, erfüllende Aktivitäten auszuprobieren.
-              Unser Ziel: Dir helfen, Klarheit zu gewinnen, dich wieder auf das Wesentliche zu konzentrieren und gesunde Routinen zu entwickeln, die dein Leben langfristig bereichern.</p>
-          </div>
-        </div>
+        <section className="tutorial-section">
+          <TutorialVideo />
+        </section>
       </main>
     </div >
 
