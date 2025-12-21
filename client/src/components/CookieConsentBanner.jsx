@@ -13,6 +13,19 @@ function CookieConsentBanner() {
     }
   }, []);
 
+
+  useEffect(() => {
+    if (consentStatus === "granted") {
+      // Enable Google Analytics
+      window.gtag?.("consent", "update", { analytics_storage: "granted" });
+      // Optional: page_view senden
+      window.gtag?.("event", "page_view");
+    }
+    if (consentStatus === "denied") {
+      window.gtag?.("consent", "update", { analytics_storage: "denied" });
+    }
+  }, [consentStatus]);
+
   const handleAccept = () => {
     setConsentStatus('granted');
     localStorage.setItem('cookieConsent', 'granted');  // Able to track data with Google Analytics
