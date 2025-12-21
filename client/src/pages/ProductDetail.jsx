@@ -57,7 +57,6 @@ function ProductDetail() {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product, quantity);
-      alert("Produkt wurde zum Warenkorb hinzugefügt!");
     }
   };
 

@@ -13,7 +13,8 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  image: string;
+  upper_price_limit: number;
+  image_paths: string[];
   countInStock: number;
   reviews: Review[];
   rating: number;
