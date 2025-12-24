@@ -7,7 +7,6 @@ function Footer() {
         { name: 'Datenschutz', path: '/datenschutz' },
         { name: 'AGB', path: '/agb' },
         { name: 'Widerruf', path: '/widerruf' },
-        { name: 'Cookies', path: '/cookies' },
     ];
 
     return (
