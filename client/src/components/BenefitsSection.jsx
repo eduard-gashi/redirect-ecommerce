@@ -3,10 +3,6 @@
 export default function BenefitsSection() {
     return (
         <section className="benefits-section">
-            <h2 className="benefits-title">
-                Reduziere deine Bildschirmzeit
-            </h2>
-
             <div className="benefit-row">
                 <div className="benefit-text">
                     <h3 className="benefits-header">Verbindlicher 30‑Tage‑Plan</h3>
