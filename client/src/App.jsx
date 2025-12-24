@@ -7,7 +7,6 @@ import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy';
-import CookieSettings from "./pages/CookieSettings"
 import Login from './pages/Login';
 import ProductDetail from './pages/ProductDetail';
 import Cart from "./pages/Cart";
@@ -18,7 +17,6 @@ import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CookieConsentBanner from './components/CookieConsentBanner';
 
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
@@ -29,7 +27,6 @@ function App() {
     <CartProvider>
       <AuthProvider>
         {/* 2. Cookie Banner */}
-        <CookieConsentBanner />
 
         <Router>
           {/* Scroll to top on route change */}
@@ -56,7 +53,6 @@ function App() {
               <Route path="/datenschutz" element={<PrivacyPolicy />} />
               <Route path="/agb" element={<TermsOfService />} />
               <Route path="/widerruf" element={<RefundPolicy />} />
-              <Route path="/cookies" element={<CookieSettings />} />
             </Routes>
           </main>
 

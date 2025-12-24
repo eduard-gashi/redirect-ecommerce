@@ -17,7 +17,7 @@ export default function BenefitsSection() {
                     </p>
                 </div>
                 <div className="benefit-image">
-                    <img src="/images/notebook.jpg" alt="Notizblock der Detox‑Box" />
+                    <img src="/images/benefits/daily_challenges.jpeg" alt="Notizblock der Detox‑Box" />
                 </div>
             </div>
 
@@ -44,7 +44,7 @@ export default function BenefitsSection() {
                     </p>
                 </div>
                 <div className="benefit-image">
-                    <img src="/images/tracker.jpg" alt="Gewohnheitstracker" />
+                    <img src="/images/benefits/daily_challenges.jpeg" alt="Gewohnheitstracker" />
                 </div>
             </div>
         </section>
