@@ -60,7 +60,7 @@ function Home() {
               {/* Replaced inline styles */}
               <div className="product-button-margin">
                 <button className="primary-button">
-                  Jetzt Kaufen!
+                  Jetzt Detox starten!
                 </button>
               </div>
             </Link>
