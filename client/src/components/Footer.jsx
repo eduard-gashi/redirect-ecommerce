@@ -17,7 +17,7 @@ function Footer() {
                 <div className="footer-section footer-contact">
                     <h3 className="footer-heading">Kontakt & Informationen</h3>
                     <p className="footer-text">
-                        © 2025 ReDirect - Handy Detox Box.
+                        © 2026 ReDirect - Handy Detox Box.
                     </p>
                     <p className="footer-text footer-email-spacing">
                         E-Mail: <a href="mailto:kaishi.company@gmail.com" className="footer-link-email">kaishi.company@gmail.com</a>
