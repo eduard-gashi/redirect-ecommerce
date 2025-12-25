@@ -50,15 +50,13 @@ function Home() {
                   alt={p.name}
                   className="product-card-image"
                 />
-                <h2 className="title-black">{p.name}</h2>
+                <h2 className="benefits-header">{p.name}</h2>
 
-                {/* Replaced inline styles */}
                 <div className="product-price-box">
                   <p className="product-old-price">{p.upper_price_limit}€</p>
                   <p className="product-current-price">{p.price}€</p>
                 </div>
 
-                {/* Replaced inline styles */}
                 <div className="product-button-margin">
                   <button className="primary-button">
                     Jetzt Detox starten!

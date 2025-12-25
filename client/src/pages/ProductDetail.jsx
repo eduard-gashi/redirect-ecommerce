@@ -11,6 +11,7 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [clientSecret, setClientSecret] = useState(null);
   const { addToCart } = useContext(CartContext);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { openCheckout } = useCheckout();
 
@@ -50,7 +51,10 @@ function ProductDetail() {
         <div className="product-detail-card hover-product">
           {/* Image Box */}
           <div className="product-image-container">
-            <ProductImages images_paths={productImages} />
+            <ProductImages
+              images_paths={productImages}
+              onImageChange={setCurrentImageIndex}
+            />
           </div>
 
           {/* Description, Price & add to Cart */}
@@ -61,15 +65,25 @@ function ProductDetail() {
             justifyContent: "space-between"
           }}>
             <div>
-              <h1 className="title-black">{product.name}</h1>
+              <h1 className="benefits-header">{product.name}</h1>
+
+              <div style={{ display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center', gap: '5px', paddingBottom: '10px' }}>
+                <p className="product-old-price">{product.upper_price_limit}€</p>
+                <p className="product-current-price">{product.price}€</p>
+              </div>
 
               <p className="text-paragraph">
-                {product.description}
+                {product.image_descriptions[currentImageIndex]}
               </p>
               <br />
-              <p className="text-bold">€{product.price}</p>
-              <br />
+            </div>
 
+            <div style={{
+              marginTop: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              paddingBottom: '20px',
+            }}>
               <div className="quantity-input-wrapper">
                 {/* Minus Button */}
                 <button
@@ -98,7 +112,6 @@ function ProductDetail() {
                 </button>
               </div>
             </div>
-            <br />
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <p className="text-bold">
