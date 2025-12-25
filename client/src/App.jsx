@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import { CheckoutProvider } from "./context/CheckoutContext";
 
 
 function App() {
@@ -27,38 +28,40 @@ function App() {
     <CartProvider>
       <AuthProvider>
         {/* 2. Cookie Banner */}
+        <CheckoutProvider>
 
-        <Router>
-          {/* Scroll to top on route change */}
-          <ScrollToTop />
+          <Router>
+            {/* Scroll to top on route change */}
+            <ScrollToTop />
 
-          {/* Header */}
-          <Header />
+            {/* Header */}
+            <Header />
 
-          {/* Main Content*/}
-          <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/produkte" element={<Products />} />
-              <Route path="/produkte/:id" element={<ProductDetail />} />
-              <Route path="/kontakt" element={<Contact />} />
-              <Route path="/warenkorb" element={<Cart />} />
-              <Route path="/bestellungen/:id" element={<OrderSuccessScreen />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/confirm-registration" element={<AccountConfirmation />} />
-              <Route path="/profil" element={<Profile />} />
+            {/* Main Content*/}
+            <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/produkte" element={<Products />} />
+                <Route path="/produkte/:id" element={<ProductDetail />} />
+                <Route path="/kontakt" element={<Contact />} />
+                <Route path="/warenkorb" element={<Cart />} />
+                <Route path="/bestellungen/:id" element={<OrderSuccessScreen />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/confirm-registration" element={<AccountConfirmation />} />
+                <Route path="/profil" element={<Profile />} />
 
-              {/* Legal Routes */}
-              <Route path="/impressum" element={<LegalNotice />} />
-              <Route path="/datenschutz" element={<PrivacyPolicy />} />
-              <Route path="/agb" element={<TermsOfService />} />
-              <Route path="/widerruf" element={<RefundPolicy />} />
-            </Routes>
-          </main>
+                {/* Legal Routes */}
+                <Route path="/impressum" element={<LegalNotice />} />
+                <Route path="/datenschutz" element={<PrivacyPolicy />} />
+                <Route path="/agb" element={<TermsOfService />} />
+                <Route path="/widerruf" element={<RefundPolicy />} />
+              </Routes>
+            </main>
 
-          {/* Footer */}
-          <Footer />
-        </Router>
+            {/* Footer */}
+            <Footer />
+          </Router>
+        </CheckoutProvider>
       </AuthProvider>
     </CartProvider>
   );
