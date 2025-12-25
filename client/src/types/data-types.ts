@@ -21,6 +21,7 @@ export interface Product {
   numReviews: number;
   createdAt: string;
   updatedAt: string;
+  quantity: number;
 }
 
 export interface OrderHistory {

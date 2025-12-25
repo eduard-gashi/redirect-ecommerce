@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { useCheckout } from "../context/CheckoutContext";
+import { Product } from "../types/data-types";
+
 
 function Cart() {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useContext(CartContext);
-  const navigate = useNavigate();
+  const { openCheckout } = useCheckout();
 
-  // Redirect to checkout page
-  const handleCheckout = () => {
-    navigate("/checkout");
-  };
+  const handleOpenCheckout = () => {
+    openCheckout(cartItems[0], cartItems[0].quantity);
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -27,7 +29,7 @@ function Cart() {
   }
 
   const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum: number, item: Product) => sum + item.price * item.quantity,
     0
   );
 
@@ -35,7 +37,7 @@ function Cart() {
     <div className="cart-container">
       <h1 className="product-title">Dein Warenkorb</h1>
       <div className="cart-content-wrapper">
-        {cartItems.map((item) => (
+        {cartItems.map((item: Product) => (
           <div
             key={item._id}
             className="cart-item"
@@ -94,7 +96,7 @@ function Cart() {
             Warenkorb leeren
           </button>
           <button
-            onClick={handleCheckout}
+            onClick={handleOpenCheckout}
             className="primary-button"
           >
             Zur Kasse gehen
