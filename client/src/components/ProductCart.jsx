@@ -1,22 +1,42 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCheckout } from "../context/CheckoutContext";
+
 
 function ProductCard({ product }) {
+  const { openCheckout } = useCheckout();
+
   return (
-    <div className="bg-white hover-product border rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+    <div className="product-card">
       <Link to={`/produkte/${product._id}`}>
         <img
           src={`/images/products/${product.image_paths?.[0]}`}
           alt={product.name}
-          className="rounded-lg mb-4 w-full h-48 object-cover"
+          className="product-card-image"
         />
       </Link>
-      <h2 className="text-xl font-bold mb-2">{product.name}</h2>
-      <p className="text-lg font-semibold text-gray-800 mb-2">€{product.price}</p>
-      <p className="text-sm text-gray-600 mb-4 truncate w-full">{product.description}</p>
-      <Link to={`/produkte/${product._id}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full mt-auto">
-        Details ansehen
-      </Link>
+
+      <h2 className="title-black">{product.name}</h2>
+      <div className="product-price-box" style={{ paddingBottom: '30px' }}>
+        <p className="product-old-price">{product.upper_price_limit}€</p>
+        <p className="product-current-price">{product.price}€</p>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "row", width: "100%", gap: "10px" }}>
+        <Link to={`/produkte/${product._id}`}
+          className="primary-button"
+          style={{ flex: 1 }}
+        >
+          Details anzeigen
+        </Link>
+
+        <button
+          onClick={() => openCheckout(product, 1)}
+          className="primary-button"
+          style={{ flex: 1 }}
+        >
+          Sofort kaufen
+        </button>
+      </div>
     </div>
   );
 }

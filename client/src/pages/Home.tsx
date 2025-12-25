@@ -35,47 +35,48 @@ function Home() {
         </div>
       </section>
 
-      {/* Product Container */}
-      <main className="product-list-container">
-        {products.length > 0 ? (
-          products.map((p) => (
-            <Link
-              to={`/produkte/${p._id}`}
-              key={p._id}
-              className="hover-product product-card"
-            >
-              <img
-                src={`/images/products/${p.image_paths?.[0]}`}
-                alt={p.name}
-                className="product-card-image"
-              />
-              <h2 className="title-black">{p.name}</h2>
+      <div className="home-view">
+        {/* Product Container */}
+        <div className="product-list-container">
+          {products.length > 0 ? (
+            products.map((p) => (
+              <Link
+                to={`/produkte/${p._id}`}
+                key={p._id}
+                className="hover-product product-card"
+              >
+                <img
+                  src={`/images/products/${p.image_paths?.[0]}`}
+                  alt={p.name}
+                  className="product-card-image"
+                />
+                <h2 className="title-black">{p.name}</h2>
 
-              {/* Replaced inline styles */}
-              <div className="product-price-box">
-                <p className="product-old-price">{p.upper_price_limit}€</p>
-                <p className="product-current-price">{p.price}€</p>
-              </div>
+                {/* Replaced inline styles */}
+                <div className="product-price-box">
+                  <p className="product-old-price">{p.upper_price_limit}€</p>
+                  <p className="product-current-price">{p.price}€</p>
+                </div>
 
-              {/* Replaced inline styles */}
-              <div className="product-button-margin">
-                <button className="primary-button">
-                  Jetzt Detox starten!
-                </button>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p className="loading-text">Produkte werden geladen...</p>
-        )}
-
+                {/* Replaced inline styles */}
+                <div className="product-button-margin">
+                  <button className="primary-button">
+                    Jetzt Detox starten!
+                  </button>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="loading-text">Produkte werden geladen...</p>
+          )}
+        </div>
         {/* Benefits Section */}
         <BenefitsSection />
 
         <section className="tutorial-section">
           <TutorialVideo />
         </section>
-      </main>
+      </div>
     </div >
 
   );

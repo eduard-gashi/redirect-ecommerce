@@ -1,21 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import apiClient from '../apiClient';
-import { AuthContext } from '../context/AuthContext';
-import EmbeddedCheckout from '../components/EmbeddedCheckout';
 import ProductImages from '../components/ProductImages';
-
+import { useCheckout } from "../context/CheckoutContext";
 
 function ProductDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { state, dispatch } = useContext(AuthContext);
   const [clientSecret, setClientSecret] = useState(null);
-  const [showCheckout, setShowCheckout] = useState(false);
   const { addToCart } = useContext(CartContext);
+
+  const { openCheckout } = useCheckout();
 
 
   useEffect(() => {
@@ -30,24 +27,6 @@ function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-
-  useEffect(() => {
-    console.log("Fetching checkout session for product:", product, "quantity:", quantity);
-    if (!product) return;
-    const fetchClientSecret = async () => {
-      try {
-        const { data } = await apiClient.post(
-          "/stripe/create-checkout-session",
-          { product, quantity }
-        );
-        setClientSecret(data.clientSecret);
-      } catch (err) {
-        console.error("Error fetching checkout session:", err);
-      }
-    };
-
-    fetchClientSecret();
-  }, [product, quantity]);
 
 
   if (!product) {
@@ -135,7 +114,7 @@ function ProductDetail() {
                 </button>
 
                 <button
-                  onClick={() => setShowCheckout(true)}
+                  onClick={() => openCheckout(product, quantity)}
                   className="primary-button"
                   style={{ flex: 1 }}
                 >
@@ -149,18 +128,6 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-
-      {/* Stripe Checkout */}
-      {showCheckout && clientSecret && (
-        <div className="checkout-overlay">
-          <div className="checkout-modal">
-            <button className="checkout-close" onClick={() => setShowCheckout(false)}>
-              ×
-            </button>
-            <EmbeddedCheckout clientSecret={clientSecret} />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
