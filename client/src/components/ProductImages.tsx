@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 
 interface ProductImagesProp {
     images_paths: Array<string>;
+    onImageChange?: (index: number) => void;
 }
 
 interface TransformState {
@@ -18,10 +19,14 @@ interface TransformState {
 }
 
 
-export default function ProductImages({ images_paths }: ProductImagesProp) {
+export default function ProductImages({ images_paths, onImageChange }: ProductImagesProp) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [prevIndex, setPrevIndex] = useState(0);
+
     if (!images_paths || images_paths.length === 0) {
         return <div className="no-image">Kein Bild verfügbar</div>;
     }
+
 
     return (
         <div className="product-images-slider">
@@ -33,6 +38,10 @@ export default function ProductImages({ images_paths }: ProductImagesProp) {
                 pagination={{ clickable: true }}
                 loop={images_paths.length > 1}
                 allowTouchMove={true}
+                onSlideChange={(swiper) => {
+                        setCurrentIndex(swiper.realIndex);
+                        onImageChange?.(swiper.realIndex);
+                }}
             >
                 {images_paths.map((path, index) => (
                     <SwiperSlide key={index}
