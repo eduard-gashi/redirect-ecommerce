@@ -535,11 +535,20 @@
 
 
 .benefit-image {
-    width: 500px;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 0 auto;
 }
+
+@media (min-width: 1024px) {
+  .benefit-image {
+    max-width: 520px;  /* hier einfach spielen: 520–600px */
+  }
+}
+
 
 .benefit-image img {
     width: 100%;
