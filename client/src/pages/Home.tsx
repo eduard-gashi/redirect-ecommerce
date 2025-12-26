@@ -68,15 +68,16 @@ function Home() {
             <p className="loading-text">Produkte werden geladen...</p>
           )}
         </div>
+
         {/* Benefits Section */}
         <BenefitsSection />
 
-        <section className="tutorial-section">
-          <TutorialVideo />
-        </section>
       </div>
-    </div >
+      <div className="video-wrapper">
+        <TutorialVideo />
+      </div>
 
+    </div >
   );
 }
 
