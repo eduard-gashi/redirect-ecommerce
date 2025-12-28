@@ -535,18 +535,19 @@
 
 
 .benefit-image {
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 16px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 0 auto;
 }
 
 @media (min-width: 1024px) {
-  .benefit-image {
-    max-width: 520px;  /* hier einfach spielen: 520–600px */
-  }
+    .benefit-image {
+        max-width: 520px;
+        /* hier einfach spielen: 520–600px */
+    }
 }
 
 
@@ -630,6 +631,22 @@
 
 .product-detail-card:hover {
     transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        padding: 32px 32px 100px;
+    }
+
+    .product-detail-card {
+        flex-direction: column;
+        padding: 16px;
+        gap: 1.5rem;
+    }
+
+    .product-image-container {
+        width: 100%;
+    }
 }
 
 .quantity-input-wrapper {
@@ -726,6 +743,23 @@
     margin: 0 auto;
 }
 
+
+@media (max-width: 768px) {
+    .cart-item-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .cart-item-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+}
+
+
 .cart-content-wrapper {
     background-color: white;
     border-radius: 0.5rem;
@@ -736,7 +770,6 @@
 
 .cart-item {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e5e7eb;
