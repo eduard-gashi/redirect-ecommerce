@@ -66,7 +66,7 @@ function Header() {
 
       {/* Mobile Overlay Menu */}
       {mobileMenuOpen && (
-        <div className="mobile-menu-overlay">
+        <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}>
           <button
             className="close-menu-button"
             onClick={() => setMobileMenuOpen(false)}
@@ -75,9 +75,9 @@ function Header() {
           </button>
           <nav className="mobile-nav">
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
-            <br></br>
+            <br />
             <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
-            <br></br>
+            <br />
             <Link to="/produkte" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
           </nav>
         </div>

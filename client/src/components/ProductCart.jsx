@@ -22,13 +22,6 @@ function ProductCard({ product }) {
       </div>
 
       <div style={{ display: "flex", flexDirection: "row", width: "100%", gap: "10px" }}>
-        <Link to={`/produkte/${product._id}`}
-          className="primary-button"
-          style={{ flex: 1 }}
-        >
-          Details anzeigen
-        </Link>
-
         <button
           onClick={() => openCheckout(product, 1)}
           className="primary-button"

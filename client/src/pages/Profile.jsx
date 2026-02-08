@@ -36,16 +36,28 @@ function Profile() {
             </div>
 
             {/* Order History */}
-            <div className="profile-details">
-                <p className="text-paragraph">
-                    <strong>Eingeloggt als: <br></br></strong>{userInfo.email}
-                </p>
+            <div className="profile-details" >
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    alignItems: "center"
+                }}>
+                    <p className="text-paragraph">
+                        <strong>Eingeloggt als: <br></br></strong>{userInfo.email}
+                    </p>
+                    <button className="primary-button" style={{
+                        width: '120px',
+                        justifyContent: "center",
+                        display: "flex"
+                    }} onClick={handleLogOut}>
+                        Ausloggen
+                    </button>
+                </div>
                 <p className="text-paragraph">
                     <OrderHistory></OrderHistory>
                 </p>
-                <button className="primary-button" onClick={handleLogOut}>
-                    Ausloggen
-                </button>
             </div>
         </div>
     );

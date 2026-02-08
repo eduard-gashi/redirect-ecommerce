@@ -43,7 +43,7 @@ function Home() {
               <Link
                 to={`/produkte/${p._id}`}
                 key={p._id}
-                className="hover-product product-card"
+                className="product-card"
               >
                 <img
                   src={`/images/products/${p.image_paths?.[0]}`}
