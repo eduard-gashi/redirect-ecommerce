@@ -6,6 +6,7 @@ import productRoutes from "./routes/product.js";
 import orderRoutes from "./routes/order.js";
 import userRoutes from "./routes/user.js";
 import stripeRoutes from "./routes/stripe.js"
+import healthRoutes from "./routes/health.js"
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/stripe", stripeRoutes);
+app.use("/api/health", healthRoutes);
 
 
 const PORT = process.env.PORT || 5000;

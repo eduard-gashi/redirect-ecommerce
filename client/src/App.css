@@ -383,10 +383,6 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.product-grid:hover {
-    transform: scale(1.02);
-}
-
 .product-card {
     background-color: white;
     border-radius: 0.5rem;
@@ -398,10 +394,6 @@
     margin-bottom: 1.5rem;
     display: block;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.product-card:hover {
-    transform: scale(1.03);
 }
 
 .product-card-image {
@@ -629,9 +621,6 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.product-detail-card:hover {
-    transform: scale(1.02);
-}
 
 @media (max-width: 768px) {
     .product-detail-container {

@@ -48,7 +48,7 @@ function ProductDetail() {
   return (
     <div>
       <div className="product-detail-container">
-        <div className="product-detail-card hover-product">
+        <div className="product-detail-card">
           {/* Image Box */}
           <div className="product-image-container">
             <ProductImages
