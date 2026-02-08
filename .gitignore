@@ -19,6 +19,7 @@ build/
 
 # Vercel
 client/.vercel/
+client/dist
 .vercel/
 
 # IDE
