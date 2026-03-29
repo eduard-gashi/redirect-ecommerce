@@ -5,7 +5,7 @@ import {
   ReactNode,
 } from "react";
 import type { Product } from "../types/data-types";
-import CheckoutOverlay from "../components/CheckoutOverlay";
+import CheckoutOverlay from "../components/checkout/CheckoutOverlay.tsx";
 
 type CheckoutContextValue = {
   openCheckout: (product: Product, quantity?: number) => void;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import apiClient from '../apiClient';
-import ProductCard from '../components/ProductCart';
+import ProductCard from '../components/ProductCard.tsx';
 import '../App.css';
 
 function Products() {

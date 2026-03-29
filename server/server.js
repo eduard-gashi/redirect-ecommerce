@@ -7,11 +7,20 @@ import orderRoutes from "./routes/order.js";
 import userRoutes from "./routes/user.js";
 import stripeRoutes from "./routes/stripe.js"
 import healthRoutes from "./routes/health.js"
+import { stripeWebhookHandler } from "./routes/stripeWebhook.js";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
+
+app.post(
+  "/api/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  stripeWebhookHandler
+);
+
+
 app.use(express.json());
 
 app.use("/api/products", productRoutes);

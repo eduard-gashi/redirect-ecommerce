@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import "../styles/home.css";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -39,8 +40,8 @@ export default function ProductImages({ images_paths, onImageChange }: ProductIm
                 loop={images_paths.length > 1}
                 allowTouchMove={true}
                 onSlideChange={(swiper) => {
-                        setCurrentIndex(swiper.realIndex);
-                        onImageChange?.(swiper.realIndex);
+                    setCurrentIndex(swiper.realIndex);
+                    onImageChange?.(swiper.realIndex);
                 }}
             >
                 {images_paths.map((path, index) => (
@@ -61,7 +62,11 @@ export default function ProductImages({ images_paths, onImageChange }: ProductIm
                                     setIsZoomedIn(prev => !prev);
                                 };
                                 return (
-                                    <div className="image-wrapper" onClick={handleClick} style={{ cursor: isZoomedIn ? 'zoom-out' : 'zoom-in' }}>
+                                    <div
+                                        className="image-wrapper"
+                                        onClick={handleClick}
+                                        style={{ cursor: isZoomedIn ? "zoom-out" : "zoom-in" }}
+                                    >
                                         <TransformComponent>
                                             <img src={`/${path}`} className="product-image-slide" />
                                         </TransformComponent>
