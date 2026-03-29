@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight, Clock, TrendingDown, Heart, Target, CheckCircle2, Star, Smartphone, Brain, Users } from "lucide-react";
 import { ImpactStats } from "../components/home/ImpactStats";
 import { ProblemSection } from "../components/home/ProblemSection";
-import { SolutionSection } from "../components/home/SolutionSection";
 import { BenefitsGrid } from "../components/home/BenefitsGrid";
 import { HowItWorks } from "../components/home/HowItWorks";
 import { ProductShowcase } from "../components/home/ProductShowcase";
