@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
-import LegalNotice from './pages/LegalNotice';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/TermsOfService';
-import RefundPolicy from './pages/RefundPolicy';
 import Login from './pages/Login';
-import ProductDetail from './pages/ProductDetail';
+import ProductDetail from './pages/ProductDetail.tsx';
 import Cart from "./pages/Cart";
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import Products from './pages/Products';
+
+import LegalNotice from './pages/legal/LegalNotice.tsx';
+import PrivacyPolicy from './pages/legal/PrivacyPolicy.tsx';
+import TermsOfService from './pages/legal/TermsOfService.tsx';
+import RefundPolicy from './pages/legal/RefundPolicy.tsx';
 
 import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';

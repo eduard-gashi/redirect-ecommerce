@@ -5,7 +5,6 @@ import apiClient from "../apiClient";
 import { AuthContext } from "../context/AuthContext";
 
 
-
 function OrderSuccessScreen() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");

@@ -1,83 +1,125 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { VideoPlayerWithThumbnail } from "../components/VideoPlayerWithThumbnail";
-import BenefitsSection from "../components/BenefitsSection";
-import TutorialVideo from "../components/TutorialVideo";
-import "../App.css";
-import apiClient from '../apiClient';
-import { Product } from "../types/data-types";
+import { ArrowRight, Clock, TrendingDown, Heart, Target, CheckCircle2, Star, Smartphone, Brain, Users } from "lucide-react";
+import { ImpactStats } from "../components/home/ImpactStats";
+import { ProblemSection } from "../components/home/ProblemSection";
+import { SolutionSection } from "../components/home/SolutionSection";
+import { BenefitsGrid } from "../components/home/BenefitsGrid";
+import { HowItWorks } from "../components/home/HowItWorks";
+import { ProductShowcase } from "../components/home/ProductShowcase";
+import "../styles/home.css";
 
+export function Home() {
+  const [screenTime, setScreenTime] = useState(0);
 
-function Home() {
-  const [products, setProducts] = useState<Array<Product>>([]);
+  const scrollToProduct = () => {
+    const element = document.getElementById("product-section");
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const { data } = await apiClient.get('/products');
-        setProducts(data);
-        console.log("Fetched products:", data);
+    let start = 0;
+    const end = 5;
+    const duration = 2000;
+    const increment = end / (duration / 16);
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setScreenTime(end);
+        clearInterval(timer);
+      } else {
+        setScreenTime(start);
       }
-      catch (err) {
-        console.error("Error while loading the products:", err);
-      }
-    };
-    fetchProducts();
-  }, []); // Runs once the component mounts
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="home-container">
+    <div className="detox-home">
+      {/* Hero Section - Sofortiger Impact */}
+      <section className="hero-section">
+        <div className="hero-gradient"></div>
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Du scrollst <span className="highlight-text">{screenTime.toFixed(1)} Stunden</span> täglich?
+          </h1>
 
-      {/* Video Section */}
-      <section className="video-section">
-        <div className="video-wrapper">
-          <VideoPlayerWithThumbnail></VideoPlayerWithThumbnail>
+          <p className="hero-subtitle">
+            Das sind über <strong>76 Tage pro Jahr</strong> – Zeit, die du für deine Träume,
+            Beziehungen und Gesundheit nutzen könntest.
+          </p>
+
+          <div className="hero-cta-group">
+            <button onClick={scrollToProduct} className="cta-primary">
+              Jetzt Freiheit zurückholen
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button className="cta-secondary">
+              So funktioniert's
+            </button>
+          </div>
+        </div>
+
+        {/* Hero Visual - Neutrale Handy-Illustration */}
+        <div className="hero-visual">
+          <div className="phone-mockup">
+            <div className="phone-screen">
+              <div className="notification-bar"></div>
+
+              <div className="screen-time-widget">
+                <Smartphone className="widget-icon" />
+                <p className="widget-title">Bildschirmzeit heute</p>
+                <div className="time-bar-container">
+                  <div className="time-bar-fill"></div>
+                </div>
+                <p className="widget-label">Beispielansicht</p>
+              </div>
+
+              <div className="app-grid">
+                <div className="app-icon-small red"></div>
+                <div className="app-icon-small blue"></div>
+                <div className="app-icon-small green"></div>
+                <div className="app-icon-small yellow"></div>
+                <div className="app-icon-small purple"></div>
+                <div className="app-icon-small orange"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="home-view">
-        {/* Product Container */}
-        <div className="product-list-container">
-          {products.length > 0 ? (
-            products.map((p) => (
-              <Link
-                to={`/produkte/${p._id}`}
-                key={p._id}
-                className="product-card"
-              >
-                <img
-                  src={`/images/products/${p.image_paths?.[0]}`}
-                  alt={p.name}
-                  className="product-card-image"
-                />
-                <h2 className="benefits-header">{p.name}</h2>
+      {/* Fakten- und Problembeschreibung - Seriös, studienbasiert */}
+      <ImpactStats />
 
-                <div className="product-price-box">
-                  <p className="product-old-price">{p.upper_price_limit}€</p>
-                  <p className="product-current-price">{p.price}€</p>
-                </div>
+      {/* Problem Section - Emotional ansprechen */}
+      <ProblemSection />
 
-                <div className="product-button-margin">
-                  <button className="primary-button">
-                    Jetzt Detox starten!
-                  </button>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p className="loading-text">Produkte werden geladen...</p>
-          )}
+      {/* How It Works - 3 Schritte */}
+      <HowItWorks />
+
+      {/* Benefits - Was die Box bietet */}
+      <BenefitsGrid />
+
+      {/* Product Showcase - Kaufen */}
+      <ProductShowcase />
+
+      {/* Final CTA Section */}
+      <section className="final-cta-section">
+        <div className="final-cta-content">
+          <h2 className="final-cta-title">
+            Bereit für eine bewusstere Handy-Nutzung?
+          </h2>
+          <p className="final-cta-subtitle">
+            Starte heute deine 30-Tage-Reise zu mehr Fokus und Freiheit.
+          </p>
+          <button onClick={scrollToProduct} className="cta-primary large">
+            Jetzt Handy Detox starten!
+            <ArrowRight className="w-5 h-5" />
+          </button>
         </div>
-
-        {/* Benefits Section */}
-        <BenefitsSection />
-
-      </div>
-      <div className="video-wrapper">
-        <TutorialVideo />
-      </div>
-
-    </div >
+      </section>
+    </div>
   );
 }
 

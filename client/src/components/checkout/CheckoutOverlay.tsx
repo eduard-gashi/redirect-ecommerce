@@ -4,8 +4,8 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import apiClient from "../apiClient";
-import type { Product } from "../types/data-types";
+import apiClient from "../../apiClient";
+import type { Product } from "../../types/data-types";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY_LIVE);
