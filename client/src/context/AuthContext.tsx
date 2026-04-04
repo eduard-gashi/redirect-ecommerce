@@ -1,25 +1,9 @@
 import React, { createContext, useReducer, useEffect, ReactNode } from 'react';
+import type { UserInfo, AuthState, AuthAction } from "../types/data-types.ts";
 
 
-interface UserInfo {
-  _id: string;
-  email: string;
-  isAdmin: boolean;
-  token: string;
-}
-
-interface AuthState {
-  userInfo: UserInfo | null;
-}
-
-type AuthAction =
-  | { type: 'USER_SIGNIN'; payload: UserInfo }
-  | { type: 'USER_SIGNOUT' };
-
-
-  const initialState: AuthState = {
-
-    userInfo: localStorage.getItem('userInfo')
+const initialState: AuthState = {
+  userInfo: localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo')!)
     : null,
 };

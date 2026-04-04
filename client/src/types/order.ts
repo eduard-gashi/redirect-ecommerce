@@ -15,6 +15,7 @@ export interface ShippingAddress {
 
 export interface Order {
   _id: string;
+  orderNumber: string;
   user: string;
   orderItems: OrderItem[];
   shippingAddress: ShippingAddress;
@@ -35,4 +36,12 @@ export interface Order {
   deliveredAt?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface OrderSummary {
+  orderNumber: string;
+  email: string;
+  address: string;
+  items: number;
+  total: number;
 }

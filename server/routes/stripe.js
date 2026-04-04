@@ -32,7 +32,7 @@ router.post('/create-checkout-session', async (req, res) => {
       shipping_address_collection: {
         allowed_countries: ["DE"],
       },
-      return_url: `${req.headers.origin}/bestellungen/success?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${req.headers.origin}/bestellungen?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.send({ clientSecret: session.client_secret });

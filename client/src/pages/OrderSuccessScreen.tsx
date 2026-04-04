@@ -1,10 +1,10 @@
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from "react";
-import { useSearchParams } from "react-router";
 import apiClient from "../apiClient";
 import { AuthContext } from "../context/AuthContext";
 import { Package, Mail, MapPin, CreditCard, CheckCircle, XCircle, Loader2, Info } from "lucide-react";
 import "../styles/order.css";
+import type { OrderSummary } from "../types/order.ts";
 
 function OrderSuccessScreen() {
   const [searchParams] = useSearchParams();
@@ -12,10 +12,13 @@ function OrderSuccessScreen() {
   const { state } = useContext(AuthContext);
   const userInfo = state.userInfo;
   const [status, setStatus] = useState("loading");
-  const [orderData, setOrderData] = useState<any>(null);
+  const [orderData, setOrderData] = useState<OrderSummary | null>(null);
 
   useEffect(() => {
-    if (!sessionId || !userInfo._id) return;
+    if (!sessionId) {
+      setStatus("error");
+      return;
+    }
 
     const finalizeOrder = async () => {
       try {
@@ -37,9 +40,11 @@ function OrderSuccessScreen() {
           return;
         }
 
+        const userId = userInfo?._id ?? null;
+
         // Create Order in MongoDB
         const { data: order } = await apiClient.post("/orders", {
-          user: userInfo._id,
+          user: userId,
           orderItems: [
             {
               name: item.description,

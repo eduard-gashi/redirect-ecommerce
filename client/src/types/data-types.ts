@@ -42,3 +42,7 @@ export interface UserInfo {
 export interface AuthState {
   userInfo: UserInfo | null;
 }
+
+export type AuthAction =
+  | { type: 'USER_SIGNIN'; payload: UserInfo }
+  | { type: 'USER_SIGNOUT' };
