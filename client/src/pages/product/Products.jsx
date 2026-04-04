@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import apiClient from '../apiClient';
-import ProductCard from '../components/ProductCard.tsx';
-import '../App.css';
+import { useEffect, useState } from 'react';
+import apiClient from '../../apiClient.jsx';
+import ProductCard from '../../components/product/ProductCard.tsx';
 
 function Products() {
     const [products, setProducts] = useState(null);
@@ -25,7 +24,6 @@ function Products() {
 
     return (
         <div className="products-view">
-            
             {/* Header */}
             <div className="product-header-container">
                 <h1 className="product-title">Unsere Produkte</h1>

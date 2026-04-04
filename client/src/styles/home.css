@@ -1078,8 +1078,7 @@ body {
 
 .product-image-placeholder {
   width: 100%;
-  max-width: 300px;
-  aspect-ratio: 1;
+  max-width: 500px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -1469,6 +1468,7 @@ body {
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 /* Product Detail Pricing */
@@ -1770,7 +1770,6 @@ body {
 
 @media (max-width: 768px) {
   .product-detail-container {
-    display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
@@ -1784,21 +1783,14 @@ body {
     flex-direction: column;
   }
 
-  /* Reihenfolge der beiden Haupt-Spalten */
   .product-info {
     order: 1;
-    /* Name/Preis/Rest zuerst */
   }
 
   .product-gallery {
     order: 2;
-    /* Bilder danach */
   }
 
-  /* Reihenfolge IN der rechten Spalte:
-     1) Header (Name+Preis)
-     2) Rest (Availability, Includes, Menge, Buttons, Payment)
-  */
   .product-info {
     display: flex;
     flex-direction: column;
@@ -1813,7 +1805,7 @@ body {
   .quantity-selector,
   .product-actions,
   .payment-methods {
-    order: 2;
+    order: 3;
   }
 }
 
@@ -1885,7 +1877,7 @@ body {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: #FF6B35;
+  background: var(--color-logo);
   color: white;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
@@ -1896,19 +1888,13 @@ body {
 }
 
 /* Product Image */
-.product-card-image-container {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2.5rem 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 220px;
-}
-
 .product-card-image {
   width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -1999,7 +1985,7 @@ body {
 .product-card-price-current {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #FF6B35;
+  color: var(--color-logo);
 }
 
 /* Out of Stock Badge */
@@ -2020,7 +2006,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #FF6B35;
+  background: var(--color-logo);;
   color: white;
   padding: 0.875rem 1.25rem;
   border-radius: 10px;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
 import { ShoppingCart, Star, TrendingUp, Package, Sparkles } from "lucide-react";
-import { useCheckout } from "../context/CheckoutContext";
+import { useCheckout } from "../../context/CheckoutContext";
 
 interface ProductCardProps {
   product: {
@@ -25,7 +25,6 @@ interface ProductCardProps {
 function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
   const { openCheckout } = useCheckout();
-  console.log("PRodut", product);
 
   const hasDiscount = product.price && product.upper_price_limit > product.price;
   const discountPercent = hasDiscount
@@ -56,6 +55,7 @@ function ProductCard({ product }: ProductCardProps) {
           -{discountPercent}%
         </div>
       )}
+
       {/* Product Images */}
       <Link to={`/produkte/${product._id}`}>
         <img

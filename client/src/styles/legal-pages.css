@@ -1,5 +1,5 @@
 /* ============================================
-   LEGAL PAGES - PREMIUM DESIGN
+   LEGAL PAGES 
    ============================================ */
 
 .legal-page {
@@ -221,7 +221,9 @@
 }
 
 @keyframes legal-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .legal-loading-text {
@@ -260,8 +262,13 @@
 }
 
 @keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Section Card */
@@ -671,31 +678,31 @@
   .legal-hero {
     padding: 5rem 2rem 4rem;
   }
-  
+
   .legal-hero-title {
     font-size: 3rem;
   }
-  
+
   .legal-hero-subtitle {
     font-size: 1.25rem;
   }
-  
+
   .legal-main {
     padding: 4rem 2rem;
   }
-  
+
   .legal-section-card {
     padding: 2.5rem;
   }
-  
+
   .legal-contact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .legal-rights-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .legal-shipping-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -707,15 +714,15 @@
     grid-template-columns: 280px 1fr;
     gap: 3rem;
   }
-  
+
   .legal-toc {
     display: block;
   }
-  
+
   .legal-section-card {
     padding: 3rem;
   }
-  
+
   .legal-rights-grid {
     grid-template-columns: repeat(3, 1fr);
   }

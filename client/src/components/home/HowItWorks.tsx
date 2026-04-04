@@ -1,5 +1,6 @@
 import React from "react";
 import { Eye, Calendar, TrendingUp } from "lucide-react";
+import TutorialVideo from "../TutorialVideo";
 
 export function HowItWorks() {
   const steps = [
@@ -51,6 +52,8 @@ export function HowItWorks() {
           ))}
         </div>
 
+        <TutorialVideo></TutorialVideo>
+
         <div className="details-cta-wrapper">
           <button onClick={scrollToProduct} className="details-cta">
             Details zum Programm ansehen
@@ -58,6 +61,7 @@ export function HowItWorks() {
           </button>
         </div>
       </div>
+
     </section>
   );
 }

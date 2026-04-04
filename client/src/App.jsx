@@ -4,10 +4,10 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import ProductDetail from './pages/ProductDetail.tsx';
 import Cart from "./pages/Cart";
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
-import Products from './pages/Products';
+import ProductDetail from './pages/product/ProductDetail.tsx';
+import Products from './pages/product/Products';
 
 import LegalNotice from './pages/legal/LegalNotice.tsx';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy.tsx';
@@ -46,7 +46,7 @@ function App() {
                 <Route path="/produkte/:id" element={<ProductDetail />} />
                 <Route path="/kontakt" element={<Contact />} />
                 <Route path="/warenkorb" element={<Cart />} />
-                <Route path="/bestellungen/:id" element={<OrderSuccessScreen />} />
+                <Route path="/bestellungen/success" element={<OrderSuccessScreen />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/confirm-registration" element={<AccountConfirmation />} />
                 <Route path="/profil" element={<Profile />} />

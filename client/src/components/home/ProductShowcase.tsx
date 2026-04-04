@@ -1,6 +1,6 @@
 import React from "react";
 import { Check, ArrowRight, Truck, RotateCcw, Package } from "lucide-react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function ProductShowcase() {
   const navigate = useNavigate();
@@ -22,14 +22,12 @@ export function ProductShowcase() {
         <div className="product-card-wrapper">
           <div className="product-card-main">
             <div className="product-image-section">
-              <div className="product-image-placeholder">
-                <div className="box-visual">
-                  <img
-                    src={`/images/products/detoxbox/01.png`}
-                    alt={"Handy Detox Box"}
-                    className="product-card-image"
-                  />
-                </div>
+              <div className="box-visual">
+                <img
+                  src={`/images/products/detoxbox/01.png`}
+                  alt={"Handy Detox Box"}
+                  className="product-card-image"
+                />
               </div>
             </div>
 

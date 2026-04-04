@@ -1,16 +1,18 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useEffect, useState, useContext } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import apiClient from "../apiClient";
 import { AuthContext } from "../context/AuthContext";
-
+import { Package, Mail, MapPin, CreditCard, CheckCircle, XCircle, Loader2, Info } from "lucide-react";
+import "../styles/order.css";
 
 function OrderSuccessScreen() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const { state, dispatch } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const userInfo = state.userInfo;
   const [status, setStatus] = useState("loading");
+  const [orderData, setOrderData] = useState<any>(null);
 
   useEffect(() => {
     if (!sessionId || !userInfo._id) return;
@@ -35,10 +37,8 @@ function OrderSuccessScreen() {
           return;
         }
 
-        console.log("Finalizing order for session:", session);
-
         // Create Order in MongoDB
-        await apiClient.post("/orders", {
+        const { data: order } = await apiClient.post("/orders", {
           user: userInfo._id,
           orderItems: [
             {
@@ -64,6 +64,14 @@ function OrderSuccessScreen() {
           },
         });
 
+        setOrderData({
+          orderNumber: order._id.slice(-8).toUpperCase(),
+          email: session.customer_details.email,
+          address: `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.postal_code}`,
+          items: order.orderItems.length,
+          total: order.totalPrice,
+        });
+
         setStatus("success");
       } catch (err) {
         console.error("Error finalizing order:", err);
@@ -74,41 +82,150 @@ function OrderSuccessScreen() {
     finalizeOrder();
   }, [sessionId, userInfo]);
 
-  if (status === "loading") return <p>Bestellung wird geprüft...</p>;
-  if (status === "not_paid") return <p>Zahlung noch nicht abgeschlossen.</p>;
-  if (status === "error") return <p>Fehler beim Speichern der Bestellung.</p>;
-
-
-  return (
-    <div className="order-success-container">
-      <div className="order-success-card">
-        <div style={{
-          fontSize: "30px"
-        }} >
-          ✅
+  // Loading State
+  if (status === "loading") {
+    return (
+      <div className="order-processing-container">
+        <div className="order-processing-card">
+          <div className="processing-spinner" />
+          <h2 className="processing-title">Bestellung wird verarbeitet...</h2>
+          <p className="processing-message">
+            Bitte warten Sie, während wir Ihre Zahlung bestätigen und Ihre Bestellung finalisieren.
+          </p>
         </div>
-        <h1 className="title-black">Vielen Dank für Ihre Bestellung!</h1>
-        <p className="text-paragraph">
-          Wir haben Ihre Bestellung erhalten und werden sie so schnell wie möglich bearbeiten.
-          Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.
-        </p>
-        <div style={{ display: "flex", gap: "10px", marginTop: "30px", justifyContent: "center" }}>
-          <Link
-            to="/"
-            className="primary-button"
-          >
-            Weiter einkaufen
-          </Link>
-          <Link
-            to="/profil"
-            className="primary-button"
-            style={{ backgroundColor: "grey" }}
-          >
-            Meine Bestellungen
+      </div>
+    );
+  }
+
+  // Not Paid State
+  if (status === "not_paid") {
+    return (
+      <div className="order-processing-container">
+        <div className="order-error-card">
+          <div className="error-icon-wrapper">
+            <XCircle className="error-icon" />
+          </div>
+          <h2 className="error-title">Zahlung noch nicht abgeschlossen</h2>
+          <p className="error-message">
+            Ihre Zahlung wurde noch nicht bestätigt. Bitte überprüfen Sie Ihre E-Mails oder versuchen Sie es erneut.
+          </p>
+          <Link to="/produkte" className="success-button-primary">
+            Zurück zum Shop
           </Link>
         </div>
       </div>
-    </div >
+    );
+  }
+
+  // Error State
+  if (status === "error") {
+    return (
+      <div className="order-processing-container">
+        <div className="order-error-card">
+          <div className="error-icon-wrapper">
+            <XCircle className="error-icon" />
+          </div>
+          <h2 className="error-title">Fehler bei der Bestellung</h2>
+          <p className="error-message">
+            Es ist ein Fehler beim Speichern Ihrer Bestellung aufgetreten. Bitte kontaktieren Sie unseren Support.
+          </p>
+          <Link to="/produkte" className="success-button-primary">
+            Zurück zum Shop
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Success State
+  return (
+    <div className="order-success-container">
+      <div className="order-success-card">
+        {/* Success Icon */}
+        <div className="success-icon-wrapper">
+          <CheckCircle className="success-icon" />
+        </div>
+
+        {/* Title & Message */}
+        <h1 className="success-title">Vielen Dank für Ihre Bestellung!</h1>
+        <p className="success-message">
+          Wir haben Ihre Bestellung erhalten und werden sie so schnell wie möglich bearbeiten.
+          Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.
+        </p>
+
+        {/* Order Summary */}
+        {orderData && (
+          <div className="order-summary-section">
+            <h2 className="order-summary-title">Bestellzusammenfassung</h2>
+
+            <div className="order-summary-details">
+              {/* Order Number */}
+              <div className="order-detail-row">
+                <Package className="order-detail-icon" />
+                <div className="order-detail-content">
+                  <span className="order-detail-label">Bestellnummer</span>
+                  <span className="order-detail-value">#{orderData.orderNumber}</span>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="order-detail-row">
+                <Mail className="order-detail-icon" />
+                <div className="order-detail-content">
+                  <span className="order-detail-label">Bestätigung an</span>
+                  <span className="order-detail-value">{orderData.email}</span>
+                </div>
+              </div>
+
+              {/* Address */}
+              <div className="order-detail-row full-width">
+                <MapPin className="order-detail-icon" />
+                <div className="order-detail-content">
+                  <span className="order-detail-label">Lieferadresse</span>
+                  <span className="order-detail-value address">{orderData.address}</span>
+                </div>
+              </div>
+
+              {/* Payment Status */}
+              <div className="order-detail-row full-width">
+                <CreditCard className="order-detail-icon" />
+                <div className="order-detail-content">
+                  <span className="order-detail-label">Zahlungsstatus</span>
+                  <div className="order-summary-status">
+                    <span className="status-dot"></span>
+                    Bezahlt
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Total Highlight */}
+            <div className="order-total-highlight">
+              <div className="order-total-label">Gesamtbetrag</div>
+              <div className="order-total-value">€{orderData.total.toFixed(2)}</div>
+            </div>
+          </div>
+        )}
+
+        {/* Info Box */}
+        <div className="success-info-box">
+          <Info className="info-box-icon" />
+          <p className="info-box-text">
+            Sie erhalten eine Versandbestätigung mit Tracking-Informationen, sobald Ihre Bestellung versandt wurde.
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="success-actions-group">
+          <Link to="/produkte" className="success-button-secondary">
+            Weiter einkaufen
+          </Link>
+          <Link to="/profil" className="success-button-primary">
+            Meine Bestellungen ansehen
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
 

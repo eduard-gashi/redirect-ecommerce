@@ -15,6 +15,11 @@ export function Home() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToHowItWorks = () => {
+    const element = document.getElementById("how-it-works")
+    element?.scrollIntoView({ behavior: "smooth" });
+  }
+
   useEffect(() => {
     let start = 0;
     const end = 5;
@@ -36,7 +41,7 @@ export function Home() {
 
   return (
     <div className="detox-home">
-      {/* Hero Section - Sofortiger Impact */}
+      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-gradient"></div>
         <div className="hero-content">
@@ -54,13 +59,13 @@ export function Home() {
               Jetzt Freiheit zurückholen
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="cta-secondary">
+            <button onClick={scrollToHowItWorks} className="cta-secondary">
               So funktioniert's
             </button>
           </div>
         </div>
 
-        {/* Hero Visual - Neutrale Handy-Illustration */}
+        {/* Smart Phone Illusration */}
         <div className="hero-visual">
           <div className="phone-mockup">
             <div className="phone-screen">
@@ -88,20 +93,20 @@ export function Home() {
         </div>
       </section>
 
-      {/* Fakten- und Problembeschreibung - Seriös, studienbasiert */}
+      {/* Facts and problem discriptions */}
       <ImpactStats />
 
-      {/* Problem Section - Emotional ansprechen */}
+      {/* Problem section */}
       <ProblemSection />
 
-      {/* How It Works - 3 Schritte */}
+      {/* Product Showcase with buy now button */}
+      <ProductShowcase />
+
+      {/* How the Handy Detox Box Works */}
       <HowItWorks />
 
-      {/* Benefits - Was die Box bietet */}
+      {/* What the product offers */}
       <BenefitsGrid />
-
-      {/* Product Showcase - Kaufen */}
-      <ProductShowcase />
 
       {/* Final CTA Section */}
       <section className="final-cta-section">

@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { LegalLayout } from './LegalLayout';
-import '../../styles/legal-pages.css';
+import { LegalTextPage } from './LegalTextPage';
 
 const sections = [
   { id: 'einleitung', title: '1. Einleitung' },
@@ -19,67 +17,12 @@ const sections = [
 ];
 
 function PrivacyPolicy() {
-  const [loading, setLoading] = useState(false);
-  const legaltextRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://www.it-recht-kanzlei.de/js/itrk-legaltext.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    const observer = new MutationObserver(() => {
-      if (legaltextRef.current && legaltextRef.current.innerHTML.trim() !== '') {
-        const h2s = Array.from(
-          legaltextRef.current.querySelectorAll<HTMLHeadingElement>('h2')
-        );
-
-        h2s.forEach((h2, idx) => {
-          const section = sections[idx];
-          if (section) {
-            h2.id = section.id;
-          }
-          h2.classList.add('legal-section-heading');
-        });
-
-        legaltextRef.current
-          .querySelectorAll('p')
-          .forEach(el => el.classList.add('legal-text'));
-
-        setLoading(false);
-        observer.disconnect();
-      }
-    });
-
-    if (legaltextRef.current) {
-      observer.observe(legaltextRef.current, { childList: true, subtree: true });
-    }
-
-    console.log("HAHA");
-    console.log(legaltextRef);
-
-
-    return () => {
-      if (script.parentNode) {
-        document.body.removeChild(script);
-      }
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <LegalLayout
-      title="Datenschutzerklärung"
-      subtitle="Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO"
+    <LegalTextPage
       sections={sections}
-      loading={loading}
-    >
-      <div
-        ref={legaltextRef}
-        className="itrk-legaltext legal-external-content"
-        data-itrk-legaltext-url="https://itrk.legal/1tey.8U.12eh-iframe.html"
-      />
-    </LegalLayout>
+      legalUrl="https://itrk.legal/1tey.8U.12eh-iframe.html"
+      extractH1AsTitle={true}
+    />
   );
 }
 

@@ -1,10 +1,10 @@
 import React, { useState, FormEvent, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import apiClient from '../apiClient';
-import '../App.css';
 import { AuthContext } from '../context/AuthContext';
+import { Mail, Lock, AlertCircle, CheckCircle, Loader2, ArrowRight, ShoppingBag, Sun, Moon } from 'lucide-react';
+import "../styles/login.css"
 
-// Typdefinition for user data returned from the API
 interface UserInfo {
   _id: string;
   email: string;
@@ -12,11 +12,12 @@ interface UserInfo {
   token: string; // JWT-Token
 }
 
-function Login(): React.JSX.Element {
+export default function Login(): React.JSX.Element {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [needsRegistration, setNeedsRegistration] = useState<boolean>(false);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState<boolean>(false);
@@ -27,18 +28,20 @@ function Login(): React.JSX.Element {
 
   // Check if user is already logged in and redirect to profile
   useEffect(() => {
-        if (userInfo) {
-            navigate('/profil');
-        }
-    }, [userInfo, navigate]);
+    if (userInfo) {
+      navigate('/profil');
+    }
+  }, [userInfo, navigate]);
+
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
     setLoading(true);
     setHasAttemptedSubmit(true);
 
-    if (passwordError) {
+    if (passwordError && needsRegistration) {
       setLoading(false);
       return;
     }
@@ -46,10 +49,12 @@ function Login(): React.JSX.Element {
     try {
       if (needsRegistration) {
         // Registration flow: Send verification email
-        await apiClient.post('/users/send-registration-email', { email, password });  // Tell backend to send email
+        await apiClient.post('/users/send-registration-email', { email, password });
         console.log('Registrierungs-E-Mail gesendet an:', email);
-        setError('Wir haben eine Verifizierungs-Email gesendet. Bitte überprüfen Sie Ihr Postfach.');
+        setSuccessMessage('Wir haben eine Verifizierungs-E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
         setNeedsRegistration(false);
+        setPassword('');
+        setPasswordError('');
       } else {
         // Regular login flow: Get user data from MongoDB
         const { data } = await apiClient.post<UserInfo>('/users/login', { email, password });
@@ -96,101 +101,149 @@ function Login(): React.JSX.Element {
     return '';
   };
 
-  const handleSetPasswort = (value: string) => {
+  const handleSetPassword = (value: string) => {
     setPassword(value);
-    const validationMessage = validatePassword(value);
-    setPasswordError(validationMessage);
+    if (needsRegistration) {
+      const validationMessage = validatePassword(value);
+      setPasswordError(validationMessage);
+    }
+  };
+
+  const handleToggleMode = () => {
+    setNeedsRegistration(!needsRegistration);
+    setError('');
+    setSuccessMessage('');
+    setPasswordError('');
+    setHasAttemptedSubmit(false);
+    setPassword('');
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="title-black">
-          Anmelden
-        </h2>
+        {/* Brand Section */}
+        <div className="login-brand">
+          <div className="login-logo">
+            <ShoppingBag className="login-logo-icon" strokeWidth={2} />
+          </div>
+          <h2 className="login-brand-name">redirect</h2>
+        </div>
+
+        {/* Title */}
+        <h1 className="login-title">
+          {needsRegistration ? 'Konto erstellen' : 'Anmelden'}
+        </h1>
+        <p className="login-subtitle">
+          {needsRegistration
+            ? 'Erstellen Sie Ihr Konto und starten Sie Ihre Detox-Reise'
+            : 'Willkommen zurück! Melden Sie sich an, um fortzufahren'}
+        </p>
+
+        {/* Error Message */}
         {error && (
-          <div className="error-message">
-            {error}
+          <div className="login-error-message">
+            <AlertCircle className="login-error-icon" />
+            <p className="login-error-text">{error}</p>
           </div>
         )}
 
+        {/* Success Message */}
+        {successMessage && (
+          <div className="login-success-message">
+            <CheckCircle className="login-success-icon" />
+            <p className="login-success-text">{successMessage}</p>
+          </div>
+        )}
+
+        {/* Form */}
         <form className="login-form" onSubmit={submitHandler}>
-          <div>
-            <label htmlFor="email" className="form-label">
+          {/* Email Field */}
+          <div className="login-form-group">
+            <label htmlFor="email" className="login-form-label">
               E-Mail-Adresse
             </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="form-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <div className="login-input-wrapper">
+              <Mail className="login-input-icon" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                className="login-form-input"
+                placeholder="ihre@email.de"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="password" className="form-label">
+          {/* Password Field */}
+          <div className="login-form-group">
+            <label htmlFor="password" className="login-form-label">
               Passwort
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="form-input"
-              value={password}
-              onChange={(e) => handleSetPasswort(e.target.value)}
-            />
-            {passwordError && hasAttemptedSubmit && (
-              <p className="mt-2 text-xs text-red-600 font-medium p-2 bg-red-50 rounded-lg border border-red-200 shadow-sm">
-                {passwordError}
-              </p>
+            <div className="login-input-wrapper">
+              <Lock className="login-input-icon" />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className={`login-form-input ${passwordError && hasAttemptedSubmit && needsRegistration ? 'error' : ''}`}
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => handleSetPassword(e.target.value)}
+                autoComplete={needsRegistration ? 'new-password' : 'current-password'}
+              />
+            </div>
+
+            {/* Password Validation */}
+            {passwordError && hasAttemptedSubmit && needsRegistration && (
+              <div className="login-password-validation">
+                <AlertCircle className="login-validation-icon" />
+                <p className="login-validation-text">{passwordError}</p>
+              </div>
             )}
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: '15px'
-            }}
-          >
-            <span
-              onClick={() => {
-                setNeedsRegistration(!needsRegistration);
-                setError('');
-                setPasswordError('');
-                setHasAttemptedSubmit(false);
-              }}
-              style={{
-                cursor: 'pointer',
-                color: '#007bff',
-                textDecoration: 'underline'
-              }}
-            >
-              {needsRegistration
-                ? 'Zurück zum Login'
-                : 'Noch kein Konto? Hier registrieren'
-              }
-            </span>
-          </div>
-
+          {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
-            className='primary-button'
+            disabled={loading || (needsRegistration && hasAttemptedSubmit && !!passwordError)}
+            className={`login-submit-button ${loading ? 'loading' : ''}`}
           >
-            {loading
-              ? 'Wird geladen...'
-              : needsRegistration ? 'Registrierungs-E-Mail senden' : 'Einloggen'
-            }
+            <span className="login-button-content">
+              {loading ? (
+                <>
+                  <Loader2 className="login-loading-spinner" />
+                  Wird geladen...
+                </>
+              ) : (
+                <>
+                  {needsRegistration ? 'Registrierungs-E-Mail senden' : 'Einloggen'}
+                  <ArrowRight size={18} />
+                </>
+              )}
+            </span>
           </button>
+
+          {/* Toggle Between Login/Register */}
+          <div className="login-toggle-section">
+            <p className="login-toggle-text">
+              {needsRegistration ? 'Haben Sie bereits ein Konto?' : 'Noch kein Konto?'}
+            </p>
+            <button
+              type="button"
+              onClick={handleToggleMode}
+              className="login-toggle-link"
+            >
+              {needsRegistration ? 'Zurück zum Login' : 'Hier registrieren'}
+              <ArrowRight className="login-toggle-icon" size={16} />
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
 }
-
-export default Login;

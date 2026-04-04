@@ -1,11 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Minus, Plus, ShoppingCart, CreditCard, Check } from "lucide-react";
-import { CartContext } from "../context/CartContext";
-import apiClient from "../apiClient";
-import ProductImages from "../components/ProductImages";
-import { useCheckout } from "../context/CheckoutContext";
-import "../styles/home.css";
+import { CartContext } from "../../context/CartContext";
+import apiClient from "../../apiClient";
+import ProductImages from "../../components/product/ProductImages";
+import { useCheckout } from "../../context/CheckoutContext";
 
 type Product = {
   _id: string;

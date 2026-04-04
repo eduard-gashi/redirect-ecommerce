@@ -1,8 +1,9 @@
 import { useState } from "react";
+import "../styles/tutorial-video.css"
 
 const TutorialVideoPlayer = () => (
     <iframe
-        src="videos/tutorial_video.mp4"
+        src="videos/tutorial.mp4"
         title="Tutorial Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -17,7 +18,7 @@ export default function TutorialVideo() {
 
     if (isVideoVisible) {
         return (
-            <div style={{ width: '800px', height: '450px', maxWidth: '100%' }}>
+            <div className="vertical-video-frame">
                 <TutorialVideoPlayer />
             </div>
         );
@@ -25,18 +26,14 @@ export default function TutorialVideo() {
 
     return (
         <div
-            className="video-thumbnail-container"
+            className="video-thumbnail-container vertical-video-frame"
             onClick={() => setIsVideoVisible(true)}
-            style={{ width: '800px', height: '450px', maxWidth: '100%' }}
         >
             <img
-                src="focus.jpg"
+                src="tutorial.jpeg"
                 alt="Video Thumbnail"
                 className="video-thumbnail-image"
             />
-            <div className="hero-overlay-top">
-                <h1>So funktionier die Handy-Detox Box</h1>
-            </div>
             <div className="play-button-overlay">
                 <div className="play-icon" />
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import "../styles/home.css";
+import "../../styles/home.css";
 
 import 'swiper/css';
 import 'swiper/css/navigation';

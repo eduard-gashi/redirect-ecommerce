@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import OrderHistory from '../components/OrderHistory'
+import OrderHistory from '../components/order/OrderHistory'
 
 function Profile() {
     const { state, dispatch } = useContext(AuthContext);
@@ -29,7 +29,6 @@ function Profile() {
 
     return (
         <div className="profile-view">
-
             {/* Header */}
             <div className="profile-header-container">
                 <h1 className="product-title">Bestellungen</h1>
@@ -47,11 +46,9 @@ function Profile() {
                     <p className="text-paragraph">
                         <strong>Eingeloggt als: <br></br></strong>{userInfo.email}
                     </p>
-                    <button className="primary-button" style={{
-                        width: '120px',
-                        justifyContent: "center",
-                        display: "flex"
-                    }} onClick={handleLogOut}>
+                    <button
+                        className="filter-tab"
+                        onClick={handleLogOut}>
                         Ausloggen
                     </button>
                 </div>
