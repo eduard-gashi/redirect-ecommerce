@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    // Link to the user who made the order
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    // Link to the user who made the order (optional)
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
 
     // Array of items in the order
     orderItems: [
