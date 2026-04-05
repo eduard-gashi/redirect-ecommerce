@@ -70,19 +70,18 @@ function Header() {
           <button
             className="close-menu-button"
             onClick={() => setMobileMenuOpen(false)}
+            aria-label="Menü schließen"
           >
-            <FaTimes size={24} />
+            <FaTimes size={22} />
           </button>
+
           <nav className="mobile-nav">
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
-            <br />
-            <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
-            <br />
             <Link to="/produkte" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
+            <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
           </nav>
         </div>
       )}
-
     </header>
   );
 }

@@ -5,22 +5,16 @@ import { CartContext } from "../../context/CartContext";
 import apiClient from "../../apiClient";
 import ProductImages from "../../components/product/ProductImages";
 import { useCheckout } from "../../context/CheckoutContext";
+import { useMediaQuery } from 'react-responsive';
+import type { Product } from "../../types/data-types.ts";
 
-type Product = {
-  _id: string;
-  name: string;
-  price: number;
-  upper_price_limit: number;
-  countInStock: number;
-  image_paths: string[];
-  image_descriptions: string[];
-  includes?: string[];
-};
 
 function ProductDetail() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -34,14 +28,13 @@ function ProductDetail() {
         setProduct(data);
       } catch (err) {
         console.error("Error while loading the product:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProduct();
   }, [id]);
 
-  if (!product) {
-    return <p className="text-center mt-10">Produkt wird geladen...</p>;
-  }
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -55,6 +48,19 @@ function ProductDetail() {
     setQuantity((prev) => Math.max(1, prev + delta));
   };
 
+  if (loading || !product) {
+    return (
+      <div className="product-detail-page">
+        <div className="product-detail-nav">
+          <button onClick={() => navigate("/produkte")} className="back-button">
+            <ArrowLeft className="w-5 h-5" />
+            Zurück zur Übersicht
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const basePath = "images/products/";
   const productImages = product.image_paths
     ? product.image_paths.map((filename) => basePath + filename)
@@ -66,12 +72,12 @@ function ProductDetail() {
       : [
         "Hochwertige Detox-Box",
         "30 tägliche Challenge-Karten",
-        "Gewohnheitstracker (90 Tage)",
         "Reflexions-Notizblock",
-        "Schritt-für-Schritt-Anleitung",
+        "Gewohnheitstracker",
       ];
 
   const available = product.countInStock > 0;
+
 
   return (
     <div className="product-detail-page">
@@ -85,25 +91,40 @@ function ProductDetail() {
 
       <div className="product-detail-container">
         {/* Left Column - Image Gallery and description */}
-        <div className="product-gallery">
-          <div className="gallery-main-image">
-            <div className="main-image-display">
-              <ProductImages
-                images_paths={productImages}
-                onImageChange={setCurrentImageIndex}
-              />
+        {!isMobile && (
+          <div className="product-gallery">
+            <div className="gallery-main-image">
+              <div className="main-image-display">
+                <ProductImages
+                  images_paths={productImages}
+                  onImageChange={setCurrentImageIndex}
+                />
+              </div>
+            </div>
+            {/* Description */}
+            <div className="product-description">
+              <p>{product.image_descriptions?.[currentImageIndex]}</p>
             </div>
           </div>
-          {/* Description */}
-          <div className="product-description">
-            <p>{product.image_descriptions?.[currentImageIndex]}</p>
-          </div>
-        </div>
+        )}
 
         {/* Right Column - Product Info */}
         <div className="product-info">
           <div className="product-header-block">
             <h1 className="product-detail-name">{product.name}</h1>
+
+            {isMobile && (
+              <div className="product-gallery">
+                <div className="gallery-main-image">
+                  <div className="main-image-display">
+                    <ProductImages
+                      images_paths={productImages}
+                      onImageChange={setCurrentImageIndex}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="product-detail-pricing">
               <div className="price-display">
@@ -129,6 +150,7 @@ function ProductDetail() {
               Status: {available ? "Auf Lager" : "Nicht verfügbar"}
             </div>
           </div>
+
 
           {/* What's Included */}
           <div className="product-includes-section">

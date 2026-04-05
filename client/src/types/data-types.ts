@@ -15,6 +15,8 @@ export interface Product {
   price: number;
   upper_price_limit: number;
   image_paths: string[];
+  image_descriptions: string[];
+  includes?: string[];
   countInStock: number;
   reviews: Review[];
   rating: number;

@@ -39,7 +39,7 @@ export default function Cart() {
   );
 
   return (
-    <div className="cart-container">
+    <div className="products-view">
       <div className="cart-header">
         <h1 className="cart-title">Dein Warenkorb</h1>
       </div>

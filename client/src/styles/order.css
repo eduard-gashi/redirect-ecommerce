@@ -2,14 +2,8 @@
    ORDER HISTORY
    ============================================ */
 
-.order-history-page {
-  min-height: 100vh;
-  background: #f8f9fa;
-  padding: 2rem 1rem;
-}
-
 .order-history-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -59,7 +53,7 @@
 }
 
 .order-history-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0 0 0.5rem 0;
@@ -259,9 +253,9 @@
 }
 
 .order-total-price {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #5cd1c7;
+  font-size: 1.4rem;
+  font-weight: 650;
+  color: #000000;
   font-feature-settings: 'tnum';
 }
 
@@ -633,7 +627,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-text {
@@ -656,7 +652,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
@@ -697,9 +693,11 @@
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -935,7 +933,6 @@
 /* ============================================
    LOADING & ERROR STATES
    ============================================ */
-
 .order-processing-container {
   min-height: 100vh;
   display: flex;
@@ -966,7 +963,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .processing-title {
@@ -992,7 +991,7 @@
   padding: 3rem 2rem;
   text-align: center;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  border: 2px solid rgba(239, 68, 68, 0.2);
+  transform: translateY(-150px); /* nach oben schieben */
 }
 
 .error-icon-wrapper {
@@ -1122,6 +1121,7 @@
   .order-detail-row.full-width {
     grid-column: 1 / -1;
   }
+
 }
 
 /* ============================================

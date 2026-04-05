@@ -1,6 +1,6 @@
-import React from "react";
-import { Check, ArrowRight, Truck, RotateCcw, Package } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import "../../styles/home.css";
 
 export function ProductShowcase() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export function ProductShowcase() {
                 <img
                   src={`/images/products/detoxbox/01.png`}
                   alt={"Handy Detox Box"}
-                  className="product-card-image"
+                  className="product-image"
                 />
               </div>
             </div>
@@ -58,6 +58,8 @@ export function ProductShowcase() {
 
               <div className="product-pricing">
                 <div className="price-wrapper">
+                  <span className="price-detail-old">24,99 €</span>
+
                   <span className="price-current">19,99 €</span>
                 </div>
               </div>

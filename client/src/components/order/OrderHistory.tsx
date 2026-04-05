@@ -43,17 +43,20 @@ export default function OrderHistory() {
     setVisibleCount(3);
   }, [activeFilter]);
 
+  function getOrderStatus(order: Order): FilterType {
+    if (!order.isPaid) return 'pending';
+    if (order.isPaid && !order.isDelivered) return 'processing';
+    if (order.isDelivered) return 'delivered';
+
+    return 'pending';
+  }
+
   // Filter orders based on active filter
   const filteredOrders = orderHistory.filter((order) => {
     if (activeFilter === 'all') return true;
-    if (order.status) return order.status === activeFilter;
 
-    // Fallback für alte Bestellungen ohne status
-    if (activeFilter === 'delivered') return order.isDelivered;
-    if (activeFilter === 'processing') return !order.isDelivered && order.isPaid;
-    if (activeFilter === 'pending') return !order.isPaid;
-
-    return false;
+    const status = getOrderStatus(order);
+    return status === activeFilter;
   });
 
   // Only show visibleCount amount of orders in the beginning
@@ -63,17 +66,7 @@ export default function OrderHistory() {
   // Get filter counts
   const getFilterCount = (filter: FilterType) => {
     if (filter === 'all') return orderHistory.length;
-
-    return orderHistory.filter((order) => {
-      if (order.status) return order.status === filter;
-
-      // Fallback
-      if (filter === 'delivered') return order.isDelivered;
-      if (filter === 'processing') return !order.isDelivered && order.isPaid;
-      if (filter === 'pending') return !order.isPaid;
-
-      return false;
-    }).length;
+    return orderHistory.filter((order) => getOrderStatus(order) === filter).length;
   };
 
   const filters: { label: string; value: FilterType; icon: any }[] = [
@@ -90,7 +83,7 @@ export default function OrderHistory() {
     return (
       <div className="order-history-container">
         <div className="order-history-header">
-          <h2 className="order-history-title">Meine Bestellungen</h2>
+          <h2 className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</h2>
         </div>
         <div className="order-history-loading">
           <div className="loading-spinner" />
@@ -105,7 +98,7 @@ export default function OrderHistory() {
     return (
       <div className="order-history-container">
         <div className="order-history-header">
-          <h2 className="order-history-title">Meine Bestellungen</h2>
+          <h2 className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</h2>
           <p className="order-history-subtitle">Übersicht über alle deine bisherigen Käufe</p>
         </div>
         <div className="order-history-empty">
@@ -129,7 +122,7 @@ export default function OrderHistory() {
     <div className="order-history-container">
       {/* Header */}
       <div className="order-history-header">
-        <h2 className="order-history-title">Meine Bestellungen</h2>
+        <div className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</div>
         <p className="order-history-subtitle">
           {orderHistory.length} {orderHistory.length === 1 ? 'Bestellung' : 'Bestellungen'} insgesamt
         </p>

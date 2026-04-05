@@ -19,15 +19,6 @@ interface OrderSummaryProps {
 export default function OrderSummary({ order }: OrderSummaryProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('de-DE', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    }).format(date);
-  };
-
   const formatShortDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('de-DE', {

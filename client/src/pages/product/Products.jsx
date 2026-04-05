@@ -18,9 +18,19 @@ function Products() {
         fetchProducts();
     }, []);
 
-    if (!products) {
-        return <p className="text-center mt-10">Produkte werden geladen...</p>;
-    }
+    const DUMMY_PRODUCT = {
+        _id: "loading",
+        name: "",
+        price: 0,
+        upper_price_limit: 0,
+        image_paths: [""],
+        image_descriptions: [""],
+        rating: 0,
+        numReviews: 0,
+        countInStock: 0,
+    };
+
+    const SKELETON_COUNT = 1;
 
     return (
         <div className="products-view">
@@ -32,9 +42,13 @@ function Products() {
             {/* Product Grid */}
             <div className="product-grid-wrapper">
                 <div className="product-grid">
-                    {products.map(product => (
-                        <ProductCard key={product._id} product={product} />
-                    ))}
+                    {!products
+                        ? Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+                            <ProductCard key={i} product={DUMMY_PRODUCT} loading />
+                        ))
+                        : products.map((product) => (
+                            <ProductCard key={product._id} product={product} />
+                        ))}
                 </div>
             </div>
         </div>

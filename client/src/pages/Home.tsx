@@ -65,28 +65,21 @@ export function Home() {
           </div>
         </div>
 
-        {/* Smart Phone Illusration */}
+        {/* Smart Phone Illusration - Screem Time Warning */}
         <div className="hero-visual">
           <div className="phone-mockup">
             <div className="phone-screen">
               <div className="notification-bar"></div>
 
-              <div className="screen-time-widget">
-                <Smartphone className="widget-icon" />
-                <p className="widget-title">Bildschirmzeit heute</p>
-                <div className="time-bar-container">
-                  <div className="time-bar-fill"></div>
+              <div className="screen-time-warning pulse">
+                <div className="warning-icon">⏳</div>
+                <h3 className="warning-title" style={{ fontSize: 20, fontWeight: 750 }}>Zeitlimit erreicht</h3>
+                <p className="warning-message">
+                  Du hast deine Bildschirmzeit von 5 Stunden heute erreicht.
+                </p>
+                <div className="warning-actions">
+                  Limit ignorieren
                 </div>
-                <p className="widget-label">Beispielansicht</p>
-              </div>
-
-              <div className="app-grid">
-                <div className="app-icon-small red"></div>
-                <div className="app-icon-small blue"></div>
-                <div className="app-icon-small green"></div>
-                <div className="app-icon-small yellow"></div>
-                <div className="app-icon-small purple"></div>
-                <div className="app-icon-small orange"></div>
               </div>
             </div>
           </div>
