@@ -3,9 +3,7 @@ import type { AuthState, AuthAction } from '../types/data-types';
 import { AuthContext } from './AuthContext';
 
 const initialState: AuthState = {
-  userInfo: localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')!)
-    : null,
+  userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')!) : null,
 };
 
 function authReducer(state: AuthState, action: AuthAction): AuthState {
@@ -27,9 +25,5 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
   }, [state.userInfo]);
 
-  return (
-    <AuthContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ state, dispatch }}>{children}</AuthContext.Provider>;
 };

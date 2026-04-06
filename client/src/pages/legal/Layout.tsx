@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Shield, ChevronRight, Home } from "lucide-react";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { Shield, ChevronRight, Home } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 interface LegalSection {
   id: string;
@@ -15,15 +15,21 @@ interface LegalLayoutProps {
   loading?: boolean;
 }
 
-export function LegalLayout({ title, subtitle, sections, children, loading = false }: LegalLayoutProps) {
-  const [activeSection, setActiveSection] = useState<string>("");
+export function LegalLayout({
+  title,
+  subtitle,
+  sections,
+  children,
+  loading = false,
+}: LegalLayoutProps) {
+  const [activeSection, setActiveSection] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionElements = sections.map(section => 
-        document.getElementById(section.id)
-      ).filter(Boolean);
+      const sectionElements = sections
+        .map((section) => document.getElementById(section.id))
+        .filter(Boolean);
 
       const scrollPosition = window.scrollY + 200;
 
@@ -49,7 +55,7 @@ export function LegalLayout({ title, subtitle, sections, children, loading = fal
       const elementPosition = element.offsetTop - offset;
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -61,7 +67,7 @@ export function LegalLayout({ title, subtitle, sections, children, loading = fal
         <div className="legal-hero-content">
           {/* Breadcrumb */}
           <div className="legal-breadcrumb">
-            <button onClick={() => navigate("/")} className="breadcrumb-link">
+            <button onClick={() => navigate('/')} className="breadcrumb-link">
               <Home className="breadcrumb-icon" />
               Home
             </button>
@@ -120,9 +126,7 @@ export function LegalLayout({ title, subtitle, sections, children, loading = fal
                 </div>
               </div>
             ) : (
-              <div className="legal-content-wrapper">
-                {children}
-              </div>
+              <div className="legal-content-wrapper">{children}</div>
             )}
           </main>
         </div>
@@ -133,9 +137,10 @@ export function LegalLayout({ title, subtitle, sections, children, loading = fal
         <div className="legal-footer-content">
           <h3 className="legal-footer-title">Fragen zu unseren rechtlichen Informationen?</h3>
           <p className="legal-footer-text">
-            Bei Fragen zu Datenschutz, Impressum oder unseren Geschäftsbedingungen kontaktiere uns gerne.
+            Bei Fragen zu Datenschutz, Impressum oder unseren Geschäftsbedingungen kontaktiere uns
+            gerne.
           </p>
-          <button onClick={() => navigate("/kontakt")} className="legal-footer-button">
+          <button onClick={() => navigate('/kontakt')} className="legal-footer-button">
             Kontakt aufnehmen
           </button>
         </div>

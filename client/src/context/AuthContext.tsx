@@ -2,9 +2,7 @@ import { createContext, useContext } from 'react';
 import type { AuthState, AuthAction } from '../types/data-types';
 
 const initialState: AuthState = {
-  userInfo: localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')!)
-    : null,
+  userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')!) : null,
 };
 
 type AuthContextValue = {

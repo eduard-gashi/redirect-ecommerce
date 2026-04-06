@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // Adds createdAt and updatedAt for each review
-  }
+  },
 );
 
 const productSchema = new mongoose.Schema(
@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
-  }
+  },
 );
 
-export default mongoose.model("Product",productSchema);
+export default mongoose.model("Product", productSchema);

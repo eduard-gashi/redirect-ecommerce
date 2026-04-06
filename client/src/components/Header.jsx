@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
-import "../App.css";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
+import '../App.css';
 import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
-
 
 function Header() {
   const { cartItems } = useContext(CartContext);
@@ -13,22 +12,14 @@ function Header() {
   return (
     <header className="main-header">
       <div className="header-container">
-
         {/* Hamburger mobile */}
-        <button
-          className="mobile-menu-button"
-          onClick={() => setMobileMenuOpen(true)}
-        >
+        <button className="mobile-menu-button" onClick={() => setMobileMenuOpen(true)}>
           <FaBars size={28} />
         </button>
 
         {/* Logo */}
         <Link to="/" className="header-logo-link">
-          <img
-            src="/redirect.png"
-            alt="Redirect Logo"
-            className="logo-image"
-          />
+          <img src="/redirect.png" alt="Redirect Logo" className="logo-image" />
         </Link>
 
         {/* Navigation desktop*/}
@@ -49,17 +40,10 @@ function Header() {
           </Link>
 
           {/* Cart */}
-          <Link
-            to="/warenkorb"
-            className="cart-link"
-          >
+          <Link to="/warenkorb" className="cart-link">
             🛒
             {/* Count Items */}
-            {totalItems > 0 && (
-              <span className="cart-count">
-                {totalItems}
-              </span>
-            )}
+            {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
           </Link>
         </nav>
       </div>
@@ -76,9 +60,15 @@ function Header() {
           </button>
 
           <nav className="mobile-nav">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Startseite</Link>
-            <Link to="/produkte" onClick={() => setMobileMenuOpen(false)}>Produkte</Link>
-            <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>Kontakt</Link>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+              Startseite
+            </Link>
+            <Link to="/produkte" onClick={() => setMobileMenuOpen(false)}>
+              Produkte
+            </Link>
+            <Link to="/kontakt" onClick={() => setMobileMenuOpen(false)}>
+              Kontakt
+            </Link>
           </nav>
         </div>
       )}

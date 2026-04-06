@@ -40,8 +40,7 @@ function AccountConfirmation() {
       <p>
         {isLoading
           ? 'Bitte warten Sie einen Moment. Wir verarbeiten Ihren Registrierungscode.'
-          : 'Sie werden gleich weitergeleitet.'
-        }
+          : 'Sie werden gleich weitergeleitet.'}
       </p>
     </div>
   );

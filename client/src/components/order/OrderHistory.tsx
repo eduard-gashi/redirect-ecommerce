@@ -1,11 +1,19 @@
-import { useState, useContext, useEffect, ComponentType } from "react";
-import { Link } from "react-router";
-import OrderSummary from "./OrderSummary";
-import { Package, ShoppingBag, Clock, Truck, CheckCircle2, XCircle, LucideProps } from "lucide-react";
-import { AuthContext } from "../../context/AuthContext";
-import type { Order } from "../../types/order";
-import apiClient from "../../apiClient";
-import "../../styles/order.css";
+import { useState, useContext, useEffect, ComponentType } from 'react';
+import { Link } from 'react-router';
+import OrderSummary from './OrderSummary';
+import {
+  Package,
+  ShoppingBag,
+  Clock,
+  Truck,
+  CheckCircle2,
+  XCircle,
+  LucideProps,
+} from 'lucide-react';
+import { AuthContext } from '../../context/AuthContext';
+import type { Order } from '../../types/order';
+import apiClient from '../../apiClient';
+import '../../styles/order.css';
 
 type FilterType = 'all' | 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 
@@ -35,7 +43,7 @@ export default function OrderHistory() {
         const { data } = await apiClient.get(`/orders?user=${userInfo._id}`);
         setOrderHistory(data);
       } catch (err) {
-        console.error("Error while loading orders:", err);
+        console.error('Error while loading orders:', err);
         setOrderHistory([]);
       } finally {
         setLoading(false);
@@ -89,7 +97,9 @@ export default function OrderHistory() {
     return (
       <div className="order-history-container">
         <div className="order-history-header">
-          <h2 className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</h2>
+          <h2 className="order-history-title" style={{ fontSize: '30px' }}>
+            Meine Bestellungen
+          </h2>
         </div>
         <div className="order-history-loading">
           <div className="loading-spinner" />
@@ -104,7 +114,9 @@ export default function OrderHistory() {
     return (
       <div className="order-history-container">
         <div className="order-history-header">
-          <h2 className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</h2>
+          <h2 className="order-history-title" style={{ fontSize: '30px' }}>
+            Meine Bestellungen
+          </h2>
           <p className="order-history-subtitle">Übersicht über alle deine bisherigen Käufe</p>
         </div>
         <div className="order-history-empty">
@@ -113,7 +125,8 @@ export default function OrderHistory() {
           </div>
           <h3 className="empty-title">Noch keine Bestellungen</h3>
           <p className="empty-text">
-            Du hast noch keine Bestellungen aufgegeben. Entdecke unsere Produkte und starte deine HandyDetox-Reise!
+            Du hast noch keine Bestellungen aufgegeben. Entdecke unsere Produkte und starte deine
+            HandyDetox-Reise!
           </p>
           <Link to="/produkte" className="empty-button">
             <ShoppingBag size={20} />
@@ -128,9 +141,12 @@ export default function OrderHistory() {
     <div className="order-history-container">
       {/* Header */}
       <div className="order-history-header">
-        <div className="order-history-title" style={{ fontSize: "30px" }}>Meine Bestellungen</div>
+        <div className="order-history-title" style={{ fontSize: '30px' }}>
+          Meine Bestellungen
+        </div>
         <p className="order-history-subtitle">
-          {orderHistory.length} {orderHistory.length === 1 ? 'Bestellung' : 'Bestellungen'} insgesamt
+          {orderHistory.length} {orderHistory.length === 1 ? 'Bestellung' : 'Bestellungen'}{' '}
+          insgesamt
         </p>
       </div>
 
@@ -181,9 +197,7 @@ export default function OrderHistory() {
             <Package className="empty-icon" />
           </div>
           <h3 className="empty-title">Keine Bestellungen gefunden</h3>
-          <p className="empty-text">
-            Es gibt keine Bestellungen in dieser Kategorie.
-          </p>
+          <p className="empty-text">Es gibt keine Bestellungen in dieser Kategorie.</p>
         </div>
       )}
     </div>

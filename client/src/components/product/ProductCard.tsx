@@ -1,23 +1,21 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router";
-import { ShoppingCart } from "lucide-react";
-import { useCheckout } from "../../context/CheckoutContext";
-import "../../styles/home.css";
-import type { Product } from "../../types/data-types";
+import { useNavigate } from 'react-router';
+import { ShoppingCart } from 'lucide-react';
+import { useCheckout } from '../../context/CheckoutContext';
+import '../../styles/home.css';
+import type { Product } from '../../types/data-types';
 
 interface ProductCardProps {
   product: Product;
   loading?: boolean;
 }
 
-
 function ProductCard({ product, loading = false }: ProductCardProps) {
   const navigate = useNavigate();
   const { openCheckout } = useCheckout();
 
-  const hasDiscount =
-    !loading && product.price && product.upper_price_limit > product.price;
+  const hasDiscount = !loading && product.price && product.upper_price_limit > product.price;
   const discountPercent = hasDiscount
     ? Math.round(((product.price! - product.upper_price_limit) / product.price!) * 100)
     : 0;
@@ -36,7 +34,7 @@ function ProductCard({ product, loading = false }: ProductCardProps) {
   if (loading) {
     return (
       <div className="product-card product-card-loading">
-        <div className="product-discount-badge" style={{ visibility: "hidden" }}>
+        <div className="product-discount-badge" style={{ visibility: 'hidden' }}>
           -00%
         </div>
 
@@ -64,11 +62,7 @@ function ProductCard({ product, loading = false }: ProductCardProps) {
       onClick={handleCardClick}
     >
       {/* Discount Badge */}
-      {hasDiscount && (
-        <div className="product-discount-badge">
-          -{discountPercent}%
-        </div>
-      )}
+      {hasDiscount && <div className="product-discount-badge">-{discountPercent}%</div>}
 
       {/* Product Images */}
       <Link to={`/produkte/${product._id}`}>
@@ -91,9 +85,7 @@ function ProductCard({ product, loading = false }: ProductCardProps) {
               {product.upper_price_limit!.toFixed(2)} €
             </span>
           )}
-          <span className="product-card-price-current">
-            {product.price.toFixed(2)} €
-          </span>
+          <span className="product-card-price-current">{product.price.toFixed(2)} €</span>
         </div>
 
         {/* Add to Cart Button */}

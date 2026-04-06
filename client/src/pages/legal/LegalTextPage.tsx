@@ -38,9 +38,7 @@ export function LegalTextPage({
           }
         }
 
-        const h2s = Array.from(
-          legaltextRef.current.querySelectorAll<HTMLHeadingElement>('h2')
-        );
+        const h2s = Array.from(legaltextRef.current.querySelectorAll<HTMLHeadingElement>('h2'));
 
         h2s.forEach((h2, idx) => {
           const section = sections[idx];
@@ -50,9 +48,7 @@ export function LegalTextPage({
           h2.classList.add('legal-section-heading');
         });
 
-        legaltextRef.current
-          .querySelectorAll('p')
-          .forEach(el => el.classList.add('legal-text'));
+        legaltextRef.current.querySelectorAll('p').forEach((el) => el.classList.add('legal-text'));
 
         setLoading(false);
         observer.disconnect();
@@ -72,12 +68,7 @@ export function LegalTextPage({
   }, [extractH1AsTitle, sections]);
 
   return (
-    <LegalLayout
-      title={title}
-      subtitle=""
-      sections={sections}
-      loading={loading}
-    >
+    <LegalLayout title={title} subtitle="" sections={sections} loading={loading}>
       <div
         ref={legaltextRef}
         className="itrk-legaltext legal-external-content"

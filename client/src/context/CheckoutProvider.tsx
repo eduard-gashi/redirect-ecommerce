@@ -21,11 +21,7 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
       {children}
 
       {activeProduct && (
-        <CheckoutOverlay
-          product={activeProduct}
-          quantity={quantity}
-          onClose={closeCheckout}
-        />
+        <CheckoutOverlay product={activeProduct} quantity={quantity} onClose={closeCheckout} />
       )}
     </CheckoutContext.Provider>
   );

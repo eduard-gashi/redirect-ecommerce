@@ -1,32 +1,35 @@
-import React from "react";
-import { Eye, Calendar, TrendingUp } from "lucide-react";
-import TutorialVideo from "../TutorialVideo";
+import React from 'react';
+import { Eye, Calendar, TrendingUp } from 'lucide-react';
+import TutorialVideo from '../TutorialVideo';
 
 export function HowItWorks() {
   const steps = [
     {
       icon: Eye,
       number: 1,
-      title: "Erkenne deine aktuelle Handy-Gewohnheit",
-      description: "Werde dir bewusst, wie viel Zeit du wirklich am Smartphone verbringst und welche Muster dahinterstecken."
+      title: 'Erkenne deine aktuelle Handy-Gewohnheit',
+      description:
+        'Werde dir bewusst, wie viel Zeit du wirklich am Smartphone verbringst und welche Muster dahinterstecken.',
     },
     {
       icon: Calendar,
       number: 2,
-      title: "Nutze die HandyDetox Box mit klaren Tagesritualen",
-      description: "Etabliere neue Gewohnheiten mit den täglichen Challenges und der physischen Box als Symbol deines Commitments."
+      title: 'Nutze die HandyDetox Box mit klaren Tagesritualen',
+      description:
+        'Etabliere neue Gewohnheiten mit den täglichen Challenges und der physischen Box als Symbol deines Commitments.',
     },
     {
       icon: TrendingUp,
       number: 3,
-      title: "Gewinne Schritt für Schritt deine Zeit zurück",
-      description: "Tracke deine Fortschritte und erlebe, wie du mehr Fokus, Zeit und Lebensqualität gewinnst."
-    }
+      title: 'Gewinne Schritt für Schritt deine Zeit zurück',
+      description:
+        'Tracke deine Fortschritte und erlebe, wie du mehr Fokus, Zeit und Lebensqualität gewinnst.',
+    },
   ];
 
   const scrollToProduct = () => {
-    const element = document.getElementById("product-section");
-    element?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById('product-section');
+    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -61,7 +64,6 @@ export function HowItWorks() {
           </button>
         </div>
       </div>
-
     </section>
   );
 }

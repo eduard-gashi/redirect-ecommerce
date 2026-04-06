@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { Link } from "react-router";
-import { CartContext } from "../context/CartContext";
-import { useCheckout } from "../context/CheckoutContext";
-import { Product } from "../types/data-types";
-import { Trash2, ShoppingBag } from "lucide-react";
-import "../styles/cart.css";
+import { useContext } from 'react';
+import { Link } from 'react-router';
+import { CartContext } from '../context/CartContext';
+import { useCheckout } from '../context/CheckoutContext';
+import { Product } from '../types/data-types';
+import { Trash2, ShoppingBag } from 'lucide-react';
+import '../styles/cart.css';
 
 export default function Cart() {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useContext(CartContext);
@@ -35,7 +35,7 @@ export default function Cart() {
 
   const total = cartItems.reduce(
     (sum: number, item: Product) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   return (
@@ -117,9 +117,7 @@ export default function Cart() {
             <span className="cart-summary-value">€{total.toFixed(2)}</span>
           </div>
 
-          <p className="cart-summary-note">
-            inkl. MwSt., zzgl. Versandkosten
-          </p>
+          <p className="cart-summary-note">inkl. MwSt., zzgl. Versandkosten</p>
 
           <div className="cart-actions-group">
             <button onClick={handleOpenCheckout} className="cart-checkout-button">

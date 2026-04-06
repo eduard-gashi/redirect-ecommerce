@@ -43,7 +43,6 @@
   transform: translateY(0);
 }
 
-
 /* ============================================
    PAGE HEADER
    ============================================ */
@@ -366,7 +365,6 @@
 .order-payment-status.unpaid {
   color: #f59e0b;
 }
-
 
 /* Order Items Preview */
 .order-items-preview {
@@ -1121,7 +1119,6 @@
   .order-detail-row.full-width {
     grid-column: 1 / -1;
   }
-
 }
 
 /* ============================================

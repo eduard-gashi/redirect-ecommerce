@@ -1,5 +1,5 @@
-import React from "react";
-import { Package, Sparkles } from "lucide-react";
+import React from 'react';
+import { Package, Sparkles } from 'lucide-react';
 
 export function SolutionSection() {
   return (
@@ -10,15 +10,14 @@ export function SolutionSection() {
             <Sparkles className="w-4 h-4" />
             Die Lösung
           </span>
-          
+
           <h2 className="solution-title">
             Die HandyDetox Box – Dein 30-Tage-Programm für echte Veränderung
           </h2>
-          
+
           <p className="solution-text">
-            Keine App, kein kompliziertes System. Nur eine einfache Box mit allem, 
-            was du brauchst, um deine Handysucht zu überwinden und neue, 
-            positive Gewohnheiten aufzubauen.
+            Keine App, kein kompliziertes System. Nur eine einfache Box mit allem, was du brauchst,
+            um deine Handysucht zu überwinden und neue, positive Gewohnheiten aufzubauen.
           </p>
 
           <div className="solution-features">
@@ -37,7 +36,8 @@ export function SolutionSection() {
               <div>
                 <h4 className="feature-title">Tägliche Challenges</h4>
                 <p className="feature-text">
-                  30 durchdachte Aufgaben füllen deine Zeit mit Sport, Kreativität und echten Verbindungen.
+                  30 durchdachte Aufgaben füllen deine Zeit mit Sport, Kreativität und echten
+                  Verbindungen.
                 </p>
               </div>
             </div>
@@ -47,7 +47,8 @@ export function SolutionSection() {
               <div>
                 <h4 className="feature-title">Reflexion & Tracking</h4>
                 <p className="feature-text">
-                  Notizblock und Gewohnheitstracker helfen dir, neue Routinen nachhaltig zu etablieren.
+                  Notizblock und Gewohnheitstracker helfen dir, neue Routinen nachhaltig zu
+                  etablieren.
                 </p>
               </div>
             </div>

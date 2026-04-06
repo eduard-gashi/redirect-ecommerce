@@ -43,7 +43,9 @@
   object-fit: cover;
   filter: brightness(0.75) saturate(1.05);
   transform: scale(1.02);
-  transition: filter 220ms ease, transform 220ms ease;
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
 }
 
 .video-thumbnail-container:hover .video-thumbnail-image {
@@ -69,7 +71,13 @@
 .hero-overlay-top h1 {
   margin: 0;
   max-width: 26rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'Inter',
+    sans-serif;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.02em;
@@ -105,11 +113,14 @@
   align-items: center;
   justify-content: center;
   pointer-events: auto;
-  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .play-icon::before {
-  content: "";
+  content: '';
   display: block;
   width: 0;
   height: 0;
@@ -118,7 +129,6 @@
   border-bottom: clamp(11px, 1.4vw, 14px) solid transparent;
   margin-left: 3px;
 }
-
 
 /* Hover */
 .video-thumbnail-container:hover .play-icon {
@@ -130,7 +140,7 @@
 }
 
 .video-thumbnail-container::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at center, rgba(15, 23, 42, 0.15), transparent 60%);
@@ -190,7 +200,6 @@
 .vertical-video-frame .hero-overlay-top h1 {
   font-size: clamp(1.05rem, 1rem + 0.6vw, 1.35rem);
 }
-
 
 @media (max-width: 768px) {
   .vertical-video-frame {

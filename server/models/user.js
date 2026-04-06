@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Mongoose "pre-save hook". Runs before a user document is saved. Ensures that if the password is new or modified, it gets hashed.
@@ -18,7 +18,7 @@ userSchema.pre("save", async function (next) {
     return next();
   }
   // Check whether the password is already hashed
-  if (this.password && this.password.startsWith('$2b$')) {
+  if (this.password && this.password.startsWith("$2b$")) {
     return next();
   }
   const salt = await bcrypt.genSalt(10);

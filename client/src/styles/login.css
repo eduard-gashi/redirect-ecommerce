@@ -38,7 +38,6 @@
   --login-icon-color: #718096;
 }
 
-
 /* ============================================
    CONTAINER & BACKGROUND
    ============================================ */
@@ -81,7 +80,8 @@
 }
 
 @keyframes float-gentle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
   50% {

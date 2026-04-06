@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema(
   {
     // Link to the user who made the order (optional)
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: false,
+    },
 
     // Array of items in the order
     orderItems: [
@@ -12,7 +16,11 @@ const orderSchema = new mongoose.Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: false },
         price: { type: Number, required: true },
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
       },
     ],
 
@@ -32,13 +40,13 @@ const orderSchema = new mongoose.Schema(
       update_time: { type: String },
       email_address: { type: String },
     },
-    
+
     // Calculated prices
     itemsPrice: { type: Number, required: true, default: 0.0 },
     taxPrice: { type: Number, required: true, default: 0.0 },
     shippingPrice: { type: Number, required: true, default: 0.0 },
     totalPrice: { type: Number, required: true, default: 0.0 },
-    
+
     // Order status
     isPaid: { type: Boolean, required: true, default: false },
     paidAt: { type: Date },
@@ -47,7 +55,7 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Order", orderSchema);

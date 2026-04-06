@@ -1,29 +1,32 @@
-import React from "react";
-import { Smartphone, Users, TrendingDown } from "lucide-react";
+import React from 'react';
+import { Smartphone, Users, TrendingDown } from 'lucide-react';
 
 export function ImpactStats() {
   const facts = [
     {
       icon: Smartphone,
-      title: "Unterschätzte Nutzung",
-      description: "Viele Menschen verbringen täglich mehrere Stunden am Smartphone – oft mehr, als sie vermuten.",
-      source: "Quelle: JIM-Studie 2023",
-      color: "blue"
+      title: 'Unterschätzte Nutzung',
+      description:
+        'Viele Menschen verbringen täglich mehrere Stunden am Smartphone – oft mehr, als sie vermuten.',
+      source: 'Quelle: JIM-Studie 2023',
+      color: 'blue',
     },
     {
       icon: TrendingDown,
-      title: "Stress & Wohlbefinden",
-      description: "Studien zeigen: Weniger Smartphone-Zeit kann Stress senken und das Wohlbefinden verbessern.",
-      source: "Quelle: Studie der Donau-Universität Krems",
-      color: "green"
+      title: 'Stress & Wohlbefinden',
+      description:
+        'Studien zeigen: Weniger Smartphone-Zeit kann Stress senken und das Wohlbefinden verbessern.',
+      source: 'Quelle: Studie der Donau-Universität Krems',
+      color: 'green',
     },
     {
       icon: Users,
-      title: "Phone-Life-Balance",
-      description: "Viele Nutzer wünschen sich eine bessere Balance zwischen digitaler und realer Welt.",
-      source: "Quelle: Digital Wellbeing Report",
-      color: "purple"
-    }
+      title: 'Phone-Life-Balance',
+      description:
+        'Viele Nutzer wünschen sich eine bessere Balance zwischen digitaler und realer Welt.',
+      source: 'Quelle: Digital Wellbeing Report',
+      color: 'purple',
+    },
   ];
 
   return (
@@ -31,9 +34,7 @@ export function ImpactStats() {
       <div className="impact-stats-container">
         <div className="section-header">
           <h2 className="section-title">Warum weniger Bildschirmzeit?</h2>
-          <p className="section-subtitle">
-            Fakten über unsere Smartphone-Nutzung
-          </p>
+          <p className="section-subtitle">Fakten über unsere Smartphone-Nutzung</p>
         </div>
 
         <div className="facts-grid">

@@ -1,8 +1,8 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 const sendEmail = async (email, subject, htmlContent) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail', // z.B. Gmail, Outlook, etc.
+    service: "gmail", // z.B. Gmail, Outlook, etc.
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -20,10 +20,10 @@ const sendEmail = async (email, subject, htmlContent) => {
     await transporter.sendMail(mailOptions);
     console.log(`Verifizierungs-E-Mail erfolgreich an ${email} gesendet.`);
   } catch (error) {
-    console.error('Fehler beim Senden der E-Mail:', error);
+    console.error("Fehler beim Senden der E-Mail:", error);
     throw new Error(
-      'E-Mail konnte nicht gesendet werden. Versuchen Sie es später erneut.',
-      { cause: error }
+      "E-Mail konnte nicht gesendet werden. Versuchen Sie es später erneut.",
+      { cause: error },
     );
   }
 };

@@ -24,8 +24,8 @@ export function CartProvider({ children }) {
     } else {
       setCartItems((prev) =>
         prev.map((item) =>
-          String(item._id) === String(id) ? { ...item, quantity: newQuantity } : item
-        )
+          String(item._id) === String(id) ? { ...item, quantity: newQuantity } : item,
+        ),
       );
     }
   };
@@ -40,7 +40,7 @@ export function CartProvider({ children }) {
         return prev.map((item) =>
           String(item._id) === productToAddId
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
       }
       return [...prev, { ...product, quantity }];

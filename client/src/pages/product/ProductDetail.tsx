@@ -1,13 +1,12 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Minus, Plus, ShoppingCart, CreditCard, Check } from "lucide-react";
-import { CartContext } from "../../context/CartContext";
-import apiClient from "../../apiClient";
-import ProductImages from "../../components/product/ProductImages";
-import { useCheckout } from "../../context/CheckoutContext";
+import { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Minus, Plus, ShoppingCart, CreditCard, Check } from 'lucide-react';
+import { CartContext } from '../../context/CartContext';
+import apiClient from '../../apiClient';
+import ProductImages from '../../components/product/ProductImages';
+import { useCheckout } from '../../context/CheckoutContext';
 import { useMediaQuery } from 'react-responsive';
-import type { Product } from "../../types/data-types.ts";
-
+import type { Product } from '../../types/data-types.ts';
 
 function ProductDetail() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -27,14 +26,13 @@ function ProductDetail() {
         const { data } = await apiClient.get(`/products/${id}`);
         setProduct(data);
       } catch (err) {
-        console.error("Error while loading the product:", err);
+        console.error('Error while loading the product:', err);
       } finally {
         setLoading(false);
       }
     };
     fetchProduct();
   }, [id]);
-
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -52,7 +50,7 @@ function ProductDetail() {
     return (
       <div className="product-detail-page">
         <div className="product-detail-nav">
-          <button onClick={() => navigate("/produkte")} className="back-button">
+          <button onClick={() => navigate('/produkte')} className="back-button">
             <ArrowLeft className="w-5 h-5" />
             Zurück zur Übersicht
           </button>
@@ -61,7 +59,7 @@ function ProductDetail() {
     );
   }
 
-  const basePath = "images/products/";
+  const basePath = 'images/products/';
   const productImages = product.image_paths
     ? product.image_paths.map((filename) => basePath + filename)
     : [];
@@ -70,20 +68,19 @@ function ProductDetail() {
     product.includes && product.includes.length > 0
       ? product.includes
       : [
-        "Hochwertige Detox-Box",
-        "30 tägliche Challenge-Karten",
-        "Reflexions-Notizblock",
-        "Gewohnheitstracker",
-      ];
+          'Hochwertige Detox-Box',
+          '30 tägliche Challenge-Karten',
+          'Reflexions-Notizblock',
+          'Gewohnheitstracker',
+        ];
 
   const available = product.countInStock > 0;
-
 
   return (
     <div className="product-detail-page">
       {/* Back Navigation */}
       <div className="product-detail-nav">
-        <button onClick={() => navigate("/produkte")} className="back-button">
+        <button onClick={() => navigate('/produkte')} className="back-button">
           <ArrowLeft className="w-5 h-5" />
           Zurück zur Übersicht
         </button>
@@ -95,10 +92,7 @@ function ProductDetail() {
           <div className="product-gallery">
             <div className="gallery-main-image">
               <div className="main-image-display">
-                <ProductImages
-                  images_paths={productImages}
-                  onImageChange={setCurrentImageIndex}
-                />
+                <ProductImages images_paths={productImages} onImageChange={setCurrentImageIndex} />
               </div>
             </div>
             {/* Description */}
@@ -129,28 +123,20 @@ function ProductDetail() {
             <div className="product-detail-pricing">
               <div className="price-display">
                 {product.upper_price_limit && (
-                  <span className="price-detail-old">
-                    {product.upper_price_limit.toFixed(2)} €
-                  </span>
+                  <span className="price-detail-old">{product.upper_price_limit.toFixed(2)} €</span>
                 )}
-                <span className="price-detail-current">
-                  {product.price.toFixed(2)} €
-                </span>
+                <span className="price-detail-current">{product.price.toFixed(2)} €</span>
               </div>
             </div>
           </div>
 
           {/* Availability */}
           <div className="product-availability">
-            <div
-              className={`availability-badge ${available ? "in-stock" : "out-of-stock"
-                }`}
-            >
+            <div className={`availability-badge ${available ? 'in-stock' : 'out-of-stock'}`}>
               <span className="availability-dot"></span>
-              Status: {available ? "Auf Lager" : "Nicht verfügbar"}
+              Status: {available ? 'Auf Lager' : 'Nicht verfügbar'}
             </div>
           </div>
-
 
           {/* What's Included */}
           <div className="product-includes-section">
@@ -179,18 +165,11 @@ function ProductDetail() {
               <input
                 type="number"
                 value={quantity}
-                onChange={(e) =>
-                  setQuantity(
-                    Math.max(1, parseInt(e.target.value || "1", 10) || 1)
-                  )
-                }
+                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value || '1', 10) || 1))}
                 className="quantity-input"
                 min={1}
               />
-              <button
-                onClick={() => handleQuantityChange(1)}
-                className="quantity-button"
-              >
+              <button onClick={() => handleQuantityChange(1)} className="quantity-button">
                 <Plus className="w-4 h-4" />
               </button>
             </div>
@@ -218,9 +197,7 @@ function ProductDetail() {
 
           {/* Payment Methods */}
           <div className="payment-methods">
-            <p className="payment-methods-title">
-              Unterstützte Zahlungsarten:
-            </p>
+            <p className="payment-methods-title">Unterstützte Zahlungsarten:</p>
             <p className="payment-methods-list">
               Kreditkarte, PayPal, Klarna, SEPA-Lastschrift, EPS, Bancontact
             </p>

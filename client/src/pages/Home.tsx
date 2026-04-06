@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
-import { ImpactStats } from "../components/home/ImpactStats";
-import { ProblemSection } from "../components/home/ProblemSection";
-import { BenefitsGrid } from "../components/home/BenefitsGrid";
-import { HowItWorks } from "../components/home/HowItWorks";
-import { ProductShowcase } from "../components/home/ProductShowcase";
-import "../styles/home.css";
+import React, { useState, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { ImpactStats } from '../components/home/ImpactStats';
+import { ProblemSection } from '../components/home/ProblemSection';
+import { BenefitsGrid } from '../components/home/BenefitsGrid';
+import { HowItWorks } from '../components/home/HowItWorks';
+import { ProductShowcase } from '../components/home/ProductShowcase';
+import '../styles/home.css';
 
 export function Home() {
   const [screenTime, setScreenTime] = useState(0);
 
   const scrollToProduct = () => {
-    const element = document.getElementById("product-section");
-    element?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById('product-section');
+    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToHowItWorks = () => {
-    const element = document.getElementById("how-it-works")
-    element?.scrollIntoView({ behavior: "smooth" });
-  }
+    const element = document.getElementById('how-it-works');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
     let start = 0;
@@ -46,7 +46,8 @@ export function Home() {
         <div className="hero-gradient"></div>
         <div className="hero-content">
           <h1 className="hero-title">
-            Du scrollst <span className="highlight-text">{screenTime.toFixed(1)} Stunden</span> täglich?
+            Du scrollst <span className="highlight-text">{screenTime.toFixed(1)} Stunden</span>{' '}
+            täglich?
           </h1>
 
           <p className="hero-subtitle">
@@ -73,13 +74,13 @@ export function Home() {
 
               <div className="screen-time-warning pulse">
                 <div className="warning-icon">⏳</div>
-                <h3 className="warning-title" style={{ fontSize: 20, fontWeight: 750 }}>Zeitlimit erreicht</h3>
+                <h3 className="warning-title" style={{ fontSize: 20, fontWeight: 750 }}>
+                  Zeitlimit erreicht
+                </h3>
                 <p className="warning-message">
                   Du hast deine Bildschirmzeit von 5 Stunden heute erreicht.
                 </p>
-                <div className="warning-actions">
-                  Limit ignorieren
-                </div>
+                <div className="warning-actions">Limit ignorieren</div>
               </div>
             </div>
           </div>
@@ -104,9 +105,7 @@ export function Home() {
       {/* Final CTA Section */}
       <section className="final-cta-section">
         <div className="final-cta-content">
-          <h2 className="final-cta-title">
-            Bereit für eine bewusstere Handy-Nutzung?
-          </h2>
+          <h2 className="final-cta-title">Bereit für eine bewusstere Handy-Nutzung?</h2>
           <p className="final-cta-subtitle">
             Starte heute deine 30-Tage-Reise zu mehr Fokus und Freiheit.
           </p>

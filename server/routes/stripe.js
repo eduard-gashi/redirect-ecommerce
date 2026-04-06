@@ -1,24 +1,24 @@
-import express from 'express';
-import Stripe from 'stripe';
-import dotenv from 'dotenv';
+import express from "express";
+import Stripe from "stripe";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY_LIVE);
 
-router.post('/create-checkout-session', async (req, res) => {
+router.post("/create-checkout-session", async (req, res) => {
   try {
     console.log("Create Checkout Session Request Body:", req.body);
     const { product, quantity } = req.body;
 
     const session = await stripe.checkout.sessions.create({
-      ui_mode: 'embedded',
-      mode: 'payment',
+      ui_mode: "embedded",
+      mode: "payment",
       line_items: [
         {
           price_data: {
-            currency: 'eur',
+            currency: "eur",
             product_data: { name: product.name },
             unit_amount: Math.round(product.price * 100),
           },
@@ -37,11 +37,10 @@ router.post('/create-checkout-session', async (req, res) => {
 
     res.send({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error('Stripe Checkout Error:', err);
+    console.error("Stripe Checkout Error:", err);
     res.status(500).json({ error: err.message });
   }
 });
-
 
 router.get("/session/:id", async (req, res) => {
   try {

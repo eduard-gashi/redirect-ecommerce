@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Calendar,
   MapPin,
@@ -7,10 +7,10 @@ import {
   ChevronDown,
   Clock,
   Truck,
-  CheckCircle2
-} from "lucide-react";
-import type { Order } from "../../types/order";
-import "../../styles/order.css";
+  CheckCircle2,
+} from 'lucide-react';
+import type { Order } from '../../types/order';
+import '../../styles/order.css';
 
 interface OrderSummaryProps {
   order: Order;
@@ -24,7 +24,7 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
     return new Intl.DateTimeFormat('de-DE', {
       day: '2-digit',
       month: '2-digit',
-      year: 'numeric'
+      year: 'numeric',
     }).format(date);
   };
 
@@ -40,7 +40,7 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
         processing: { label: 'In Bearbeitung', className: 'status-processing', Icon: Truck },
         shipped: { label: 'Versendet', className: 'status-shipped', Icon: Truck },
         delivered: { label: 'Zugestellt', className: 'status-delivered', Icon: CheckCircle2 },
-        cancelled: { label: 'Storniert', className: 'status-cancelled', Icon: Package }
+        cancelled: { label: 'Storniert', className: 'status-cancelled', Icon: Package },
       };
       return configs[order.status] || configs.pending;
     }
@@ -70,7 +70,9 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
             </div>
             <div className="order-date-section">
               <Calendar className="order-header-icon-small" />
-              <span className="order-date">{formatShortDate(order.createdAt || new Date().toISOString())}</span>
+              <span className="order-date">
+                {formatShortDate(order.createdAt || new Date().toISOString())}
+              </span>
             </div>
           </div>
 
@@ -95,7 +97,8 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
               <div className="order-info-content">
                 <span className="order-info-label">Lieferadresse</span>
                 <span className="order-info-value">
-                  {order.shippingAddress.address}, {order.shippingAddress.postalCode} {order.shippingAddress.city}
+                  {order.shippingAddress.address}, {order.shippingAddress.postalCode}{' '}
+                  {order.shippingAddress.city}
                 </span>
               </div>
             </div>
@@ -120,10 +123,7 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
 
           {/* Order Items Toggle */}
           <div className="order-items-preview">
-            <button
-              className="order-items-toggle"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
+            <button className="order-items-toggle" onClick={() => setIsExpanded(!isExpanded)}>
               <div className="order-items-toggle-left">
                 <ChevronDown className={`toggle-icon ${isExpanded ? 'rotated' : ''}`} />
                 <span className="order-items-toggle-text">
@@ -151,7 +151,9 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
                     </div>
                     <div className="order-item-price">
                       <span className="item-unit-price">€{item.price.toFixed(2)} / Stk.</span>
-                      <span className="item-total-price">€{(item.qty * item.price).toFixed(2)}</span>
+                      <span className="item-total-price">
+                        €{(item.qty * item.price).toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 ))}

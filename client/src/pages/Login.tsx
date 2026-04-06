@@ -2,8 +2,16 @@ import React, { useState, FormEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
-import { Mail, Lock, AlertCircle, CheckCircle, Loader2, ArrowRight, ShoppingBag } from 'lucide-react';
-import "../styles/login.css"
+import {
+  Mail,
+  Lock,
+  AlertCircle,
+  CheckCircle,
+  Loader2,
+  ArrowRight,
+  ShoppingBag,
+} from 'lucide-react';
+import '../styles/login.css';
 import type { AxiosError } from 'axios';
 
 interface UserInfo {
@@ -34,7 +42,6 @@ export default function Login(): React.JSX.Element {
     }
   }, [userInfo, navigate]);
 
-
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
@@ -52,7 +59,9 @@ export default function Login(): React.JSX.Element {
         // Registration flow: Send verification email
         await apiClient.post('/users/send-registration-email', { email, password });
         console.log('Registrierungs-E-Mail gesendet an:', email);
-        setSuccessMessage('Wir haben eine Verifizierungs-E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.');
+        setSuccessMessage(
+          'Wir haben eine Verifizierungs-E-Mail gesendet. Bitte überprüfen Sie Ihr Postfach.',
+        );
         setNeedsRegistration(false);
         setPassword('');
         setPasswordError('');
@@ -132,9 +141,7 @@ export default function Login(): React.JSX.Element {
         </div>
 
         {/* Title */}
-        <h1 className="login-title">
-          {needsRegistration ? 'Konto erstellen' : 'Anmelden'}
-        </h1>
+        <h1 className="login-title">{needsRegistration ? 'Konto erstellen' : 'Anmelden'}</h1>
         <p className="login-subtitle">
           {needsRegistration
             ? 'Erstellen Sie Ihr Konto und starten Sie Ihre Detox-Reise'
@@ -235,11 +242,7 @@ export default function Login(): React.JSX.Element {
             <p className="login-toggle-text">
               {needsRegistration ? 'Haben Sie bereits ein Konto?' : 'Noch kein Konto?'}
             </p>
-            <button
-              type="button"
-              onClick={handleToggleMode}
-              className="login-toggle-link"
-            >
+            <button type="button" onClick={handleToggleMode} className="login-toggle-link">
               {needsRegistration ? 'Zurück zum Login' : 'Hier registrieren'}
               <ArrowRight className="login-toggle-icon" size={16} />
             </button>

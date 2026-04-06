@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import Cart from "./pages/Cart";
+import Cart from './pages/Cart';
 import OrderSuccessScreen from './pages/OrderSuccessScreen';
 import ProductDetail from './pages/product/ProductDetail.tsx';
 import Products from './pages/product/Products';
@@ -16,13 +16,12 @@ import RefundPolicy from './pages/legal/RefundPolicy.tsx';
 
 import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 import { CartProvider } from './context/CartProvider';
 import { AuthProvider } from './context/AuthProvider';
-import { CheckoutProvider } from "./context/CheckoutProvider";
-
+import { CheckoutProvider } from './context/CheckoutProvider';
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
       <AuthProvider>
         {/* 2. Cookie Banner */}
         <CheckoutProvider>
-
           <Router>
             {/* Scroll to top on route change */}
             <ScrollToTop />
@@ -39,7 +37,7 @@ function App() {
             <Header />
 
             {/* Main Content*/}
-            <main style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}>
+            <main style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh' }}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/produkte" element={<Products />} />

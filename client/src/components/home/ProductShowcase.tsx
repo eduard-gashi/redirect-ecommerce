@@ -1,12 +1,12 @@
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import "../../styles/home.css";
+import '../../styles/home.css';
 
 export function ProductShowcase() {
   const navigate = useNavigate();
 
   const handleBuyClick = () => {
-    navigate("/produkte/68cea0b7265fc9be4132d44a");
+    navigate('/produkte/68cea0b7265fc9be4132d44a');
   };
 
   return (
@@ -14,9 +14,7 @@ export function ProductShowcase() {
       <div className="product-showcase-container">
         <div className="section-header">
           <h2 className="section-title">Die HandyDetox Box</h2>
-          <p className="section-subtitle">
-            Alles, was du für deine 30-Tage-Reise brauchst
-          </p>
+          <p className="section-subtitle">Alles, was du für deine 30-Tage-Reise brauchst</p>
         </div>
 
         <div className="product-card-wrapper">
@@ -25,7 +23,7 @@ export function ProductShowcase() {
               <div className="box-visual">
                 <img
                   src={`/images/products/detoxbox/01.png`}
-                  alt={"Handy Detox Box"}
+                  alt={'Handy Detox Box'}
                   className="product-image"
                 />
               </div>
