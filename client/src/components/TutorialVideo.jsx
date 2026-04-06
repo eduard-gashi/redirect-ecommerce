@@ -1,15 +1,13 @@
+// TutorialVideo.tsx
 import { useState } from 'react';
 import '../styles/tutorial-video.css';
 
 const TutorialVideoPlayer = () => (
-  <iframe
+  <video
     src="videos/tutorial.mp4"
-    title="Tutorial Video"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-    width="100%"
-    height="100%"
-    style={{ border: 'none', outline: 'none' }}
+    controls
+    playsInline
+    style={{ width: '100%', height: '100%', border: 'none', outline: 'none' }}
   />
 );
 

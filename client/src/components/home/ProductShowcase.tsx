@@ -57,8 +57,7 @@ export function ProductShowcase() {
               <div className="product-pricing">
                 <div className="price-wrapper">
                   <span className="price-detail-old">24,99 €</span>
-
-                  <span className="price-current">19,99 €</span>
+                  <span className="price-detail-current">19,99 €</span>
                 </div>
               </div>
 

@@ -1484,15 +1484,15 @@ body {
 }
 
 .price-detail-old {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--text-muted);
   text-decoration: line-through;
 }
 
 .price-detail-current {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--detox-primary);
+  font-size: 1.7rem;
+  font-weight: 450;
+  color: black;
 }
 
 /* Product Description */
@@ -1767,11 +1767,11 @@ body {
   }
 
   .price-detail-old {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .price-detail-current {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .product-detail-nav {
@@ -1790,6 +1790,18 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .product-name {
+    font-size: 1.5rem !important;
+  }
+
+  .product-card-price-current {
+    font-size: 1.3rem !important;
+  }
+
+  .buy-button {
+    font-size: 1rem !important;
+  }
+
   .button-icon {
     display: none !important;
   }
@@ -1806,6 +1818,10 @@ body {
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
+  }
+
+  .product-card-name {
+    font-size: 1.1rem !important;
   }
 }
 
@@ -1998,7 +2014,7 @@ body {
 
 /* Product Name */
 .product-card-name {
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 650;
   color: #1a1a1a;
   line-height: 1.4;
@@ -2027,9 +2043,9 @@ body {
 }
 
 .product-card-price-current {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-logo);
+  font-size: 1.5rem;
+  font-weight: 450;
+  color: black;
 }
 
 /* Out of Stock Badge */

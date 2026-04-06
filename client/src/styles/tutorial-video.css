@@ -133,10 +133,7 @@
 /* Hover */
 .video-thumbnail-container:hover .play-icon {
   transform: scale(1.07) translateY(-1px);
-  box-shadow:
-    0 22px 50px rgba(8, 47, 73, 0.9),
-    0 0 0 1px rgba(125, 211, 252, 0.45);
-  background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a);
+  background: #22c55e;
 }
 
 .video-thumbnail-container::after {

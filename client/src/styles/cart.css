@@ -441,13 +441,13 @@
    ============================================ */
 
 .cart-empty-state {
-  max-width: 480px;
   margin: 4rem auto;
   padding: 3rem 2rem;
   text-align: center;
   background: var(--bg-primary, #ffffff);
   border: 1px solid var(--border-color, #e5e7eb);
   border-radius: 24px;
+  max-width: 440px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -623,8 +623,8 @@
   }
 
   .cart-empty-state {
-    margin: 2rem auto;
     padding: 2rem 1.5rem;
+    max-width: 340px;
   }
 
   .cart-empty-title {
