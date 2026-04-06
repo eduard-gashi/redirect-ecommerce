@@ -288,30 +288,6 @@
   flex-direction: column;
 }
 
-.video-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 40px;
-}
-
-.video-thumbnail-container {
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.video-thumbnail-image {
-  display: block;
-  width: 100%;
-  transition: transform 0.3s ease;
-}
-
-.video-thumbnail-container:hover .video-thumbnail-image {
-  transform: scale(1.02);
-}
-
 /* Product Section */
 .product-title {
   font-size: clamp(2rem, 4vw, 2.5rem);
