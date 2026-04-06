@@ -47,46 +47,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 2rem 2rem;
   position: relative;
   overflow: hidden;
-}
-
-/* Decorative Background Elements */
-.login-container::before {
-  content: '';
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(92, 209, 199, 0.15), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: float-gentle 8s ease-in-out infinite;
-}
-
-.login-container::after {
-  content: '';
-  position: absolute;
-  bottom: -10%;
-  left: -5%;
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: float-gentle 10s ease-in-out infinite reverse;
-}
-
-@keyframes float-gentle {
-  0%,
-  100% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(-30px) translateX(20px);
-  }
 }
 
 /* ============================================

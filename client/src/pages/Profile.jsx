@@ -36,14 +36,7 @@ function Profile() {
 
       {/* Order History */}
       <div className="profile-details">
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        <div className="profile-details-header">
           <p className="text-paragraph">
             <strong>
               Eingeloggt als: <br></br>
@@ -54,9 +47,8 @@ function Profile() {
             Ausloggen
           </button>
         </div>
-        <p className="text-paragraph">
-          <OrderHistory></OrderHistory>
-        </p>
+
+        <OrderHistory></OrderHistory>
       </div>
     </div>
   );

@@ -1774,6 +1774,10 @@ body {
     font-size: 1.6rem;
   }
 
+  .product-detail-nav {
+    padding: 2rem;
+  }
+
   .product-availability {
     display: none;
   }
@@ -1796,6 +1800,12 @@ body {
 
   .gallery-thumbnails {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-card-price-section {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: auto;
   }
 }
 
@@ -2005,7 +2015,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: auto;
   white-space: nowrap;
 }

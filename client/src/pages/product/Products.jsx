@@ -36,7 +36,7 @@ function Products() {
     <div className="products-view">
       {/* Header */}
       <div className="product-header-container">
-        <h1 className="product-title">Unsere Produkte</h1>
+        <h1 className="product-title">Produkte</h1>
       </div>
 
       {/* Product Grid */}

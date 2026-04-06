@@ -314,7 +314,7 @@
 
 /* Product Section */
 .product-title {
-  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -456,6 +456,15 @@
     align-items: center;
     width: 100%;
     padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-details-header {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    gap: 1rem;
   }
 }
 
@@ -916,16 +925,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
 }
 
 .profile-details {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  text-align: left;
+  gap: 1.5rem;
   width: 100%;
   padding: 32px 32px;
+}
+
+.profile-details-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
 }
 
 .logout-button {

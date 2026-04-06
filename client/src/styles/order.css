@@ -4,7 +4,6 @@
 
 .order-history-container {
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 /* ============================================
@@ -1150,6 +1149,10 @@
   .filter-tab {
     width: 100%;
     justify-content: center;
+  }
+
+  .order-history-title {
+    font-size: 1.4rem !important;
   }
 }
 
