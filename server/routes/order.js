@@ -111,22 +111,39 @@ router.post('/', async (req, res) => {
           .map((item) => `${item.qty}× ${item.name} – ${item.price.toFixed(2)} €`)
           .join('<br />');
 
+        const orderIdStr = createdOrder._id.toString();
+        const shortOrderNumber = orderIdStr.slice(-8).toUpperCase();
+
         const html = `
-      <h2>Bestellbestätigung – HandyDetox Box</h2>
-      <p>Hallo,</p>
-      <p>vielen Dank für deine Bestellung. Wir haben deine Bestellung erhalten und werden sie schnellstmöglich bearbeiten.</p>
-      <p><strong>Bestellnummer:</strong> ${createdOrder._id.slice(-8).toUpperCase()}</p>
-      <p><strong>Gesamtbetrag:</strong> ${finalTotalPrice.toFixed(2)} €</p>
-      <h3>Bestellte Artikel</h3>
-      <p>${itemsList}</p>
-      <h3>Lieferadresse</h3>
-      <p>
-        ${shippingAddress.address}<br/>
-        ${shippingAddress.postalCode} ${shippingAddress.city}<br/>
-        ${shippingAddress.country}
-      </p>
-      <p>Du erhältst eine weitere E-Mail mit der Sendungsverfolgungsnummer, sobald dein Paket versendet wurde.</p>
-    `;
+  <h2>Bestellbestätigung – HandyDetox Box</h2>
+  <p>Hey,</p>
+  <p>
+    vielen Dank für deine Bestellung – <strong>mega, dass du dich für die HandyDetox Box entschieden hast!</strong>
+  </p>
+  <p>
+    Du machst damit einen bewussten Schritt hin zu weniger Bildschirmzeit und mehr echter Lebenszeit.
+    Wir haben deine Bestellung erhalten und bereiten gerade alles für den Versand vor.
+  </p>
+  <p><strong>Bestellnummer:</strong> ${shortOrderNumber}</p>
+  <p><strong>Gesamtbetrag:</strong> ${finalTotalPrice.toFixed(2)} €</p>
+
+  <h3>Bestellte Artikel</h3>
+  <p>${itemsList}</p>
+
+  <h3>Lieferadresse</h3>
+  <p>
+    ${shippingAddress.address}<br/>
+    ${shippingAddress.postalCode} ${shippingAddress.city}<br/>
+    ${shippingAddress.country}
+  </p>
+
+  <p>
+    Du erhältst eine weitere E-Mail mit der Sendungsverfolgungsnummer, sobald dein Paket auf dem Weg zu dir ist.
+  </p>
+  <p>
+    Bis dahin: Nimm dir einen Moment, atme durch – du hast gerade in dich und deinen Fokus investiert. 🙌
+  </p>
+`;
 
         await sendEmail(customerEmail, 'Deine Bestellung bei HandyDetox Box ist eingegangen', html);
       } else {
