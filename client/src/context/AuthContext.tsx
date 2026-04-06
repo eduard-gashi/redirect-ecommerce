@@ -1,6 +1,5 @@
-import React, { createContext, useReducer, useEffect, ReactNode } from 'react';
-import type { UserInfo, AuthState, AuthAction } from "../types/data-types.ts";
-
+import { createContext, useContext } from 'react';
+import type { AuthState, AuthAction } from '../types/data-types';
 
 const initialState: AuthState = {
   userInfo: localStorage.getItem('userInfo')
@@ -8,37 +7,20 @@ const initialState: AuthState = {
     : null,
 };
 
-function authReducer(state: AuthState, action: AuthAction): AuthState {
-  switch (action.type) {
-    case 'USER_SIGNIN':
-      console.log('Reducer USER_SIGNIN aufgerufen mit payload:', action.payload);
-      return { ...state, userInfo: action.payload };
-    case 'USER_SIGNOUT':
-      return { ...state, userInfo: null };
-    default:
-      return state;
-  }
-}
-
-
-export const AuthContext = createContext<{
+type AuthContextValue = {
   state: AuthState;
   dispatch: React.Dispatch<AuthAction>;
-}>({
+};
+
+export const AuthContext = createContext<AuthContextValue>({
   state: initialState,
   dispatch: () => null,
 });
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
-
-  useEffect(() => {
-    localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
-  }, [state.userInfo]);
-
-  return (
-    <AuthContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+  return ctx;
+}

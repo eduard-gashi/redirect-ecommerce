@@ -19,8 +19,6 @@ router.post(
 
     const user = await User.findOne({ email });
 
-    let error_message = '';
-
     if (user) {
       if (await user.matchPassword(password)) {
         console.log("Login erfolgreich für E-Mail:", email);
@@ -33,17 +31,17 @@ router.post(
       }
       else {
         console.log("Ungültiges Passwort für E-Mail:", email);
-        error_message = 'Ungültiges Passwort. Bitte versuchen Sie es erneut.';
-        res.status(401);
-        res.json({ message: error_message });
-        throw new Error(error_message);
+        res.status(401).json({
+          message: 'Ungültiges Passwort. Bitte versuchen Sie es erneut.',
+        });
+        throw new Error('Ungültiges Passwort. Bitte versuchen Sie es erneut');
       }
     } else {
       console.log("Ungültige Login-Versuche für E-Mail:", email);
-      res.status(401);
-      error_message = 'Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.';
-      res.json({ message: error_message });
-      throw new Error(error_message);
+      res.status(401).json({
+        message: 'Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.',
+      });
+      throw new Error('Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.');
     }
   })
 );

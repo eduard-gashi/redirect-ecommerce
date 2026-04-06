@@ -2,8 +2,9 @@ import React, { useState, FormEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
-import { Mail, Lock, AlertCircle, CheckCircle, Loader2, ArrowRight, ShoppingBag, Sun, Moon } from 'lucide-react';
+import { Mail, Lock, AlertCircle, CheckCircle, Loader2, ArrowRight, ShoppingBag } from 'lucide-react';
 import "../styles/login.css"
+import type { AxiosError } from 'axios';
 
 interface UserInfo {
   _id: string;
@@ -62,13 +63,14 @@ export default function Login(): React.JSX.Element {
         navigate('/profil');
       }
       setHasAttemptedSubmit(false);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Fehler bei der Anmeldung/Registrierung:', err);
-      setError(
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : 'Anmeldung/Registrierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.'
-      );
+
+      const axiosError = err as AxiosError<{ message?: string }>;
+      const message =
+        axiosError.response?.data?.message ??
+        'Anmeldung/Registrierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.';
+      setError(message);
     } finally {
       setLoading(false);
     }

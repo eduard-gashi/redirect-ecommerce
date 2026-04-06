@@ -2,7 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from "react";
 import apiClient from "../apiClient";
 import { AuthContext } from "../context/AuthContext";
-import { Package, Mail, MapPin, CreditCard, CheckCircle, XCircle, Loader2, Info } from "lucide-react";
+import { Package, Mail, MapPin, CreditCard, CheckCircle, XCircle, Info } from "lucide-react";
 import "../styles/order.css";
 import type { OrderSummary } from "../types/order.ts";
 

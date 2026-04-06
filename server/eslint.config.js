@@ -1,0 +1,25 @@
+// server/eslint.config.js
+import js from '@eslint/js';
+import globals from 'globals';
+
+export default [
+  {
+    files: ['**/*.js'],
+    ignores: ['node_modules', 'dist', 'build'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',       
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-console': 'off',
+      'eqeqeq': ['error', 'always'],
+      'no-var': 'error',
+      'prefer-const': 'warn',
+    },
+  },
+];

@@ -1,13 +1,19 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, ComponentType } from "react";
 import { Link } from "react-router";
 import OrderSummary from "./OrderSummary";
-import { Package, ShoppingBag, Loader2, Clock, Truck, CheckCircle2, XCircle } from "lucide-react";
+import { Package, ShoppingBag, Clock, Truck, CheckCircle2, XCircle, LucideProps } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import type { Order } from "../../types/order";
 import apiClient from "../../apiClient";
 import "../../styles/order.css";
 
 type FilterType = 'all' | 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+
+type FilterConfig = {
+  label: string;
+  value: FilterType;
+  icon: ComponentType<LucideProps>;
+};
 
 export default function OrderHistory() {
   const { state } = useContext(AuthContext);
@@ -69,7 +75,7 @@ export default function OrderHistory() {
     return orderHistory.filter((order) => getOrderStatus(order) === filter).length;
   };
 
-  const filters: { label: string; value: FilterType; icon: any }[] = [
+  const filters: FilterConfig[] = [
     { label: 'Alle', value: 'all', icon: Package },
     { label: 'Ausstehend', value: 'pending', icon: Clock },
     { label: 'In Bearbeitung', value: 'processing', icon: Truck },

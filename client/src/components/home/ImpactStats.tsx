@@ -1,5 +1,5 @@
 import React from "react";
-import { Smartphone, BookOpen, Users, TrendingDown } from "lucide-react";
+import { Smartphone, Users, TrendingDown } from "lucide-react";
 
 export function ImpactStats() {
   const facts = [

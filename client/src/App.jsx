@@ -19,9 +19,9 @@ import AccountConfirmation from './components/AccountConfirmation';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import { CartProvider } from './context/CartContext';
-import { AuthProvider } from './context/AuthContext';
-import { CheckoutProvider } from "./context/CheckoutContext";
+import { CartProvider } from './context/CartProvider';
+import { AuthProvider } from './context/AuthProvider';
+import { CheckoutProvider } from "./context/CheckoutProvider";
 
 
 function App() {
