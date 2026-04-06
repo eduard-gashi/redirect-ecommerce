@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" && tsc --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\"",
     "preview": "vite preview",
     "deploy": "vercel --prod"
@@ -33,7 +33,6 @@
     "@tailwindcss/postcss": "^4.1.11",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@types/swiper": "^5.4.3",
     "@typescript-eslint/eslint-plugin": "^8.58.0",
     "@typescript-eslint/parser": "^8.58.0",
     "@vitejs/plugin-react": "^4.4.1",

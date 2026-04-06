@@ -13,13 +13,7 @@ import {
 } from 'lucide-react';
 import '../styles/login.css';
 import type { AxiosError } from 'axios';
-
-interface UserInfo {
-  _id: string;
-  email: string;
-  isAdmin: boolean;
-  token: string; // JWT-Token
-}
+import type { UserInfo } from '../types/data-types';
 
 export default function Login(): React.JSX.Element {
   const [email, setEmail] = useState<string>('');

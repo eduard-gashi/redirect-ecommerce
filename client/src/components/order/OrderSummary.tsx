@@ -10,6 +10,8 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import type { Order } from '../../types/order';
+import { getOrderStatus, type OrderStatus } from './orderStatus';
+import type { LucideProps } from 'lucide-react';
 import '../../styles/order.css';
 
 interface OrderSummaryProps {
@@ -34,22 +36,24 @@ export default function OrderSummary({ order }: OrderSummaryProps) {
 
   // Get status config based on order.status or fallback to isDelivered
   const getStatusConfig = () => {
-    if (order.status) {
-      const configs = {
-        pending: { label: 'Ausstehend', className: 'status-pending', Icon: Clock },
-        processing: { label: 'In Bearbeitung', className: 'status-processing', Icon: Truck },
-        shipped: { label: 'Versendet', className: 'status-shipped', Icon: Truck },
-        delivered: { label: 'Zugestellt', className: 'status-delivered', Icon: CheckCircle2 },
-        cancelled: { label: 'Storniert', className: 'status-cancelled', Icon: Package },
-      };
-      return configs[order.status] || configs.pending;
-    }
+    const status = getOrderStatus(order);
 
-    // Fallback to old isDelivered logic
-    if (order.isDelivered) {
-      return { label: 'Zugestellt', className: 'status-delivered', Icon: CheckCircle2 };
-    }
-    return { label: 'In Bearbeitung', className: 'status-processing', Icon: Truck };
+    const configs: Record<
+      OrderStatus,
+      {
+        label: string;
+        className: string;
+        Icon: React.ComponentType<LucideProps>;
+      }
+    > = {
+      pending: { label: 'Ausstehend', className: 'status-pending', Icon: Clock },
+      processing: { label: 'In Bearbeitung', className: 'status-processing', Icon: Truck },
+      shipped: { label: 'Versendet', className: 'status-shipped', Icon: Truck },
+      delivered: { label: 'Zugestellt', className: 'status-delivered', Icon: CheckCircle2 },
+      cancelled: { label: 'Storniert', className: 'status-cancelled', Icon: Package },
+    };
+
+    return configs[status];
   };
 
   const statusConfig = getStatusConfig();

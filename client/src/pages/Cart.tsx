@@ -1,13 +1,13 @@
-import { useContext } from 'react';
 import { Link } from 'react-router';
-import { CartContext } from '../context/CartContext';
+import { useCart } from '../context/CartContext';
+import type { CartItem } from '../context/CartContext';
 import { useCheckout } from '../context/CheckoutContext';
 import { Product } from '../types/data-types';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import '../styles/cart.css';
 
 export default function Cart() {
-  const { cartItems, removeFromCart, clearCart, updateQuantity } = useContext(CartContext);
+  const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
   const { openCheckout } = useCheckout();
 
   const handleOpenCheckout = () => {
@@ -34,7 +34,7 @@ export default function Cart() {
   }
 
   const total = cartItems.reduce(
-    (sum: number, item: Product) => sum + item.price * item.quantity,
+    (sum: number, item: CartItem) => sum + item.price * item.quantity,
     0,
   );
 

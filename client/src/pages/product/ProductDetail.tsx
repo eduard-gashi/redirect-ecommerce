@@ -1,7 +1,7 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Minus, Plus, ShoppingCart, CreditCard, Check } from 'lucide-react';
-import { CartContext } from '../../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import apiClient from '../../apiClient';
 import ProductImages from '../../components/product/ProductImages';
 import { useCheckout } from '../../context/CheckoutContext';
@@ -17,7 +17,7 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
   const { openCheckout } = useCheckout();
 
   useEffect(() => {
@@ -35,10 +35,12 @@ function ProductDetail() {
   }, [id]);
 
   const handleAddToCart = () => {
+    if (!product) return; // type guard
     addToCart(product, quantity);
   };
 
   const handleBuyNow = () => {
+    if (!product) return;
     openCheckout(product, quantity);
   };
 

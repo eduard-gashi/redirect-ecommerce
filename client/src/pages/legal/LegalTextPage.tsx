@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { LegalLayout } from './Layout.tsx';
+import { LegalLayout } from './Layout';
 import '../../styles/legal-pages.css';
 
 export type Section = { id: string; title: string };

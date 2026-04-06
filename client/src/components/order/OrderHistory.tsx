@@ -13,9 +13,10 @@ import {
 import { AuthContext } from '../../context/AuthContext';
 import type { Order } from '../../types/order';
 import apiClient from '../../apiClient';
+import { getOrderStatus, type OrderStatus } from './orderStatus';
 import '../../styles/order.css';
 
-type FilterType = 'all' | 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+type FilterType = 'all' | OrderStatus;
 
 type FilterConfig = {
   label: string;
@@ -56,14 +57,6 @@ export default function OrderHistory() {
   useEffect(() => {
     setVisibleCount(3);
   }, [activeFilter]);
-
-  function getOrderStatus(order: Order): FilterType {
-    if (!order.isPaid) return 'pending';
-    if (order.isPaid && !order.isDelivered) return 'processing';
-    if (order.isDelivered) return 'delivered';
-
-    return 'pending';
-  }
 
   // Filter orders based on active filter
   const filteredOrders = orderHistory.filter((order) => {
