@@ -4,9 +4,9 @@ import apiClient from '../apiClient';
 import { AuthContext } from '../context/AuthContext';
 import { Package, Mail, MapPin, CreditCard, CheckCircle, XCircle, Info } from 'lucide-react';
 import '../styles/order.css';
-import type { OrderSummary } from '../types/order.ts';
+import type { OrderSummary } from '../types/order';
 
-function OrderSuccessScreen() {
+export default function OrderSuccess() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const { state } = useContext(AuthContext);
@@ -234,5 +234,3 @@ function OrderSuccessScreen() {
     </div>
   );
 }
-
-export default OrderSuccessScreen;

@@ -38,6 +38,15 @@ export function LegalTextPage({
           }
         }
 
+        const firstH2 = legaltextRef.current.querySelector('h2');
+        if (firstH2 && firstH2.textContent?.trim().toLowerCase() === 'inhaltsverzeichnis') {
+          const next = firstH2.nextElementSibling;
+          if (next && next.tagName.toLowerCase() === 'ol') {
+            next.remove();
+          }
+          firstH2.remove();
+        }
+
         const h2s = Array.from(legaltextRef.current.querySelectorAll<HTMLHeadingElement>('h2'));
 
         h2s.forEach((h2, idx) => {

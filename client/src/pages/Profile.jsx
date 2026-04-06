@@ -41,7 +41,6 @@ function Profile() {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            width: '100%',
             alignItems: 'center',
           }}
         >
@@ -51,7 +50,7 @@ function Profile() {
             </strong>
             {userInfo.email}
           </p>
-          <button className="filter-tab" onClick={handleLogOut}>
+          <button className="logout-button" style={{}} onClick={handleLogOut}>
             Ausloggen
           </button>
         </div>

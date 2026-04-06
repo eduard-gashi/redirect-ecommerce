@@ -14,7 +14,7 @@ function Footer() {
         {/* 1. Copyright and Contact */}
         <div className="footer-section footer-contact">
           <h3 className="footer-heading">Kontakt & Informationen</h3>
-          <p className="footer-text">© 2026 ReDirect - Handy Detox Box.</p>
+          <p className="footer-text">© 2026 redirect - Handy Detox Box.</p>
           <p className="footer-text footer-email-spacing">
             E-Mail:{' '}
             <a href="mailto:kaishi.company@gmail.com" className="footer-link-email">

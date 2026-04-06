@@ -19,7 +19,7 @@ function TermsOfService() {
       sections={sections}
       legalUrl="https://itrk.legal/1tey.2Y.12eh-iframe.html"
       layoutTitle="Allgemeine Geschäftsbedingungen mit Kundeninformationen"
-      extractH1AsTitle={false}
+      extractH1AsTitle={true}
     />
   );
 }

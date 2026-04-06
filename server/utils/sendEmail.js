@@ -5,12 +5,12 @@ const sendEmail = async (email, subject, htmlContent) => {
     service: 'gmail', // z.B. Gmail, Outlook, etc.
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
+      pass: process.env.EMAIL_PASS, // App Password
+    }
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM, // Ihre Absender-E-Mail
+    from: process.env.EMAIL_FROM,
     to: email,
     subject: subject,
     html: htmlContent,

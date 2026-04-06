@@ -5,14 +5,14 @@ import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
-import OrderSuccessScreen from './pages/OrderSuccessScreen';
-import ProductDetail from './pages/product/ProductDetail.tsx';
+import OrderSuccess from './pages/OrderSuccess';
+import ProductDetail from './pages/product/ProductDetail';
 import Products from './pages/product/Products';
 
-import LegalNotice from './pages/legal/LegalNotice.tsx';
-import PrivacyPolicy from './pages/legal/PrivacyPolicy.tsx';
-import TermsOfService from './pages/legal/TermsOfService.tsx';
-import RefundPolicy from './pages/legal/RefundPolicy.tsx';
+import LegalNotice from './pages/legal/LegalNotice';
+import PrivacyPolicy from './pages/legal/PrivacyPolicy';
+import TermsOfService from './pages/legal/TermsOfService';
+import RefundPolicy from './pages/legal/RefundPolicy';
 
 import ScrollToTop from './components/ScrollToTop';
 import AccountConfirmation from './components/AccountConfirmation';
@@ -44,7 +44,7 @@ function App() {
                 <Route path="/produkte/:id" element={<ProductDetail />} />
                 <Route path="/kontakt" element={<Contact />} />
                 <Route path="/warenkorb" element={<Cart />} />
-                <Route path="/bestellungen" element={<OrderSuccessScreen />} />
+                <Route path="/bestellungen" element={<OrderSuccess />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/confirm-registration" element={<AccountConfirmation />} />
                 <Route path="/profil" element={<Profile />} />
