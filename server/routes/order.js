@@ -1,10 +1,11 @@
 import express from 'express';
 import Order from '../models/order.js';
-import Product from '../models/product.js'; // Ensure Product Model is imported
+import Product from '../models/product.js';
+import sendEmail from '../utils/sendEmail.js';
 
 const router = express.Router();
 
-// Assuming this endpoint is mounted at `/api/orders`
+// Endpoint is mounted at `/api/orders`
 router.post('/', async (req, res) => {
   // 1. Destructure the required order data sent from the frontend
   const {
@@ -101,7 +102,41 @@ router.post('/', async (req, res) => {
     // 4. Save the order to MongoDB
     const createdOrder = await order.save();
 
-    // 5. Respond with the created order object
+    // 5. Send Order Confirmation E-Mail to the user
+    try {
+      const customerEmail = paymentResult?.email_address || (req.user && req.user.email) || null;
+
+      if (customerEmail) {
+        const itemsList = validatedOrderItems
+          .map((item) => `${item.qty}× ${item.name} – ${item.price.toFixed(2)} €`)
+          .join('<br />');
+
+        const html = `
+      <h2>Bestellbestätigung – HandyDetox Box</h2>
+      <p>Hallo,</p>
+      <p>vielen Dank für deine Bestellung. Wir haben deine Bestellung erhalten und werden sie schnellstmöglich bearbeiten.</p>
+      <p><strong>Bestellnummer:</strong> ${createdOrder._id.slice(-8).toUpperCase()}</p>
+      <p><strong>Gesamtbetrag:</strong> ${finalTotalPrice.toFixed(2)} €</p>
+      <h3>Bestellte Artikel</h3>
+      <p>${itemsList}</p>
+      <h3>Lieferadresse</h3>
+      <p>
+        ${shippingAddress.address}<br/>
+        ${shippingAddress.postalCode} ${shippingAddress.city}<br/>
+        ${shippingAddress.country}
+      </p>
+      <p>Du erhältst eine weitere E-Mail mit der Sendungsverfolgungsnummer, sobald dein Paket versendet wurde.</p>
+    `;
+
+        await sendEmail(customerEmail, 'Deine Bestellung bei HandyDetox Box ist eingegangen', html);
+      } else {
+        console.warn('No customer email available to send order confirmation.');
+      }
+    } catch (emailErr) {
+      console.error('Error sending order confirmation email:', emailErr);
+    }
+
+    // 6. Respond with the created order object
     res.status(201).json(createdOrder);
   } catch (error) {
     console.error('Error saving order to database:', error);
