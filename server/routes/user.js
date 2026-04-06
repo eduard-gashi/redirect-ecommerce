@@ -1,26 +1,26 @@
-import express from "express";
-import asyncHandler from "express-async-handler";
-import User from "../models/user.js";
-import generateToken from "../utils/generateToken.js";
-import { v4 as uuidv4 } from "uuid";
-import TempRegistration from "../models/TempRegistration.js";
-import sendEmail from "../utils/sendEmail.js";
-import bcrypt from "bcryptjs";
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+import User from '../models/user.js';
+import generateToken from '../utils/generateToken.js';
+import { v4 as uuidv4 } from 'uuid';
+import TempRegistration from '../models/TempRegistration.js';
+import sendEmail from '../utils/sendEmail.js';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
 // Login Endpoint
 router.post(
-  "/login",
+  '/login',
   asyncHandler(async (req, res) => {
-    console.log("Nutzer versucht sich anzumelden mit:", req.body);
+    console.log('Nutzer versucht sich anzumelden mit:', req.body);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
 
     if (user) {
       if (await user.matchPassword(password)) {
-        console.log("Login erfolgreich für E-Mail:", email);
+        console.log('Login erfolgreich für E-Mail:', email);
         res.json({
           _id: user._id,
           email: user.email,
@@ -28,30 +28,27 @@ router.post(
           token: generateToken(user._id),
         });
       } else {
-        console.log("Ungültiges Passwort für E-Mail:", email);
+        console.log('Ungültiges Passwort für E-Mail:', email);
         res.status(401).json({
-          message: "Ungültiges Passwort. Bitte versuchen Sie es erneut.",
+          message: 'Ungültiges Passwort. Bitte versuchen Sie es erneut.',
         });
-        throw new Error("Ungültiges Passwort. Bitte versuchen Sie es erneut");
+        throw new Error('Ungültiges Passwort. Bitte versuchen Sie es erneut');
       }
     } else {
-      console.log("Ungültige Login-Versuche für E-Mail:", email);
+      console.log('Ungültige Login-Versuche für E-Mail:', email);
       res.status(401).json({
-        message:
-          "Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.",
+        message: 'Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.',
       });
-      throw new Error(
-        "Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.",
-      );
+      throw new Error('Sie haben noch kein Konto bei uns angelegt. Bitte registrieren.');
     }
   }),
 );
 
 // send-registration-email Endpoint
 router.post(
-  "/send-registration-email",
+  '/send-registration-email',
   asyncHandler(async (req, res) => {
-    console.log("POST /send-registration-email aufgerufen", req.body);
+    console.log('POST /send-registration-email aufgerufen', req.body);
     const { email, password } = req.body;
 
     // Check whether the email is already registered
@@ -59,14 +56,12 @@ router.post(
 
     if (userExists) {
       res.status(400);
-      throw new Error(
-        "Diese E-Mail ist bereits registriert. Bitte melden Sie sich an.",
-      );
+      throw new Error('Diese E-Mail ist bereits registriert. Bitte melden Sie sich an.');
     }
 
     if (!password || password.length < 8) {
       res.status(400);
-      throw new Error("Passwort fehlt oder ist zu kurz.");
+      throw new Error('Passwort fehlt oder ist zu kurz.');
     }
 
     // Hash the password before storing it temporarily in the database
@@ -79,7 +74,7 @@ router.post(
     const registrationToken = uuidv4();
 
     // Create a temporary registration entry
-    console.log("Erstelle temporären Registrierungseintrag für:", email);
+    console.log('Erstelle temporären Registrierungseintrag für:', email);
     await TempRegistration.create({
       email,
       passwordHash,
@@ -87,10 +82,10 @@ router.post(
     });
 
     let baseURL;
-    if (process.env.NODE_ENV === "development") {
-      baseURL = "http://localhost:5173";
+    if (process.env.NODE_ENV === 'development') {
+      baseURL = 'http://localhost:5173';
     } else {
-      baseURL = "https://www.redirectstore.de";
+      baseURL = 'https://www.redirectstore.de';
     }
 
     const confirmationLink = `${baseURL}/confirm-registration?token=${registrationToken}`;
@@ -102,7 +97,7 @@ router.post(
       <p>Dieser Link ist 1 Stunde gültig.</p>
     `;
 
-    await sendEmail(email, "Bestätigen Sie Ihre Registrierung", emailHtml);
+    await sendEmail(email, 'Bestätigen Sie Ihre Registrierung', emailHtml);
 
     res.json({
       message: `Registrierungs-E-Mail erfolgreich an ${email} gesendet.`,
@@ -112,19 +107,19 @@ router.post(
 
 // Confirm-registration Endpoint
 router.get(
-  "/confirm-registration",
+  '/confirm-registration',
   asyncHandler(async (req, res) => {
     const { token } = req.query;
 
-    console.log("Token vom Request:", token);
+    console.log('Token vom Request:', token);
     if (!token) {
       res.status(400);
-      throw new Error("Fehlender Registrierungstoken.");
+      throw new Error('Fehlender Registrierungstoken.');
     }
 
     const allTempRegs = await TempRegistration.find({});
     console.log(
-      "Alle vorhandenen temporären Registrierungen:",
+      'Alle vorhandenen temporären Registrierungen:',
       allTempRegs.map((tr) => ({
         email: tr.email,
         token: tr.registrationToken,
@@ -136,15 +131,15 @@ router.get(
       registrationToken: token,
     });
 
-    console.log("Temporärer Registrierungseintrag gefunden:", tempReg);
+    console.log('Temporärer Registrierungseintrag gefunden:', tempReg);
 
     if (!tempReg) {
       res.status(404);
-      throw new Error("Ungültiger oder abgelaufener Verifizierungslink.");
+      throw new Error('Ungültiger oder abgelaufener Verifizierungslink.');
     }
 
     const { email, passwordHash } = tempReg;
-    console.log("E-Mail und Passwort-Hash aus temporärer Registrierung:", {
+    console.log('E-Mail und Passwort-Hash aus temporärer Registrierung:', {
       email,
       passwordHash,
     });
@@ -159,27 +154,27 @@ router.get(
 
     // 4. Send success message and navigate the user to his profile page
     res.json({
-      message: "Konto erfolgreich erstellt! Sie können sich jetzt anmelden.",
+      message: 'Konto erfolgreich erstellt! Sie können sich jetzt anmelden.',
       userId: user._id,
     });
   }),
 );
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await User.find();
-    console.log("Fetched users:", users.length);
+    console.log('Fetched users:', users.length);
     res.json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    console.log("Requested user with ID:", req.params.id);
+    console.log('Requested user with ID:', req.params.id);
     const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "Could not find user" });
+    if (!user) return res.status(404).json({ error: 'Could not find user' });
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });

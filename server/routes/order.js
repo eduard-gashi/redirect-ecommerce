@@ -1,11 +1,11 @@
-import express from "express";
-import Order from "../models/order.js";
-import Product from "../models/product.js"; // Ensure Product Model is imported
+import express from 'express';
+import Order from '../models/order.js';
+import Product from '../models/product.js'; // Ensure Product Model is imported
 
 const router = express.Router();
 
 // Assuming this endpoint is mounted at `/api/orders`
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   // 1. Destructure the required order data sent from the frontend
   const {
     orderItems,
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
   // 2. Simple Validation
   if (orderItems && orderItems.length === 0) {
-    return res.status(400).json({ message: "No order items found" });
+    return res.status(400).json({ message: 'No order items found' });
   }
 
   try {
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     // Fetch products and their current prices from the database
     const productsFromDb = await Product.find({
       _id: { $in: productIds },
-    }).select("_id price countInStock");
+    }).select('_id price countInStock');
 
     // Create a map for quick lookup: { productId: { price, countInStock } }
     const productMap = productsFromDb.reduce((acc, prod) => {
@@ -49,16 +49,12 @@ router.post("/", async (req, res) => {
       const productInfo = productMap[item.product];
 
       if (!productInfo) {
-        return res
-          .status(404)
-          .json({ message: `Product with ID ${item.product} not found.` });
+        return res.status(404).json({ message: `Product with ID ${item.product} not found.` });
       }
       if (productInfo.countInStock < item.qty) {
-        return res
-          .status(400)
-          .json({
-            message: `Not enough stock for ${item.name}. Available: ${productInfo.countInStock}`,
-          });
+        return res.status(400).json({
+          message: `Not enough stock for ${item.name}. Available: ${productInfo.countInStock}`,
+        });
       }
 
       // Calculate the subtotal for this item using the secure DB price
@@ -108,21 +104,19 @@ router.post("/", async (req, res) => {
     // 5. Respond with the created order object
     res.status(201).json(createdOrder);
   } catch (error) {
-    console.error("Error saving order to database:", error);
+    console.error('Error saving order to database:', error);
     res.status(500).json({
-      message: "Server Error: Failed to save order.",
+      message: 'Server Error: Failed to save order.',
       details: error.message,
     });
   }
 });
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    console.log("TRYING TO fetch orders", req.query);
+    console.log('TRYING TO fetch orders', req.query);
     const userId = req.query.user;
-    const orders = userId
-      ? await Order.find({ user: userId })
-      : await Order.find();
+    const orders = userId ? await Order.find({ user: userId }) : await Order.find();
     res.json(orders);
   } catch (err) {
     res.status(500).json({ error: err.message });

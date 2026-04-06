@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // A sub-schema for reviews
 const reviewSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     name: { type: String, required: true },
     rating: { type: Number, required: true }, // e.g., 1-5 stars
     comment: { type: String, required: true },
@@ -28,4 +28,4 @@ const productSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model('Product', productSchema);

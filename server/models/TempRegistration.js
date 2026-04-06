@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const tempRegistrationSchema = new mongoose.Schema({
   email: {
@@ -18,8 +18,5 @@ const tempRegistrationSchema = new mongoose.Schema({
   },
 });
 
-const TempRegistration = mongoose.model(
-  "TempRegistration",
-  tempRegistrationSchema,
-);
+const TempRegistration = mongoose.model('TempRegistration', tempRegistrationSchema);
 export default TempRegistration;
