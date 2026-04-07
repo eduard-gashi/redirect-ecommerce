@@ -673,6 +673,24 @@
   box-shadow: 0 8px 20px rgba(92, 209, 199, 0.4);
 }
 
+/* ===== LEGAL PAGES RESPONSIVE - MOBILE ===== */
+@media (max-width: 480px) {
+  .legal-hero-title {
+    font-size: 28px !important;
+  }
+
+  .legal-text {
+    font-size: 14px !important;
+  }
+  li {
+    font-size: 14px !important;
+  }
+  h3 {
+    font-size: 14px !important;
+    font-weight: 700;
+  }
+}
+
 /* ===== LEGAL PAGES RESPONSIVE - TABLET ===== */
 @media (min-width: 768px) {
   .legal-hero {
