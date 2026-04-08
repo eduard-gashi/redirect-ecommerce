@@ -8,7 +8,7 @@ Our first product: the Smartphone Detox Box – a 30‑day guided program that h
 
 ## Production
 
-- Live Store: https://.redirectstore.de/
+- Live Store: https://redirectstore.de/
 
 Deployed on a dedicated Hetzner Linux server, running:
 - NGINX (serving the static frontend and reverse‑proxying API requests)
@@ -36,12 +36,6 @@ Domain is purchased and managed via Strato.
 - Stripe acts purely as a payment processor — prices and products are always validated server‑side against MongoDB.
 - Orders are persisted only after verifying a completed Stripe Checkout Session.
 - Environment variables (MongoDB URI, Stripe keys, etc.) are securely loaded through .env.
-
-
-## Architecture Details
-- MongoDB is the single source of truth for products (price, stock, metadata).
-- Stripe is used purely as a payment layer; prices are validated against MongoDB, not client input.
-- Orders are created in MongoDB only after verifying the Stripe Checkout Session status.
 
 
 ## API Overview
