@@ -12,7 +12,7 @@ const sendEmail = async (email, subject, htmlContent) => {
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM,
+    from: `"Redirect" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: subject,
     html: htmlContent,
