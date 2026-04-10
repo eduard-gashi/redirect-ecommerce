@@ -34,7 +34,7 @@ router.post('/create-checkout-session', async (req, res) => {
       },
       shipping_options: [
         {
-          shipping_rate: 'shr_1TJfyd42SFmEoZIO8cF3t2sf',
+          shipping_rate: 'shr_1TKiM942SFmEoZIOtVKldvqH',
         },
       ],
       return_url: `${req.headers.origin}/bestellungen?session_id={CHECKOUT_SESSION_ID}`,
