@@ -47,6 +47,15 @@ export async function stripeWebhookHandler(req, res) {
     // const labelData = await labelResponse.json();
     // const labelUrl = labelData.label_url;
 
+    // Fetch bought items
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+      limit: 100,
+    });
+    const totalQuantity = lineItems.data.reduce((sum, item) => sum + item.quantity, 0);
+    const firstItem = lineItems.data[0];
+    const itemQuantity = firstItem?.quantity ?? 1;
+    const itemProductName = productName || firstItem?.price?.product || 'Produkt';
+
     // Send notification E-Mail with lables
     const nodemailer = await import('nodemailer');
     const transporter = nodemailer.createTransport({
@@ -66,14 +75,18 @@ export async function stripeWebhookHandler(req, res) {
         to: process.env.EMAIL_USER,
         subject: `🚚 NEUE BESTELLUNG #${session.id.slice(-7)} - Bestelldaten`,
         html: `
-      <h2>Bestellung erhalten!</h2>
-      <p><strong>An:</strong> ${customerDetails.name}<br>
-         ${customerDetails.address.line1}<br>
-         ${customerDetails.address.postal_code} ${customerDetails.address.city}</p>
-      <p><strong>Produkt-ID:</strong> ${productId}</p>
-            <p><strong>Produkt-ID:</strong> ${productName}</p>
-      <p><em>Tracking kommt nach Abgabe</em></p>
-    `,
+        <h2>Bestellung erhalten!</h2>
+        <p><strong>An:</strong> ${customerDetails.name}<br>
+           ${customerDetails.address.line1}<br>
+           ${customerDetails.address.line2 || ''}<br>
+           ${customerDetails.address.postal_code} ${customerDetails.address.city}</p>
+
+        <p><strong>Produkt:</strong> ${itemProductName}</p>
+        <p><strong>Menge:</strong> ${itemQuantity}</p>
+        <p><strong>Insgesamt:</strong> ${totalQuantity} Stück</p>
+
+        <p><strong>Produkt-ID (metadata):</strong> ${productId}</p>
+      `,
       });
 
       console.log('✅ Mail gesendet:', info.messageId);

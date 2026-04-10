@@ -2,6 +2,8 @@ import express from 'express';
 import Order from '../models/order.js';
 import Product from '../models/product.js';
 import sendEmail from '../utils/sendEmail.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const router = express.Router();
 
@@ -138,14 +140,36 @@ router.post('/', async (req, res) => {
   </p>
 
   <p>
-    Du erhältst eine weitere E-Mail mit der Sendungsverfolgungsnummer, sobald dein Paket auf dem Weg zu dir ist.
+    Deine Handy-Detox Box wird dir in 2-3 Tagen versendet und sollte in 5-7 Werktagen bei dir sein.
   </p>
   <p>
     Bis dahin: Nimm dir einen Moment, atme durch – du hast gerade in dich und deinen Fokus investiert. 🙌
   </p>
 `;
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
+        const agbPath = path.join(__dirname, '..', 'assets', 'AGB.pdf');
+        const refundPolicyPath = path.join(__dirname, '..', 'assets', 'AGB.pdf');
 
-        await sendEmail(customerEmail, 'Deine Bestellung bei HandyDetox Box ist eingegangen', html);
+        const attachments = [
+          {
+            filename: 'AGB.pdf',
+            path: agbPath,
+            contentType: 'application/pdf',
+          },
+          {
+            filename: 'Widerrufsbelehrung.pdf',
+            path: refundPolicyPath,
+            contentType: 'application/pdf',
+          },
+        ];
+
+        await sendEmail(
+          customerEmail,
+          'Deine Bestellung bei HandyDetox Box ist eingegangen',
+          html,
+          attachments,
+        );
       } else {
         console.warn('No customer email available to send order confirmation.');
       }

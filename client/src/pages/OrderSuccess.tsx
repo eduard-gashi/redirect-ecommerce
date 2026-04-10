@@ -38,6 +38,12 @@ export default function OrderSuccess() {
           return;
         }
 
+        const shippingAmountCents = session.shipping_cost?.amount_total
+          ?? session.total_details?.amount_shipping
+          ?? 0;
+
+        const shippingPrice = shippingAmountCents / 100;
+
         const userId = userInfo?._id ?? null;
 
         // Create Order in MongoDB
@@ -59,7 +65,7 @@ export default function OrderSuccess() {
           },
           paymentMethod: 'Stripe',
           taxPrice: 0,
-          shippingPrice: 0,
+          shippingPrice: shippingPrice,
           paymentResult: {
             id: session.payment_intent,
             status: session.payment_status,
