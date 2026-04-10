@@ -40,3 +40,4 @@ logs/
 # Server
 server/node_modules/
 server/.env*
+server/assets
