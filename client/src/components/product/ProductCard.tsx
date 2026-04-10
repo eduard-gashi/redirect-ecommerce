@@ -17,7 +17,7 @@ function ProductCard({ product, loading = false }: ProductCardProps) {
 
   const hasDiscount = !loading && product.price && product.upper_price_limit > product.price;
   const discountPercent = hasDiscount
-    ? Math.round(((product.price! - product.upper_price_limit) / product.price!) * 100)
+    ? Math.round(((product.upper_price_limit - product.price!) / product.upper_price_limit) * 100)
     : 0;
 
   const handleCardClick = () => {
